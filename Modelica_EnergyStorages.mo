@@ -2078,7 +2078,6 @@ management systems, loads and charging devices.
                 origin={60,-90})));
 
           annotation (
-            uses(Modelica(version="2.2.1")),
             Diagram(graphics),
             Icon(graphics={
                 Text(
@@ -2098,10 +2097,7 @@ management systems, loads and charging devices.
                   lineColor={0,0,127},
                   fillColor={122,255,107},
                   fillPattern=FillPattern.Solid,
-                  textString="i")}),
-            version="1",
-            conversion(from(version="", script=
-                    "ConvertFromresistancevariablewithsoc2_.mos")));
+                  textString="i")}));
         end BasicImpedance;
 
         model Rlinear "Linear dependent resistance"
@@ -2174,7 +2170,6 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
-            uses(Modelica(version="2.2.1")),
             Diagram(graphics),
             Icon(graphics={
                 Line(points={{-100,0},{-80,0}}, color={0,0,255}),
@@ -2198,10 +2193,7 @@ management systems, loads and charging devices.
                   lineColor={0,0,127},
                   fillColor={122,255,107},
                   fillPattern=FillPattern.Solid,
-                  textString="Z")}),
-            version="1",
-            conversion(from(version="", script=
-                    "ConvertFromresistancevariablewithsoc2_.mos")));
+                  textString="Z")}));
         end Rlinear;
 
         model Clinear "Linear dependent capacitance"
@@ -2251,7 +2243,6 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
-            uses(Modelica(version="2.2.1")),
             Diagram(graphics),
             Icon(graphics={
                 Line(points={{-100,0},{-80,0}}, color={0,0,255}),
@@ -2272,11 +2263,7 @@ management systems, loads and charging devices.
                   lineColor={0,0,255},
                   fillColor={122,255,107},
                   fillPattern=FillPattern.Solid,
-                  textString=
-                       "%name")}),
-            version="1",
-            conversion(from(version="", script=
-                    "ConvertFromresistancevariablewithsoc2_.mos")));
+                  textString="%name")}));
         end Clinear;
 
         model RClinear
@@ -2519,7 +2506,7 @@ management systems, loads and charging devices.
                   extent={{22,-12},{82,14}},
                   lineColor={0,0,255},
                   pattern=LinePattern.Dot,
-                  textString =                    "num"),
+                  textString=                     "num"),
                 Text(extent={{-80,-10},{-20,16}}, textString=
                                                     "1"),
                 Line(points={{-20,0},{0,0},{0,0},{0,0}}, color={0,0,255}),
@@ -2692,7 +2679,7 @@ management systems, loads and charging devices.
                   extent={{112,-12},{172,14}},
                   lineColor={0,0,255},
                   pattern=LinePattern.Dot,
-                  textString =                    "num"),
+                  textString=                     "num"),
                 Line(
                   points={{140,40},{140,68},{40,68},{40,68}},
                   color={188,0,0},
@@ -2928,7 +2915,6 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
-            uses(Modelica(version="2.2.1")),
             Diagram(graphics),
             Icon(graphics={
                 Text(
