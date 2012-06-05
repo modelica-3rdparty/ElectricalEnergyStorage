@@ -757,10 +757,11 @@ management systems, loads and charging devices.
 
     model AdvancedStackCycling
       extends Modelica.Icons.Example;
-      parameter CellRecords.LinearDynamicImpedance.Test1Parameters cellParameters[3,1](
-        capacity=[Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=35*3600);
-                  Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=40*3600);
-                  Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=45*3600)])
+      parameter
+        CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters         cellParameters[:,:]=
+        {{CellRecords.LinearDynamicImpedance.Test1Parameters(capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=35*3600))},
+         {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=40*3600))},
+         {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=45*3600))}}
         annotation (Placement(transformation(extent={{50,-80},{70,-60}})));
       output Modelica.SIunits.Current Istack=currentSensor.i;
       output Modelica.SIunits.Current Icell[:,:]=cycler.singleCellBus.i;
