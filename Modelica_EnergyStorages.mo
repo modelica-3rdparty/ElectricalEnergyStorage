@@ -11,7 +11,7 @@ extends Modelica_EnergyStorages.Icons.BatteryPackage;
      annotation (Documentation(info="<html>
 <dl><dt>
 <p>This package contains electric energy storage models and components for modeling these storages.</p>
-A rough overview about the EnergyStorages library was presented at the Modelica conference 2011: 
+A rough overview about the EnergyStorages library was presented at the Modelica conference 2011:
 <p>web: <a href=\"http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf\">http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf</a></dd>
 
 
@@ -5026,10 +5026,10 @@ management systems, loads and charging devices.
 <p>
 This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage\">asynchronous induction machines with squirrel cage rotor</a> (AIMCs) control. Various signals are predefined in the SEDBusAIMC.
 </p>
- 
+
 <!-- visible -->
- 
- 
+
+
 </html>",       revisions="<html>
 <table border=\"1\" rules=\"groups\">
 <thead>
@@ -5291,7 +5291,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
           Documentation(info="<html>
 <p>
 This connector defines the \"expandable connector\" ControlBus that
-is used as bus in the 
+is used as bus in the
 <a href=\"Modelica://Modelica.Blocks.Examples.BusUsage\">BusUsage</a> example.
 Note, this connector is \"empty\". When using it, the actual content is
 constructed by the signals connected to this bus.
