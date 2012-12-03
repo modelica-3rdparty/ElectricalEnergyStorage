@@ -7,16 +7,11 @@ extends Modelica_EnergyStorages.Icons.BatteryPackage;
   extends Modelica.Icons.Information;
 
     model GeneralInformation "General Information"
-      extends ModelicaReference.Icons.Information;
-     annotation (Documentation(info="<html>
-<dl><dt>
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
 <p>This package contains electric energy storage models and components for modeling these storages.</p>
-A rough overview about the EnergyStorages library was presented at the Modelica conference 2011:
-<p>web: <a href=\"http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf\">http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf</a></dd>
-
-
-<dd>&nbsp;&nbsp;</dd>
-
+<p>A rough overview about the EnergyStorages library was presented at the Modelica conference 2011:</p>
+<p>web: <a href=\"http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf\">http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf</a></p>
 </html>"));
 
     end GeneralInformation;
@@ -24,28 +19,26 @@ A rough overview about the EnergyStorages library was presented at the Modelica 
   class Contact "Contact"
     extends Modelica.Icons.Contact;
 
-   annotation (Documentation(info="<html>
-<dl><dt>The Electric Energy Storages Library was developed by Dr.Markus Einhorn, Dr.Fiorentino Valerio Conte and Dr.Christian Kral from the
-<dl><dt>&nbsp;</dt>
+    annotation (Documentation(info="<html>
+<dl><dt>The Electric Energy Storages Library was developed by Dr. Markus Einhorn, Dr. Fiorentino Valerio Conte and Dr. Christian Kral from the</dt>
 <dd>AIT Austrian Institute of Technology</dd>
 <dd>Oesterreichisches Forschungs und Pruefzentrum Arsenal GmbH</dd>
 <dd>Giefinggasse 2</dd>
 <dd>1220 Vienna, Austria</dd>
 <dd>web: <a href=\"http://www.ait.ac.at\">http://www.ait.ac.at</a></dd>
 <dd>e-mail: <a href=\"mailto:markus.einhorn@ait.ac.at\">markus.einhorn@ait.ac.at</a></dd>
-<dd>&nbsp;&nbsp;</dd>
-
+</dl>
 </html>"));
 
   end Contact;
-   annotation (DocumentationClass=true, Documentation(info="<html>
+   annotation (__Dymola_DocumentationClass=true, Documentation(info="<html>
  The Electric Energy Storages Library contains models with different complexity for simulating of electric energy storages like batteries (single cells as well as stacks) interacting with loads, battery
 management systems, loads and charging devices.
 </html>"));
   end UsersGuide;
 
   package Examples
-    "Examples that demonstrate the usage of the components of the Elecric Energy Stroage Library "
+    "Examples that demonstrate the usage of the components of the Electric Energy Storage Library "
     extends Modelica.Icons.ExamplesPackage;
 
     model Impedance
@@ -173,7 +166,7 @@ management systems, loads and charging devices.
           color={0,0,255},
           smooth=Smooth.None));
       connect(voltageSensor.v, greaterThreshold.u) annotation (Line(
-          points={{40,-1.83697e-015},{48,-1.83697e-015},{48,0}},
+          points={{40,0},{48,0}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(greaterThreshold.y, fTP72_1.on) annotation (Line(
@@ -215,8 +208,9 @@ management systems, loads and charging devices.
             rotation=180,
             origin={-10,40})));
       Modelica_EnergyStorages.Batteries.Cells.Basic.LinearDynamicImpedance batteryCell(
-        cellParameters=Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.Test1Parameters(),
-        SOCini=0.5)
+          cellParameters=
+            Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.Test1Parameters(),
+          SOCini=0.5)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
     equation
       connect(pulseCurrent.n, ground.p) annotation (Line(
@@ -352,7 +346,7 @@ management systems, loads and charging devices.
           smooth=Smooth.None));
       connect(cycler.Discharging, idealCommutingSwitch.control) annotation (
           Line(
-          points={{9,16},{0,16},{0,40},{-9.79717e-016,40},{-9.79717e-016,52}},
+          points={{9,16},{0,16},{0,52}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (experiment(StopTime=20000, Interval=1), Diagram(graphics));
@@ -735,7 +729,7 @@ management systems, loads and charging devices.
           smooth=Smooth.None));
 
       connect(cycler.Discharging, idealCommutingSwitch.control) annotation (Line(
-          points={{9,16},{0,16},{0,52},{-9.79717e-016,52}},
+          points={{9,16},{0,16},{0,52}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(voltageSensor.p, batteryStack.pin_pStack)     annotation (Line(
@@ -803,8 +797,7 @@ management systems, loads and charging devices.
             rotation=180,
             origin={40,60})));
       Modelica_EnergyStorages.Batteries.Stacks.WithMeasurement.LinearDynamicImpedanceMatrix
-                                                        batteryStack(
-          cellParameters=cellParameters)
+        batteryStack(cellParameters=cellParameters)
         annotation (Placement(transformation(extent={{50,0},{70,20}})));
       Sources.Loads.BooleanConstantCurrent
                                  load(I=40)
@@ -854,7 +847,7 @@ management systems, loads and charging devices.
           color={255,0,255},
           smooth=Smooth.None));
       connect(cycler.Discharging,idealCommutingSwitch. control) annotation (Line(
-          points={{9,16},{0,16},{0,52},{-9.79717e-016,52}},
+          points={{9,16},{0,16},{0,52}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(voltageSensor.p,batteryStack. pin_pStack)     annotation (Line(
@@ -889,7 +882,8 @@ management systems, loads and charging devices.
           extends Modelica_EnergyStorages.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters
                                                cellParameters
-            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},{-80,100}})));
+            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},
+                    {-80,100}})));
           extends
             Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start=0.5) "Initial state of charge"
@@ -979,11 +973,11 @@ management systems, loads and charging devices.
 
         equation
           connect(OCV.n, pin_n)
-                            annotation (Line(points={{-1.83697e-015,-80},{
-                  -1.83697e-015,-100},{0,-100}},color={0,0,255}));
+                            annotation (Line(points={{0,-80},{0,-100}},
+                                                color={0,0,255}));
           connect(Rs.p, OCV.p)
-            annotation (Line(points={{-6.12323e-016,-10},{0,-10},{0,-60},{
-                  1.83697e-015,-60}},        color={0,0,255}));
+            annotation (Line(points={{0,-10},{0,-10},{0,-60}},
+                                             color={0,0,255}));
           connect(sococvTable.y[1], OCV.v)
             annotation (Line(points={{-49,-70},{-49,-70},{-7,-70}},
                                                           color={0,0,127}));
@@ -994,7 +988,7 @@ management systems, loads and charging devices.
               color={191,0,0},
               smooth=Smooth.None));
           connect(Rs.heatPort, internalHeatPort)  annotation (Line(
-              points={{10,-6.12323e-016},{80,-6.12323e-016},{80,0}},
+              points={{10,0},{80,0}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(heatPort, internalHeatPort) annotation (Line(
@@ -1002,11 +996,11 @@ management systems, loads and charging devices.
               color={191,0,0},
               smooth=Smooth.None));
           connect(IBatt.p, Rs.n) annotation (Line(
-              points={{-6.12323e-016,50},{6.12323e-016,50},{6.12323e-016,10}},
+              points={{0,50},{0,10}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(IBatt.n, pin_p) annotation (Line(
-              points={{6.12323e-016,70},{0,70},{0,100}},
+              points={{0,70},{0,100}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(IBatt.i, calculator.i)
@@ -1048,7 +1042,8 @@ management systems, loads and charging devices.
          parameter
             CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters
             cellParameters
-            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},{-80,100}})));
+            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},
+                    {-80,100}})));
           extends
             Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start=0.5) "Initial state of charge"
@@ -1130,8 +1125,8 @@ management systems, loads and charging devices.
 
         equation
           connect(Vo.n, pin_n)
-                            annotation (Line(points={{-1.83697e-015,-80},{
-                  -1.83697e-015,-100},{0,-100}},color={0,0,255}));
+                            annotation (Line(points={{0,-80},{0,-100}},
+                                                color={0,0,255}));
           connect(pin_p, pin_p)
             annotation (Line(points={{0,100},{0,100}}, color={0,0,255}));
           connect(heatPort, internalHeatPort) annotation (Line(
@@ -1143,7 +1138,7 @@ management systems, loads and charging devices.
               color={191,0,0},
               smooth=Smooth.None));
           connect(IBatt_int.n, pin_p) annotation (Line(
-              points={{6.12323e-016,70},{0,70},{0,100}},
+              points={{0,70},{0,100}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(calculator.i, IBatt_int.i)
@@ -1152,7 +1147,7 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           connect(cellImpedance.heatPort, internalHeatPort) annotation (Line(
-              points={{10,-6.12323e-016},{39,-6.12323e-016},{39,0},{80,0}},
+              points={{10,0},{80,0}},
               color={191,0,0},
               smooth=Smooth.None));
 
@@ -1161,7 +1156,7 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           connect(cellImpedance.SOC, calculator.SOC) annotation (Line(
-              points={{-9,5.51091e-016},{-90,5.51091e-016},{-90,64},{-81,64}},
+              points={{-9,0},{-90,0},{-90,64},{-81,64}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(clock.y, cellImpedance.t) annotation (Line(
@@ -1193,20 +1188,20 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           connect(cellImpedance.pin_p, Vo.p) annotation (Line(
-              points={{-1.22465e-015,-20},{1.83697e-015,-20},{1.83697e-015,-60}},
+              points={{0,-20},{0,-60}},
               color={0,0,255},
               smooth=Smooth.None));
 
           connect(selfDischarge.pin_p, IBatt_int.n) annotation (Line(
-              points={{40,40},{40,70},{6.12323e-016,70}},
+              points={{40,40},{40,70},{0,70}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(IBatt_int.p, cellImpedance.pin_n) annotation (Line(
-              points={{-6.12323e-016,50},{1.22465e-015,50},{1.22465e-015,20}},
+              points={{0,50},{0,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(selfDischarge.pin_n, Vo.p) annotation (Line(
-              points={{40,20},{40,-60},{1.83697e-015,-60}},
+              points={{40,20},{40,-60},{0,-60}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sococvTable.y[1], Vo.v) annotation (Line(
@@ -1236,11 +1231,12 @@ management systems, loads and charging devices.
        extends Modelica_EnergyStorages.Icons.MeasurementPackage;
 
         model StaticResistance
-          "Battery cell model with a static internal impedancea and with basic cell measurement"
+          "Battery cell model with a static internal impedance and with basic cell measurement"
           extends Modelica_EnergyStorages.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters
                                                cellParameters
-            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},{-80,100}})));
+            annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},
+                    {-80,100}})));
           extends
             Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start=0.5) "Initial state of charge"
@@ -1283,15 +1279,13 @@ management systems, loads and charging devices.
             final useHeatPort=true,
             final TOperational=TOperational,
             final SOCini=SOCini)
-            annotation (Placement(transformation(extent={{40,-20},{
-                    80,20}})));
+            annotation (Placement(transformation(extent={{40,-20},{80,20}})));
         equation
-          connect(cellMeasurement.pin_p, pin_p) annotation (Line(points={{
-                  2.44929e-015,20},{2.44929e-015,50},{0,50},{0,100}},   color={
+          connect(cellMeasurement.pin_p, pin_p) annotation (Line(points={{0,20},{
+                  0,50},{0,100}},                                       color={
                   0,0,255}));
-          connect(cellMeasurement.pin_n, pin_n) annotation (Line(points={{
-                  -2.44929e-015,-20},{-2.44929e-015,-50},{0,-50},{0,-100}},
-                                                                          color=
+          connect(cellMeasurement.pin_n, pin_n) annotation (Line(points={{0,-20},
+                  {0,-50},{0,-100}},                                      color=
                  {0,0,255}));
           connect(cellMeasurement.T, singleCellBus.T)
                                                 annotation (
@@ -1299,8 +1293,8 @@ management systems, loads and charging devices.
               string="%second",
               index=1,
               extent=[6,3; 6,3],
-              style(color=0, rgbcolor={0,0,0})), Line(points={{-22,2.69422e-015},
-                  {-40,2.69422e-015},{-40,0},{-60,0}},                  color={
+              style(color=0, rgbcolor={0,0,0})), Line(points={{-22,0},{-40,0},{
+                  -60,0}},                                              color={
                   0,0,127}));
           connect(internalHeatPort, fixedTemperature.port) annotation (Line(
               points={{80,0},{80,-40}},
@@ -1329,8 +1323,7 @@ management systems, loads and charging devices.
               color={191,0,0},
               smooth=Smooth.None));
           connect(cellMeasurement.heatPort, internalHeatPort) annotation (Line(
-              points={{20,-2.44929e-015},{30,-2.44929e-015},{30,-32},{80,-32},{
-                  80,0}},
+              points={{20,0},{30,0},{30,-32},{80,-32},{80,0}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(cellMeasurement.pinCell_p, staticResistance.pin_p) annotation (Line(
@@ -1348,7 +1341,7 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance
-          "Battery cell model with a linear dependant, dynamic internal impedancea and with basic cell measurement"
+          "Battery cell model with a linear dependant, dynamic internal impedance and with basic cell measurement"
         extends Modelica_EnergyStorages.Icons.CellLinearDynamicImpedance;
           parameter
             CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters
@@ -1464,34 +1457,21 @@ management systems, loads and charging devices.
       end WithMeasurement;
 
     annotation (Icon(
-          Polygon(points=[-80,-80; -80,40; -60,40; -60,60; -20,60; -20,40; 20,40;
-                20,60; 60,60; 60,40; 80,40; 80,-80; -80,-80], style(
-              color=0,
-              rgbcolor={0,0,0},
-              fillColor=7,
-              rgbfillColor={255,255,255},
-              fillPattern=1)),
-          Text(
-            extent=[-62,12; 14,-50],
-            style(
-              color=0,
-              rgbcolor={0,0,0},
-              thickness=2,
-              fillColor=7,
-              rgbfillColor={255,255,255},
-              fillPattern=1),
-            string="+"),
-          Text(
-            extent=[12,26; 104,-60],
-            style(
-              color=0,
-              rgbcolor={0,0,0},
-              thickness=2,
-              fillColor=7,
-              rgbfillColor={255,255,255},
-              fillPattern=1),
-            string="-")),
-                  Diagram(graphics));
+          coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+          graphics={
+            Line(
+              points={{-80,-80},{-80,40},{-60,40},{-60,60},{-20,60},{-20,40},{20,40},
+                  {20,60},{60,60},{60,40},{80,40},{80,-80},{-80,-80}},
+              color={0,0,0},
+              smooth=Smooth.None),
+            Text(
+              extent={{-40,0},{20,-60}},
+              lineColor={0,0,0},
+              textString="+"),
+            Text(
+              extent={{20,-8},{80,-68}},
+              lineColor={0,0,0},
+              textString="-")}));
     end Cells;
 
     package Stacks "Package for battery stacks"
@@ -1506,7 +1486,8 @@ management systems, loads and charging devices.
          parameter Integer np(min=1) "number of parallel connected cells";
          parameter CellRecords.StaticResistance.StaticResistanceParameters
                                               cellParameters
-           annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},{-80,100}})));
+           annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-100,80},
+                    {-80,100}})));
          extends
             Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
          parameter Real SOCini(start=0.5) "Initial state of charge"
@@ -1592,8 +1573,8 @@ management systems, loads and charging devices.
             final table=cellParameters.SOCOCV.OCVtable,
             final tableName=cellParameters.SOCOCV.OCVtableName,
             final fileName=cellParameters.SOCOCV.OCVfileName)
-                               annotation (Placement(transformation(extent={{-70,-80},{
-                   -50,-60}},           rotation=0)));
+                               annotation (Placement(transformation(extent={{-70,-80},
+                    {-50,-60}},         rotation=0)));
          final parameter Modelica.SIunits.Time tini(fixed=false)=0
             "Initial time";
        initial equation
@@ -1601,18 +1582,17 @@ management systems, loads and charging devices.
 
        equation
          connect(Uo.n, pin_n)
-                           annotation (Line(points={{-1.83697e-015,-80},{
-                  -1.83697e-015,-100},{0,-100}},
+                           annotation (Line(points={{0,-80},{0,-100}},
                                                color={0,0,255}));
          connect(Rs.p, Uo.p)
-           annotation (Line(points={{-6.12323e-016,-10},{-6.12323e-016,-35},{0,
-                  -60},{1.83697e-015,-60}}, color={0,0,255}));
+           annotation (Line(points={{0,-10},{0,-35},{0,-60}},
+                                            color={0,0,255}));
          connect(gain.y, Uo.v) annotation (Line(points={{-19,-70},{-7,-70}},
                color={0,0,127}));
          connect(gain1.u, IBatt.i)
            annotation (Line(points={{-18,60},{-10,60}}, color={0,0,127}));
          connect(Rs.heatPort, internalHeatPort) annotation (Line(
-             points={{10,-6.12323e-016},{8,-6.12323e-016},{6,0},{80,0}},
+             points={{10,0},{80,0}},
              color={191,0,0},
              smooth=Smooth.None));
          connect(internalHeatPort, fixedTemperature.port) annotation (Line(
@@ -1644,11 +1624,11 @@ management systems, loads and charging devices.
              color={0,0,127},
              smooth=Smooth.None));
          connect(IBatt.p, Rs.n) annotation (Line(
-             points={{-1.83697e-015,50},{0,50},{0,10},{6.12323e-016,10}},
+             points={{0,50},{0,10}},
              color={0,0,255},
              smooth=Smooth.None));
          connect(IBatt.n, pin_p) annotation (Line(
-             points={{1.83697e-015,70},{0,70},{0,100}},
+             points={{0,70},{0,100}},
              color={0,0,255},
              smooth=Smooth.None));
           connect(sococvTable.y[1], gain.u) annotation (Line(
@@ -1725,16 +1705,16 @@ management systems, loads and charging devices.
                origin={80,-50})));
 
          Modelica_EnergyStorages.Batteries.Cells.Basic.LinearDynamicImpedance cell[ns,np](
-           final useHeatPort=fill(
-               true,
-               ns,
-               np),
-           final TOperational=fill(
-               TOperational,
-               ns,
-               np),
-           final SOCini=SOCini,
-           final cellParameters=cellParameters)
+            final useHeatPort=fill(
+                       true,
+                       ns,
+                       np),
+            final TOperational=fill(
+                       TOperational,
+                       ns,
+                       np),
+            final SOCini=SOCini,
+            final cellParameters=cellParameters)
            annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
        equation
          //series connection
@@ -1760,9 +1740,9 @@ management systems, loads and charging devices.
        //top connection
          connect(cell[1, 1].pin_p, pin_pStack);
 
-       //bottom conection
+       //bottom connection
          connect(cell[ns, np].pin_n, pin_nStack);
-       //heatPort conection
+       //heatPort connection
 
          connect(internalHeatPort, heatPort) annotation (Line(
              points={{80,0},{100,0}},
@@ -1830,8 +1810,8 @@ management systems, loads and charging devices.
                 rotation=90,
                 origin={80,-50})));
 
-          Modelica_EnergyStorages.Sensors.CellMeasurement
-            cellMeasurement annotation (Placement(transformation(extent={{0,-20},
+          Modelica_EnergyStorages.Sensors.CellMeasurement cellMeasurement
+                            annotation (Placement(transformation(extent={{0,-20},
                     {-40,20}},      rotation=0)));
           Modelica.Blocks.Math.Gain gainCurrent(final k=1/np)
             annotation (Placement(transformation(
@@ -1843,7 +1823,7 @@ management systems, loads and charging devices.
                 transformation(extent={{-10,-10},{10,10}},   rotation=180,
                 origin={-70,-40})));
           Modelica_EnergyStorages.Batteries.Stacks.Basic.StaticResistanceScaled
-                                                                                staticResistance(
+            staticResistance(
             final ns=ns,
             final np=np,
             final useHeatPort=true,
@@ -2023,9 +2003,9 @@ management systems, loads and charging devices.
         //top connection
           connect(cell[1, 1].pin_p, pin_pStack);
 
-        //bottom conection
+        //bottom connection
           connect(cell[ns, np].pin_n, pin_nStack);
-        //heatPort conection
+        //heatPort connection
 
           connect(internalHeatPort, heatPort) annotation (Line(
               points={{80,0},{100,0}},
@@ -2047,7 +2027,7 @@ management systems, loads and charging devices.
               points={{10.8,0},{80,0}},
               color={191,0,0},
               smooth=Smooth.None));
-        //bus conection
+        //bus connection
 
           annotation (Diagram(graphics),
                                Icon(graphics));
@@ -2134,15 +2114,15 @@ management systems, loads and charging devices.
             annotation (Placement(transformation(extent={{-10,90},{10,110}})));
         equation
           connect(n, n) annotation (Line(
-              points={{100,0},{100,0},{100,0}},
+              points={{100,4.44089e-16},{100,4.44089e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(Resistor.p, p) annotation (Line(
-              points={{-10,0},{-100,0}},
+              points={{-10,0},{-54,0},{-54,4.44089e-16},{-100,4.44089e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(Resistor.n, n) annotation (Line(
-              points={{10,0},{100,0}},
+              points={{10,0},{56,0},{56,4.44089e-16},{100,4.44089e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(t, impedanceValue.t) annotation (Line(
@@ -2150,11 +2130,11 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           connect(SOC, impedanceValue.SOC) annotation (Line(
-              points={{0,-90},{0,-39},{-5.51091e-016,-39}},
+              points={{4.44089e-16,-90},{4.44089e-16,-39},{0,-39}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(impedanceValue.y, Resistor.R) annotation (Line(
-              points={{6.73556e-016,-19},{0,-16},{0,-11}},
+              points={{0,-19},{0,-11}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Resistor.heatPort, heatPort) annotation (Line(
@@ -2162,7 +2142,7 @@ management systems, loads and charging devices.
               color={191,0,0},
               smooth=Smooth.None));
           connect(impedanceValue.y, Z) annotation (Line(
-              points={{6.73556e-016,-19},{6.73556e-016,-16},{60,-16},{60,100}},
+              points={{0,-19},{0,-16},{60,-16},{60,100}},
               color={0,0,127},
               smooth=Smooth.None));
 
@@ -2219,7 +2199,7 @@ management systems, loads and charging devices.
                 origin={0,0})));
         equation
           connect(SOC, impedanceValue.SOC) annotation (Line(
-              points={{0,-90},{0,-39},{-5.51091e-016,-39}},
+              points={{4.44089e-16,-90},{4.44089e-16,-39},{0,-39}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(t, impedanceValue.t) annotation (Line(
@@ -2227,16 +2207,15 @@ management systems, loads and charging devices.
               color={0,0,127},
               smooth=Smooth.None));
           connect(variableCapacitor.p, p) annotation (Line(
-              points={{-10,1.22465e-015},{-56,1.22465e-015},{-56,0},{-100,0}},
+              points={{-10,0},{-56,0},{-56,4.44089e-16},{-100,4.44089e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(variableCapacitor.n, n) annotation (Line(
-              points={{10,-1.22465e-015},{54,-1.22465e-015},{54,0},{100,0}},
+              points={{10,0},{54,0},{54,4.44089e-16},{100,4.44089e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(impedanceValue.y, variableCapacitor.C) annotation (Line(
-              points={{6.73556e-016,-19},{6.73556e-016,-16.5},{-1.34711e-015,
-                  -16.5},{-1.34711e-015,-11}},
+              points={{0,-19},{0,-11}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(impedanceValue.i, i) annotation (Line(
@@ -2427,7 +2406,7 @@ management systems, loads and charging devices.
               smooth=Smooth.None));
         end for;
 
-        //serial conection
+        //serial connection
           connect(p, rclinear[1].p) annotation (Line(
               points={{-100,0},{-20,0}},
               color={0,0,255},
@@ -2440,7 +2419,7 @@ management systems, loads and charging devices.
               color={0,0,255},
               smooth=Smooth.None));
 
-        //temp conection
+        //temp connection
           for k in 1:num loop
              connect(heatPort, rclinear[k].heatPort) annotation (Line(points={{0,100},{0,20}},
                              color={191,0,0}));
@@ -2531,11 +2510,10 @@ management systems, loads and charging devices.
                        "%name")}));
         end RCseriesLinear;
 
-        model CellImpedance "Complete internal impedacen of a battery cell"
-          parameter Modelica_EnergyStorages.CellRecords.Components.Resistance
-                               Rs "Resistance parameters";
-          parameter Modelica_EnergyStorages.CellRecords.Components.RCelement
-                               RC[:]
+        model CellImpedance "Complete internal impedance of a battery cell"
+          parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs
+            "Resistance parameters";
+          parameter Modelica_EnergyStorages.CellRecords.Components.RCelement RC[:]
             "Transient response resistance and capacitance parameters";
 
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p
@@ -2795,7 +2773,7 @@ management systems, loads and charging devices.
         "Calculators for the variables in the cell land stack models"
        extends Modelica_EnergyStorages.Icons.CalculatorPackage;
         block CellCalculator "Calculator for the capacity, SOC, SOH,..."
-          import ElectricEnergyStorages = Modelica_EnergyStorages;
+          import ElectricEnergyStorages = Modelica.Electrical.EnergyStorages;
          extends Icons.Block;
 
           Modelica.Blocks.Interfaces.RealInput i
@@ -2852,10 +2830,10 @@ management systems, loads and charging devices.
           parameter Modelica.SIunits.Resistance Z0
             "Sum of all initial ohmic impedances Rs0+Rd0[1]+...+Rd0[ns]";
           parameter
-            Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity         capacity
+            Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity
             "Charge capacity";
           parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH
-            "State of health relevant paramters";
+            "State of health relevant parameters";
         equation
           connect(SOC, SOC) annotation (Line(points={{110,60},{110,60}}, color=
                   {0,0,127}));
@@ -3008,7 +2986,7 @@ management systems, loads and charging devices.
         block Capacity "Capacity calculator"
           extends Icons.Block;
           parameter
-            Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity         capacity
+            Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity
             "Charge capacity";
 
           Modelica.Blocks.Interfaces.RealInput Qabs
@@ -3085,7 +3063,7 @@ management systems, loads and charging devices.
                   textString="i")}));
         end Qabs;
 
-        block Cycles "Equivalent caycles calculator"
+        block Cycles "Equivalent cycles calculator"
             extends Icons.Block;
           Modelica.Blocks.Interfaces.RealOutput cycles
             "Output signal connector"
@@ -3240,7 +3218,7 @@ management systems, loads and charging devices.
           parameter Modelica.SIunits.Resistance Z0
             "Sum of all initial ohmic impedances Rs0+Rd0[1]+...+Rd0[ns]";
           parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH
-            "State of health relevant paramters";
+            "State of health relevant parameters";
           Modelica.Blocks.Sources.Constant const(final k=1)
             annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
           Modelica.Blocks.Math.Feedback feedback
@@ -3379,7 +3357,8 @@ management systems, loads and charging devices.
           "Current flowing from pin p to pin n as input signal"
           annotation (Placement(transformation(extent={{-100,-70},{-80,-50}},
                 rotation=0)));
-        MoveTo_Modelica.LinearDependency linearDependency(
+        Modelica.Blocks.Math.LinearDependency
+                                         linearDependency(
           k1=Isd.aging.kQabs,
           k2=Isd.aging.kt,
           y0=Isd.Isd0)
@@ -3404,7 +3383,7 @@ management systems, loads and charging devices.
             color={0,0,127},
             smooth=Smooth.None));
         connect(linearDependency.y, signalCurrent.i) annotation (Line(
-            points={{21,0},{21,1.28588e-015},{33,1.28588e-015}},
+            points={{21,0},{33,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(i, qabs.i) annotation (Line(
@@ -3433,7 +3412,6 @@ management systems, loads and charging devices.
           "Operational Temperature"
           annotation (Dialog(enable = not useHeatPort));
       end OperationalParameters;
-    annotation (classOrder={"Impedances","Calculators","Utilites"}, Diagram(graphics));
     end Components;
 
   end Batteries;
@@ -3447,14 +3425,13 @@ management systems, loads and charging devices.
         "Basic parameter record for StaticResistance models"
         extends Modelica.Icons.MaterialProperty;
         parameter Modelica_EnergyStorages.CellRecords.Components.SOCOCV SOCOCV
-          "SOC vs OCV curve relevant paramters";
+          "SOC vs OCV curve relevant parameters";
         parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity
-                                                                                capacity
-          "Charge capacity";
+          capacity "Charge capacity";
         parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs
           "Resistance parameters";
         parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH
-          "State of health relevant paramters";
+          "State of health relevant parameters";
       annotation(defaultComponentPrefixes="parameter", Icon(graphics={Text(
                 extent={{-100,120},{100,100}},
                 lineColor={0,0,255},
@@ -3469,22 +3446,28 @@ management systems, loads and charging devices.
       record Test1Parameters
         extends
           Modelica_EnergyStorages.CellRecords.StaticResistance.StaticResistanceParameters(
-            SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
-              OCVtableOnFile=false,
-              OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-            capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=40*3600),
-            Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.001));
+          SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
+              0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
+
+          capacity=
+              Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
+              40*3600),
+          Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.001));
       annotation(defaultComponentPrefixes="parameter");
       end Test1Parameters;
 
       record Test2Parameters
         extends
           Modelica_EnergyStorages.CellRecords.StaticResistance.StaticResistanceParameters(
-            SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
-              OCVtableOnFile=false,
-              OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-            capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=20*3600),
-            Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.002));
+          SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
+              0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
+
+          capacity=
+              Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
+              20*3600),
+          Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.002));
       annotation(defaultComponentPrefixes="parameter");
       end Test2Parameters;
     end StaticResistance;
@@ -3496,14 +3479,13 @@ management systems, loads and charging devices.
         "Basic parameter record for LinearDynamicImpedance models"
         extends Modelica.Icons.MaterialProperty;
         parameter Modelica_EnergyStorages.CellRecords.Components.SOCOCV SOCOCV
-          "SOC vs OCV curve relevant paramters";
+          "SOC vs OCV curve relevant parameters";
         parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity
-                                                                                capacity
-          "Charge capacity";
+          capacity "Charge capacity";
         parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs
           "Resistance parameters";
         parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH
-          "State of health relevant paramters";
+          "State of health relevant parameters";
         parameter Modelica_EnergyStorages.CellRecords.Components.Selfdischarge Isd
           "Self discharge parameters"
           annotation(Dialog(group="Advanced"));
@@ -3534,21 +3516,27 @@ management systems, loads and charging devices.
       record Test1Parameters
         extends
           Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters(
-            SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
-              OCVtableOnFile=false,
-              OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-            capacity=Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=40*3600),
-            Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.0001),
-            RC={Modelica_EnergyStorages.CellRecords.Components.RCelement(
-              Rd=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.0001),
-              Cd=Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0=50000))});
+          SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
+              0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
+
+          capacity=
+              Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
+              40*3600),
+          Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=
+              0.0001),
+          RC={Modelica_EnergyStorages.CellRecords.Components.RCelement(Rd=
+              Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=
+              0.0001), Cd=
+              Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0=
+              50000))});
       annotation(defaultComponentPrefixes="parameter", Icon(graphics));
       end Test1Parameters;
     end LinearDynamicImpedance;
 
     package Components
       "Contains the records for more comfortable parameterization"
-     extends Modelica.Icons.Package;
+     extends Modelica_EnergyStorages.Icons.ComponentPackage;
 
       record SOCOCV "Combines SOC vs OCV curve table parameters"
         extends Modelica.Icons.Record;
@@ -3590,9 +3578,9 @@ management systems, loads and charging devices.
         extends Modelica.Icons.Record;
         parameter Modelica.SIunits.ElectricCharge Qini=0
           "Initial transferred charge";
-        parameter Modelica_EnergyStorages.MoveTo_Modelica.ChargeAging kQabs = 0
+        parameter Modelica.SIunits.ChargeAging                        kQabs = 0
           "Linear charge transfer aging coefficient";
-        parameter Modelica_EnergyStorages.MoveTo_Modelica.TimeAging kt = 0
+        parameter Modelica.SIunits.TimeAging                        kt = 0
           "Linear calendaric aging coefficient";
       annotation(defaultComponentPrefixes="parameter");
       end Aging;
@@ -3639,9 +3627,9 @@ management systems, loads and charging devices.
       record RCelement "Combines the properties of an RC element"
         extends Modelica.Icons.Record;
         parameter CellRecords.Components.Resistance Rd
-          "Paramters for the resistance";
+          "Parameters for the resistance";
         parameter CellRecords.Components.Capacitance Cd
-          "Paramters for the capacitance";
+          "Parameters for the capacitance";
       annotation(defaultComponentPrefixes="parameter");
       end RCelement;
 
@@ -3690,14 +3678,15 @@ management systems, loads and charging devices.
         delayAfterCharging=delayAfterCharging,
         delayAfterDischarging=delayAfterDischarging)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-      MoveTo_Modelica.MinMax minMax(nin=ns)
+      Modelica.Blocks.Math.MinMax
+                             minMax(nin=ns)
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
       Interfaces.SingleCellBus.VOut                     vOut[
                            ns]
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
       Interfaces.SingleCellBus.Bus singleCellBus[ns,np]
-        "This bus contains the voltage, the current and the temperatur of the cell"
+        "This bus contains the voltage, the current and the temperature of the cell"
         annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
@@ -3810,7 +3799,7 @@ management systems, loads and charging devices.
 
       block Cycling "Basic cycling model"
         extends Icons.Block;
-        Modelica_EnergyStorages.MoveTo_Modelica.RSFlipFlop rSFlipFlop(Qini=
+        Modelica.Blocks.Logical.RSFlipFlop                 rSFlipFlop(Qini=
               initialDischarging)     annotation (Placement(transformation(extent={{20,-4},
                   {40,16}},             rotation=0)));
         Modelica.Blocks.Logical.LessThreshold lessVinMin(threshold=Vmin - 0.001)
@@ -3844,13 +3833,13 @@ management systems, loads and charging devices.
                 rotation=0,
               origin={110,60})));
 
-        Modelica_EnergyStorages.MoveTo_Modelica.BooleanOnDelay AfterChargingDelay(delayTime=
-             delayAfterCharging)
+        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime
+            =delayAfterCharging)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 rotation=0,
               origin={70,40})));
-        Modelica_EnergyStorages.MoveTo_Modelica.BooleanOnDelay BeforeChargingDelay(delayTime=
-             delayAfterDischarging)
+        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime
+            =delayAfterDischarging)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 rotation=0,
               origin={70,0})));
@@ -4002,8 +3991,72 @@ management systems, loads and charging devices.
                 lineColor={255,85,255},
                 textString="finished")}));
       end ChargingFinished;
+
+      block OnDelay "Delays the boolean true with a defined delay time"
+        extends Modelica.Blocks.Interfaces.BooleanSISO;
+        Modelica.Blocks.Logical.RSFlipFlop                 rSFlipFlop
+                              annotation (Placement(transformation(extent={{40,-10},{60,
+                  10}},           rotation=0)));
+        Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
+                extent={{-40,-20},{-20,0}},  rotation=0)));
+        parameter Modelica.SIunits.Time delayTime
+          "Delay time of output with respect to input signal";
+        Modelica.Blocks.Logical.Timer timer
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+        Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
+              delayTime)
+          annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+      equation
+        connect(not1.y, rSFlipFlop.R) annotation (Line(points={{-19,-10},{20,-10},
+                {20,-6},{38,-6}},
+                                color={255,0,255}));
+        connect(timer.y, greaterThreshold.u) annotation (Line(
+            points={{-39,30},{-22,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(greaterThreshold.y, rSFlipFlop.S) annotation (Line(
+            points={{1,30},{20,30},{20,6},{38,6}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(u, timer.u) annotation (Line(
+            points={{-120,0},{-80,0},{-80,30},{-62,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(u, not1.u) annotation (Line(
+            points={{-120,0},{-80,0},{-80,-10},{-42,-10}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(rSFlipFlop.Q, y) annotation (Line(
+            points={{61,6},{80,6},{80,0},{110,0}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(graphics),
+                             Icon(graphics={
+              Polygon(
+                points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                lineColor={0,0,0},
+                fillColor={0,0,0},
+                fillPattern=FillPattern.Solid),
+              Line(points={{-80,66},{-80,-82}}, color={0,0,0}),
+              Line(points={{-90,-70},{72,-70}}, color={0,0,0}),
+              Polygon(
+                points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                lineColor={0,0,0},
+                fillColor={0,0,0},
+                fillPattern=FillPattern.Solid),
+              Line(points={{-80,-70},{-50,-70},{-50,54},{56,54},{56,-70},{58,
+                    -70}}, color={0,0,0}),
+              Line(points={{-50,-70},{-30,-70},{-30,54},{56,54},{56,-70},{70,
+                    -70},{68,-70}}, color={0,0,0}),
+              Text(
+                extent={{-90,72},{10,56}},
+                lineColor={0,0,0},
+                fillColor={0,0,0},
+                fillPattern=FillPattern.Solid,
+                textString=
+                     "Td")}));
+      end OnDelay;
     end Components;
-  annotation (classOrder={"Components"});
   end BatteryManagement;
 
   package Icons "Package which contains all icons of the used models"
@@ -4255,7 +4308,7 @@ management systems, loads and charging devices.
 
     partial package BatteriesPackage "Icon for the Batteries package "
 
-    annotation (classOrder={"Cells","Packages","Components"}, Icon(graphics={
+    annotation (Icon(graphics={
             Ellipse(
               extent={{-56,-34},{26,-76}},
               lineColor={0,0,0},
@@ -5024,7 +5077,7 @@ management systems, loads and charging devices.
                 lineThickness=0.5)}),
                                defaultComponentName="sedBusAIMC",Documentation(info="<html>
 <p>
-This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage\">asynchronous induction machines with squirrel cage rotor</a> (AIMCs) control. Various signals are predefined in the SEDBusAIMC.
+This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage\">asynchronous induction machines with squirrel cage rotor</a> (AIMCs) control. Various signals are predefined in the SEDBusAIMC.
 </p>
 
 <!-- visible -->
@@ -5053,7 +5106,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5065,15 +5118,15 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.i) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-28,1.46958e-015},{-28,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-28,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end IOut;
 
@@ -5082,7 +5135,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={40,0},
               extent={{-20,20},{20,-20}},
@@ -5098,11 +5151,11 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.i) annotation (Line(
-            points={{11,-1.34711e-015},{23.5,-1.34711e-015},{23.5,0},{40,0}},
+            points={{11,0},{40,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5116,12 +5169,12 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
       extends Icons.AdaptorOut;
 
         Modelica.Blocks.Interfaces.RealOutput y
-          "Temperatur of the battery (Output)"
+          "Temperature of the battery (Output)"
           annotation (Placement(transformation(extent={{30,-10},{50,10}},
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5133,15 +5186,15 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.T) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-26,1.46958e-015},{-26,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-26,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end TempOut;
 
@@ -5150,7 +5203,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={40,0},
               extent={{-20,20},{20,-20}},
@@ -5166,11 +5219,11 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-10,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-10,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.T) annotation (Line(
-            points={{13,-1.34711e-015},{26.5,-1.34711e-015},{26.5,0},{40,0}},
+            points={{13,0},{40,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5189,7 +5242,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5201,15 +5254,15 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.v) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-24,1.46958e-015},{-24,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-24,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics),
                              Icon(graphics));
       end VOut;
@@ -5219,7 +5272,7 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={40,0},
               extent={{-20,20},{20,-20}},
@@ -5235,11 +5288,11 @@ This bus is used for <a href=\"Modelica.Electrical.Machines.BasicMachines.Asynch
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.v) annotation (Line(
-            points={{11,-1.34711e-015},{24.5,-1.34711e-015},{24.5,0},{40,0}},
+            points={{11,0},{40,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5301,16 +5354,15 @@ constructed by the signals connected to this bus.
       end Bus;
 
       model VariableSwitch
-        "Bus connector switch according to the interger input"
+        "Bus connector switch according to the integer input"
       parameter Integer ns=12 "Number of buses";
         SOCOut sOCOut[ns]
           annotation (Placement(transformation(extent={{-66,46},{-46,66}})));
         SOCIn sOCIn annotation (Placement(transformation(extent={{46,46},{66,66}})));
-        Modelica_EnergyStorages.Interfaces.ControlBus.SOHOut
-               sOHOut[ns]
+        Modelica_EnergyStorages.Interfaces.ControlBus.SOHOut sOHOut[ns]
           annotation (Placement(transformation(extent={{-66,26},{-46,46}})));
-        Modelica_EnergyStorages.Interfaces.ControlBus.SOHIn
-              sOHIn annotation (Placement(transformation(extent={{46,26},{66,46}})));
+        Modelica_EnergyStorages.Interfaces.ControlBus.SOHIn sOHIn
+                    annotation (Placement(transformation(extent={{46,26},{66,46}})));
         COut cOut[ns]
           annotation (Placement(transformation(extent={{-66,6},{-46,26}})));
         CIn cIn annotation (Placement(transformation(extent={{46,6},{66,26}})));
@@ -5525,7 +5577,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5537,15 +5589,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.SOC) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-26,1.46958e-015},{-26,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-26,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end SOCOut;
 
@@ -5554,7 +5606,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5570,11 +5622,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.SOC) annotation (Line(
-            points={{11,-1.34711e-015},{27.5,-1.34711e-015},{27.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5593,7 +5645,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5605,10 +5657,10 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.SOH) annotation (Line(
-            points={{-12,1.46958e-015},{-27,1.46958e-015},{-27,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5622,7 +5674,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5638,11 +5690,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.SOH) annotation (Line(
-            points={{11,-1.34711e-015},{24.5,-1.34711e-015},{24.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5661,7 +5713,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5673,15 +5725,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.C) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-24,1.46958e-015},{-24,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-24,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end COut;
 
@@ -5690,7 +5742,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5706,11 +5758,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.C) annotation (Line(
-            points={{11,-1.34711e-015},{26.5,-1.34711e-015},{26.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5729,7 +5781,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5741,10 +5793,10 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.cycles) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5758,7 +5810,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5774,11 +5826,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.cycles) annotation (Line(
-            points={{11,-1.34711e-015},{25.5,-1.34711e-015},{25.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5797,7 +5849,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5809,15 +5861,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.OCV) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-26,1.46958e-015},{-26,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-26,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end OCVOut;
 
@@ -5826,7 +5878,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5842,11 +5894,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.OCV) annotation (Line(
-            points={{11,-1.34711e-015},{25.5,-1.34711e-015},{25.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5865,7 +5917,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5877,15 +5929,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.v) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-25,1.46958e-015},{-25,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-25,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end VOut;
 
@@ -5894,7 +5946,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5910,11 +5962,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.v) annotation (Line(
-            points={{11,-1.34711e-015},{26.5,-1.34711e-015},{26.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -5933,7 +5985,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -5945,15 +5997,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.i) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-27,1.46958e-015},{-27,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-27,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end IOut;
 
@@ -5962,7 +6014,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -5978,11 +6030,11 @@ constructed by the signals connected to this bus.
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(gain.y, controlBus.i) annotation (Line(
-            points={{11,-1.34711e-015},{27.5,-1.34711e-015},{27.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -6001,7 +6053,7 @@ constructed by the signals connected to this bus.
                 rotation=0)));
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={-40,0},
               extent={{-20,20},{20,-20}},
@@ -6013,15 +6065,15 @@ constructed by the signals connected to this bus.
               extent={{10,10},{-10,-10}},
               rotation=180)));
       equation
-        connect(gain.y, y)  annotation (Line(points={{11,-1.34711e-015},{17,
-                -1.34711e-015},{17,0},{40,0}}, color={0,0,127}));
+        connect(gain.y, y)  annotation (Line(points={{11,0},{17,0},{40,0}},
+                                               color={0,0,127}));
         connect(gain.u, controlBus.T) annotation (
           Text(
             string="%second",
             index=1,
             extent=[6,3; 6,3],
-            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,1.46958e-015},
-                {-23,1.46958e-015},{-23,0},{-40,0}},color={0,0,127}));
+            style(color=0, rgbcolor={0,0,0})), Line(points={{-12,0},{-23,0},{
+                -40,0}},                            color={0,0,127}));
         annotation (Diagram(graphics));
       end TOut;
 
@@ -6030,7 +6082,7 @@ constructed by the signals connected to this bus.
       extends Icons.AdaptorIn;
 
         Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus
-          "This bus contains the voltage, the current and the temperatur of the cell"
+          "This bus contains the voltage, the current and the temperature of the cell"
           annotation (Placement(transformation(
               origin={42,0},
               extent={{-20,20},{20,-20}},
@@ -6047,14 +6099,14 @@ constructed by the signals connected to this bus.
               iconTransformation(extent={{-50,-10},{-30,10}})));
       equation
         connect(gain.y, controlBus.T) annotation (Line(
-            points={{11,-1.34711e-015},{26.5,-1.34711e-015},{26.5,0},{42,0}},
+            points={{11,0},{42,0}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}}));
         connect(gain.u, u) annotation (Line(
-            points={{-12,1.46958e-015},{-26,1.46958e-015},{-26,0},{-40,0}},
+            points={{-12,0},{-40,0}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(graphics), Icon(graphics));
@@ -6095,7 +6147,7 @@ constructed by the signals connected to this bus.
     model ChargeCounter "Senses the transferred charge"
       extends Modelica.Icons.RotationalSensor;
       parameter Modelica.SIunits.ElectricCharge Charge_start=0
-        "Initial transferrend charge";
+        "Initial transferred charge";
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
         annotation (Placement(transformation(extent={{-10,-10},{10,10}},
               rotation=0)));
@@ -6122,15 +6174,14 @@ constructed by the signals connected to this bus.
             color={0,0,255}));
       connect(currentSensor.n, pin_n)
         annotation (Line(points={{10,0},{100,0}}, color={0,0,255}));
-      connect(integrator.u, currentSensor.i) annotation (Line(points={{
-              7.34788e-016,-38},{7.34788e-016,-24},{0,-24},{0,-10}},   color={0,
+      connect(integrator.u, currentSensor.i) annotation (Line(points={{0,-38},{
+              0,-24},{0,-10}},                                         color={0,
               0,127}));
       connect(charge, charge)
                           annotation (Line(points={{0,-110},{0,-110}},
             color={0,0,127}));
       connect(integrator.y, charge)
-                                  annotation (Line(points={{-6.73556e-016,-61},
-              {-6.73556e-016,-110},{0,-110}},
+                                  annotation (Line(points={{0,-61},{0,-110}},
                                           color={0,0,127}));
       annotation (Diagram(graphics),
                            Icon(graphics={
@@ -6228,10 +6279,10 @@ constructed by the signals connected to this bus.
                    "%name")}));
     end EnergyCounter;
 
-    model AbsChargeCounter "Senses the absolut transferred charge"
+    model AbsChargeCounter "Senses the absolute transferred charge"
       extends Modelica.Icons.RotationalSensor;
       parameter Modelica.SIunits.ElectricCharge Charge_start=0
-        "Initial transferrend charge";
+        "Initial transferred charge";
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
         annotation (Placement(transformation(extent={{-10,-10},{10,10}},
               rotation=0)));
@@ -6267,15 +6318,14 @@ constructed by the signals connected to this bus.
                           annotation (Line(points={{0,-90},{0,-90}},
             color={0,0,127}));
       connect(currentSensor.i, abs1.u) annotation (Line(points={{0,-10},{0,-14},
-              {0,-18},{2.20436e-015,-18}}, color={0,0,127}));
+              {0,-18}},                    color={0,0,127}));
       connect(abs1.y, integrator.u) annotation (Line(
-          points={{-2.02067e-015,-41},{-2.02067e-015,-43.5},{7.34788e-016,-43.5},
-              {7.34788e-016,-48}},
+          points={{0,-41},{0,-48}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(integrator.y, absCharge)
                                annotation (Line(
-          points={{-6.73556e-016,-71},{-6.73556e-016,-76.5},{0,-76.5},{0,-90}},
+          points={{0,-71},{0,-90}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(graphics),
@@ -6296,7 +6346,7 @@ constructed by the signals connected to this bus.
                    "%name")}));
     end AbsChargeCounter;
 
-    model AbsEnergyCounter "Senses the absolut transferred energy"
+    model AbsEnergyCounter "Senses the absolute transferred energy"
       extends Modelica.Icons.RotationalSensor;
       parameter Modelica.SIunits.Energy Energy_start=0
         "Initial transferred energy";
@@ -6387,7 +6437,7 @@ constructed by the signals connected to this bus.
       "Senses the transferred energy as well as the transferred charge"
       extends Modelica.Icons.RotationalSensor;
       parameter Modelica.SIunits.ElectricCharge Charge_start=0
-        "Initial transferrend charge";
+        "Initial transferred charge";
       parameter Modelica.SIunits.Energy Energy_start=0
         "Initial transferred energy";
       Modelica.Electrical.Analog.Interfaces.PositivePin pin_pc "positive pin"
@@ -6532,25 +6582,25 @@ constructed by the signals connected to this bus.
               rotation=0)));
     equation
       connect(pinCell_p, currentSensor.p)
-        annotation (Line(points={{-100,60},{-1.83697e-015,60}}, color={0,0,
+        annotation (Line(points={{-100,60},{0,60}},             color={0,0,
               255}));
       connect(voltageSensor.n, pinCell_n)
-                                      annotation (Line(points={{-60,-50},{
-              -60,-60},{-100,-60}}, color={0,0,255}));
-      connect(pin_p, currentSensor.n)  annotation (Line(points={{0,100},{0,80},
-              {1.83697e-015,80}},     color={0,0,255}));
+                                      annotation (Line(points={{-60,-50},{-60,
+              -60},{-100,-60}},     color={0,0,255}));
+      connect(pin_p, currentSensor.n)  annotation (Line(points={{0,100},{0,80}},
+                                      color={0,0,255}));
       connect(voltageSensor.p, currentSensor.p) annotation (Line(points={{-60,-30},
-              {-60,60},{-1.83697e-015,60}},          color={0,0,255}));
-      connect(pinCell_n, pin_n) annotation (Line(points={{-100,-60},{-100,
-              -80},{0,-80},{0,-100}}, color={0,0,255}));
-      connect(TemperatureSensor.port, heatPort) annotation (Line(points={{
-              -10,0},{-100,0}}, color={191,0,0}));
+              {-60,60},{0,60}},                      color={0,0,255}));
+      connect(pinCell_n, pin_n) annotation (Line(points={{-100,-60},{-100,-80},
+              {0,-80},{0,-100}},      color={0,0,255}));
+      connect(TemperatureSensor.port, heatPort) annotation (Line(points={{-10,0},
+              {-100,0}},        color={191,0,0}));
       connect(currentSensor.i,i)  annotation (Line(points={{10,70},{56,70},{56,
               60},{110,60}},     color={0,0,127}));
-      connect(TemperatureSensor.T, T) annotation (Line(points={{10,0},{110,
-              0}}, color={0,0,127}));
-      connect(voltageSensor.v,v)  annotation (Line(points={{-50,-40},{26,
-              -40},{26,-60},{110,-60}}, color={0,0,127}));
+      connect(TemperatureSensor.T, T) annotation (Line(points={{10,0},{110,0}},
+                   color={0,0,127}));
+      connect(voltageSensor.v,v)  annotation (Line(points={{-50,-40},{26,-40},{
+              26,-60},{110,-60}},       color={0,0,127}));
       connect(i,i)  annotation (Line(points={{110,60},{110,60}}, color={0,0,
               127}));
       annotation (Diagram(graphics),
@@ -6598,7 +6648,7 @@ constructed by the signals connected to this bus.
 
   package Sources "Contains loads and chargers"
     extends Modelica.Icons.SourcesPackage;
-    package Loads "Package with differnt loads"
+    package Loads "Package with different loads"
     extends Modelica.Icons.Package;
      extends Modelica_EnergyStorages.Icons.Load;
 
@@ -6904,7 +6954,7 @@ constructed by the signals connected to this bus.
             1356,-1.541663615;1357,-0.975896978;1358,-4.584656071;1359,-3.875336982;1360,-3.679521202;
             1361,-3.479181935;1362,-5.131929056;1363,-8.692604712;1364,-6.342728867;1365,-3.840186021;
             1366,-1.778577377;1367,-2.41891E-10;1368,0;1369,0;1370,0]
-            "FTP72 power table (time = first column; power in kW= scond columns e.g. table=[0,2])";
+            "FTP72 power table (time = first column; power in kW= second columns e.g. table=[0,2])";
           Components.FTP72_Power fTP72_Power(gain=gain, table=table)
             annotation (Placement(transformation(extent={{-60,6},{-40,26}})));
           parameter Modelica.Blocks.Interfaces.RealOutput gain=1 "Gain";
@@ -7316,7 +7366,7 @@ constructed by the signals connected to this bus.
               1356,-1.541663615;1357,-0.975896978;1358,-4.584656071;1359,-3.875336982;1360,-3.679521202;
               1361,-3.479181935;1362,-5.131929056;1363,-8.692604712;1364,-6.342728867;1365,-3.840186021;
               1366,-1.778577377;1367,-2.41891E-10;1368,0;1369,0;1370,0]
-              "FTP72 power table (time = first column; power in kW= scond columns e.g. table=[0,2])";
+              "FTP72 power table (time = first column; power in kW= second columns e.g. table=[0,2])";
             Modelica.Blocks.Interfaces.RealOutput y
               "Connector of Real output signal"
               annotation (Placement(transformation(extent={{100,-10},{120,10}})));
@@ -7566,8 +7616,8 @@ constructed by the signals connected to this bus.
               iconTransformation(extent={{-10,90},{10,110}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin"
                                      annotation (Placement(transformation(extent={{-10,
-                  -110},{10,-90}},   rotation=0), iconTransformation(extent={{-10,-110},
-                  {10,-90}})));
+                  -110},{10,-90}},   rotation=0), iconTransformation(extent={{-10,
+                  -110},{10,-90}})));
         Modelica.Blocks.Interfaces.BooleanInput on annotation (Placement(
               transformation(extent={{-100,-10},{-80,10}}), iconTransformation(
                 extent={{-100,-10},{-80,10}})));
@@ -7589,7 +7639,7 @@ constructed by the signals connected to this bus.
 
         connect(voltageSensor.v, internalNode)
                                      annotation (Line(
-            points={{-30,-6.12323e-016},{-20,0},{6,0}},
+            points={{-30,0},{6,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(internalNode, controlledCurrent.vControl)
@@ -7622,18 +7672,18 @@ constructed by the signals connected to this bus.
             points={{-40,-10},{-40,-40},{60,-40},{60,-8}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics={
+        annotation (Icon(graphics={
               Text(
                 extent={{17,14},{-17,-14}},
                 lineColor={255,85,255},
                 textString="on",
                 origin={-63,2},
-                rotation=180)}),
-                  Icon(graphics={Text(
+                rotation=180),
+              Text(
                 extent={{27,20},{-27,-20}},
                 lineColor={0,0,127},
                 textString="v",
-                origin={-139,-112},
+                origin={-65,-56},
                 rotation=180)}));
       end CCCV;
 
@@ -7666,14 +7716,14 @@ constructed by the signals connected to this bus.
                 rotation=0)));
       equation
         connect(signalCurrent.p, pin_p)
-                                     annotation (Line(points={{40,-1.77636e-015},
-                {40,100},{0,100}},
+                                     annotation (Line(points={{40,0},{40,100},{
+                0,100}},
                        color={0,0,255}));
         connect(signalCurrent.n, pin_n)
                                      annotation (Line(points={{40,-20},{40,-100},
                 {0,-100}}, color={0,0,255}));
-        connect(product.y, signalCurrent.i) annotation (Line(points={{21,-10},{27,
-                -10},{27,-10},{33,-10}}, color={0,0,127}));
+        connect(product.y, signalCurrent.i) annotation (Line(points={{21,-10},{
+                27,-10},{33,-10}},       color={0,0,127}));
         connect(realExpression.y, product.u2) annotation (Line(points={{-39,-40},
                 {-20,-40},{-20,-16},{-2,-16}}, color={0,0,127}));
         connect(booleanToReal.u, on)  annotation (Line(points={{-62,0},{-90,0}},
@@ -7734,30 +7784,30 @@ constructed by the signals connected to this bus.
                 rotation=0)));
       equation
         connect(signalCurrent.p, pin_p)
-                                     annotation (Line(points={{40,10},{40,100},{0,
-                100}}, color={0,0,255}));
+                                     annotation (Line(points={{40,10},{40,100},
+                {0,100}},
+                       color={0,0,255}));
         connect(signalCurrent.n, pin_n)
                                      annotation (Line(points={{40,-10},{40,-100},
                 {0,-100}}, color={0,0,255}));
         connect(product.u1, voltageSensor.v) annotation (Line(points={{22,-46},
-                {92,-46},{92,0},{90,0},{90,-1.83697e-015}},
-                                                          color={0,0,127}));
+                {92,-46},{92,0},{90,0}},                  color={0,0,127}));
         connect(voltageSensor.n, signalCurrent.n) annotation (Line(points={{80,-10},
                 {80,-20},{40,-20},{40,-10}},      color={0,0,255}));
         connect(voltageSensor.p, signalCurrent.p) annotation (Line(points={{80,10},
                 {80,20},{40,20},{40,10}}, color={0,0,255}));
         connect(product.u2, signalCurrent.i) annotation (Line(points={{22,-34},
-                {28,-34},{28,1.28588e-015},{33,1.28588e-015}},color={0,0,127}));
+                {28,-34},{28,0},{33,0}},                      color={0,0,127}));
         connect(limitedController.fb, product.y) annotation (Line(
             points={{-4,-9},{-4,-40},{-1,-40}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(limitedController.y, signalCurrent.i) annotation (Line(
-            points={{11,0},{11,1.28588e-015},{33,1.28588e-015}},
+            points={{11,0},{33,0}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(booleanToReal.u,on)   annotation (Line(points={{-74,6},{-76,6},{-76,0},
-                {-90,0}},
+        connect(booleanToReal.u,on)   annotation (Line(points={{-74,6},{-76,6},
+                {-76,0},{-90,0}},
               color={255,0,255}));
         connect(product1.y, limitedController.u) annotation (Line(
             points={{-19,0},{-9,0}},
@@ -7820,16 +7870,15 @@ constructed by the signals connected to this bus.
                                      annotation (Line(points={{20,-10},{20,-100},
                 {0,-100}}, color={0,0,255}));
         connect(product.u1, voltageSensor.v) annotation (Line(points={{-18,-56},
-                {80,-56},{80,0},{70,0},{70,-1.83697e-015}},
-                                                          color={0,0,127}));
+                {80,-56},{80,0},{70,0}},                  color={0,0,127}));
         connect(voltageSensor.n, signalCurrent.n) annotation (Line(points={{60,-10},
                 {60,-20},{20,-20},{20,-10}},      color={0,0,255}));
         connect(voltageSensor.p, signalCurrent.p) annotation (Line(points={{60,10},
                 {60,20},{20,20},{20,10}}, color={0,0,255}));
         connect(product.u2, signalCurrent.i) annotation (Line(points={{-18,-44},
-                {0,-44},{0,1.28588e-015},{13,1.28588e-015}},  color={0,0,127}));
+                {0,-44},{0,0},{13,0}},                        color={0,0,127}));
         connect(limitedController.y, signalCurrent.i) annotation (Line(
-            points={{-39,0},{-13,0},{-13,1.28588e-015},{13,1.28588e-015}},
+            points={{-39,0},{13,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(power, limitedController.u)
@@ -7860,8 +7909,7 @@ constructed by the signals connected to this bus.
       extends Modelica_EnergyStorages.Icons.Source;
         parameter Boolean ExternalControl =  true;
 
-        Modelica_EnergyStorages.Sources.Components.ControlledCurrent
-                                                            controlledCurrent(
+        Modelica_EnergyStorages.Sources.Components.ControlledCurrent controlledCurrent(
           Imax=Imax,
           T=T,
           Vref=Vmax)
@@ -7878,8 +7926,8 @@ constructed by the signals connected to this bus.
               iconTransformation(extent={{-10,90},{10,110}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin"
                                      annotation (Placement(transformation(extent={{-10,
-                  -110},{10,-90}},   rotation=0), iconTransformation(extent={{-10,-110},
-                  {10,-90}})));
+                  -110},{10,-90}},   rotation=0), iconTransformation(extent={{-10,
+                  -110},{10,-90}})));
         Modelica.Blocks.Interfaces.BooleanInput on annotation (Placement(
               transformation(extent={{-100,-10},{-80,10}}), iconTransformation(
                 extent={{-100,-10},{-80,10}})));
@@ -7901,7 +7949,7 @@ constructed by the signals connected to this bus.
 
         connect(voltageSensor.v, internalNode)
                                      annotation (Line(
-            points={{-30,-6.12323e-016},{-20,0},{6,0}},
+            points={{-30,0},{6,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(internalNode, controlledCurrent.vControl)
@@ -7934,42 +7982,20 @@ constructed by the signals connected to this bus.
             points={{-40,10},{-40,40},{60,40},{60,10}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics={
-              Ellipse(extent={{-40,40},{40,-40}}, lineColor={0,0,0},
-                origin={0,2},
-                rotation=90),
-              Line(points={{0,40},{0,-40}}, color={0,0,0},
-                origin={0,2},
-                rotation=90),
+        annotation (Icon(graphics={
               Text(
                 extent={{17,14},{-17,-14}},
                 lineColor={255,85,255},
                 textString="on",
                 origin={-63,2},
                 rotation=180),
-              Polygon(
-                points={{0,-10},{-8,8},{8,8},{0,-10}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                origin={0,60},
-                rotation=180),
-              Line(
-                points={{0,90},{0,44}},
-                color={0,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{0,-90}},
-                color={0,0,0},
-                smooth=Smooth.None)}),
-                  Icon(graphics={Text(
+              Text(
                 extent={{27,20},{-27,-20}},
                 lineColor={0,0,127},
                 textString="v",
-                origin={-139,-112},
+                origin={-65,-56},
                 rotation=180)}));
       end CCCV;
-    annotation (classOrder={"Components"});
     end Chargers;
 
     package Components "Components for the loads and the charging devices"
@@ -8067,7 +8093,7 @@ constructed by the signals connected to this bus.
                 fillPattern=FillPattern.Solid)}));
       end LimitedIntegralController;
 
-      model ControlledCurrent "Controlls the current according to the inputs"
+      model ControlledCurrent "Controls the current according to the inputs"
       extends Modelica_EnergyStorages.Icons.Source;
 
         parameter Modelica.SIunits.Voltage Vref "Reference voltage";
@@ -8100,9 +8126,8 @@ constructed by the signals connected to this bus.
               origin={-100,-60},
               extent={{-10,-10},{10,10}},
               rotation=0), iconTransformation(extent={{-100,-68},{-80,-48}})));
-        Modelica_EnergyStorages.Sources.Components.LimitedIntegralController
-          limitedController(                                outMax=Imax,
-          T=T)
+        Modelica_EnergyStorages.Sources.Components.LimitedIntegralController limitedController(outMax=
+              Imax, T=T)
           annotation (Placement(transformation(extent={{-46,-20},{-26,0}})));
 
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p
@@ -8116,9 +8141,8 @@ constructed by the signals connected to this bus.
         connect(booleanToReal.u, on) annotation (Line(points={{-50,30},{-50,28},
                 {-58,28},{-80,28},{-80,60},{-100,60}},
               color={255,0,255}));
-        connect(product.y, CurrentSource.i) annotation (Line(points={{27,
-                -1.34711e-015},{27,4.28626e-016},{33,4.28626e-016}},
-                                color={0,0,127}));
+        connect(product.y, CurrentSource.i) annotation (Line(points={{27,0},{27,
+                0},{33,0}},     color={0,0,127}));
         connect(refVoltage.y, limitedController.u) annotation (Line(
             points={{-59,-10},{-45,-10}},
             color={0,0,127},
@@ -8174,437 +8198,6 @@ constructed by the signals connected to this bus.
     end Components;
   end Sources;
 
-  package MoveTo_Modelica "Universal models for the MSL"
-   extends Modelica.Icons.Package;
-
-    model CapacitorInitialVoltage
-      "Ideal linear electrical capacitor with an initial voltage"
-      extends Modelica.Electrical.Analog.Basic.Capacitor(v(start=0));
-    end CapacitorInitialVoltage;
-
-    block RSFlipFlop "A basic RS Flip Flop"
-      extends Modelica.Blocks.Interfaces.BooleanBlockIcon;
-      parameter Boolean Qini=false "Start value of Q at initial time";
-      Modelica.Blocks.Interfaces.BooleanOutput Q
-        annotation (Placement(transformation(extent={{100,50},{120,70}},
-              rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput QI
-        annotation (Placement(transformation(extent={{100,-70},{120,-50}},
-              rotation=0)));
-      Modelica.Blocks.Logical.Nor nor annotation (Placement(transformation(
-              extent={{-20,20},{0,40}},   rotation=0)));
-      Modelica.Blocks.Logical.Nor nor1 annotation (Placement(transformation(
-              extent={{-20,-20},{0,0}}, rotation=0)));
-      Modelica.Blocks.Logical.Pre pre(pre_u_start=not (Qini))
-                                       annotation (Placement(transformation(
-              extent={{10,20},{30,40}},rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanInput S
-        annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-      Modelica.Blocks.Interfaces.BooleanInput R
-        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-    equation
-      connect(nor1.y, nor.u2) annotation (Line(points={{1,-10},{40,-10},{40,-40},
-              {-60,-40},{-60,22},{-22,22}},      color={255,0,255}));
-      connect(nor1.y, Q) annotation (Line(points={{1,-10},{60,-10},{60,60},{
-              110,60}}, color={255,0,255}));
-      connect(nor.y, pre.u)  annotation (Line(points={{1,30},{8,30}},   color=
-             {255,0,255}));
-      connect(pre.y, nor1.u1)  annotation (Line(points={{31,30},{40,30},{40,10},
-              {-40,10},{-40,-10},{-22,-10}},     color={255,0,255}));
-      connect(pre.y, QI)  annotation (Line(points={{31,30},{80,30},{80,-60},{
-              110,-60}}, color={255,0,255}));
-      connect(S, nor.u1) annotation (Line(
-          points={{-120,60},{-40,60},{-40,30},{-22,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(R, nor1.u2) annotation (Line(
-          points={{-120,-60},{-40,-60},{-40,-18},{-22,-18}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(graphics),
-                           Icon(graphics={
-            Text(
-              extent={{-70,-30},{-30,-90}},
-              lineColor={255,85,255},
-              textString=
-                   "R"),
-            Text(
-              extent={{-70,90},{-30,30}},
-              lineColor={255,85,255},
-              textString=
-                   "S"),
-            Text(
-              extent={{40,90},{80,30}},
-              lineColor={255,85,255},
-              textString=
-                   "Q"),
-            Text(
-              extent={{30,-30},{90,-90}},
-              lineColor={255,85,255},
-              textString=
-                   "Q!")}));
-    end RSFlipFlop;
-
-    block RSFlipFlopEdge "A basic edge controlled RS Flip Flop"
-      extends Modelica.Blocks.Interfaces.BooleanBlockIcon;
-      parameter Boolean Qini=false "Start value of Q at initial time";
-      Modelica.Blocks.Interfaces.BooleanOutput Q
-        annotation (Placement(transformation(extent={{100,50},{120,70}},
-              rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput QI
-        annotation (Placement(transformation(extent={{100,-70},{120,-50}},
-              rotation=0)));
-      Modelica.Blocks.Logical.Edge edge1 annotation (Placement(transformation(
-              extent={{-60,50},{-40,70}}, rotation=0)));
-      Modelica.Blocks.Logical.Edge edge2 annotation (Placement(transformation(
-              extent={{-60,-70},{-40,-50}}, rotation=0)));
-      Modelica_EnergyStorages.MoveTo_Modelica.RSFlipFlop rSFlipFlop(Qini=Qini)
-        annotation (Placement(transformation(extent={{0,0},{20,20}})));
-      Modelica.Blocks.Interfaces.BooleanInput S
-        annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-      Modelica.Blocks.Interfaces.BooleanInput R
-        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-    equation
-      connect(edge1.y, rSFlipFlop.S) annotation (Line(
-          points={{-39,60},{-20,60},{-20,16},{-2,16}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(edge2.y, rSFlipFlop.R) annotation (Line(
-          points={{-39,-60},{-20,-60},{-20,4},{-2,4}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(rSFlipFlop.QI, QI) annotation (Line(
-          points={{21,4},{60,4},{60,-60},{110,-60}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(rSFlipFlop.Q, Q) annotation (Line(
-          points={{21,16},{60,16},{60,60},{110,60}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(S, edge1.u) annotation (Line(
-          points={{-120,60},{-62,60}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(R, edge2.u) annotation (Line(
-          points={{-120,-60},{-62,-60}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(graphics),
-                           Icon(graphics={
-            Text(
-              extent={{-70,-30},{-20,-90}},
-              lineColor={255,85,255},
-              textString=
-                   "R^"),
-            Text(
-              extent={{-70,90},{-8,30}},
-              lineColor={255,85,255},
-              textString=
-                   "S^"),
-            Text(
-              extent={{40,90},{80,30}},
-              lineColor={255,85,255},
-              textString=
-                   "Q"),
-            Text(
-              extent={{30,-30},{90,-90}},
-              lineColor={255,85,255},
-              textString=
-                   "Q!"),
-            Text(
-              extent={{-70,-30},{-8,-90}},
-              lineColor={255,85,255},
-              textString="R^")}));
-    end RSFlipFlopEdge;
-
-    block Polynom "Variable, polynomial interpolation"
-      extends Modelica.Blocks.Interfaces.SISO;
-      parameter Real c[:] = {1,0,0}
-        "polynomial coefficients in ascending order";
-    equation
-      y = sum({c[i]*u^(i-1) for i in 1:size(c,1)});
-      annotation (Icon(graphics={Text(
-              extent={{-80,20},{80,-20}},
-              lineColor={0,0,255},
-              textString="polynom")}),
-                           Diagram(graphics));
-    end Polynom;
-
-    block BooleanImpulse "A boolean impulse with definable duration"
-      extends Modelica.Blocks.Interfaces.BooleanBlockIcon;
-      parameter Real start=0;
-      parameter Modelica.SIunits.Time duration=0.01;
-      Modelica.Blocks.Sources.BooleanStep booleanStep1(startTime=start)
-        annotation (Placement(transformation(extent={{-40,10},{-20,30}},
-              rotation=0)));
-      Modelica.Blocks.Sources.BooleanStep booleanStep2(startValue=true,
-          startTime=duration)
-                           annotation (Placement(transformation(extent={{
-                -40,-30},{-20,-10}}, rotation=0)));
-      Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
-              extent={{20,-10},{40,10}}, rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput y
-        "Connector of Boolean output signal" annotation (Placement(
-            transformation(extent={{100,-10},{120,10}}, rotation=0)));
-    equation
-      connect(booleanStep1.y, and1.u1)
-                                      annotation (Line(points={{-19,20},{0,
-              20},{0,0},{18,0}}, color={255,0,255}));
-      connect(booleanStep2.y, and1.u2) annotation (Line(points={{-19,-20},{
-              0,-20},{0,-8},{18,-8}}, color={255,0,255}));
-      connect(and1.y, y)  annotation (Line(points={{41,0},{110,0}}, color={
-              255,0,255}));
-      annotation (Diagram(graphics),
-                           Icon(graphics={
-            Polygon(
-              points={{-80,88},{-88,66},{-72,66},{-80,88}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-80,66},{-80,-82}}, color={0,0,0}),
-            Line(points={{-90,-70},{72,-70}}, color={0,0,0}),
-            Polygon(
-              points={{90,-70},{68,-62},{68,-78},{90,-70}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-80,-70},{-50,-70},{-50,54},{-16,54},{-16,-70},{
-                  58,-70}}, color={0,0,0})}));
-    end BooleanImpulse;
-
-    block FallingEdgeCounter "Counts the number falling edges"
-      extends Modelica.Blocks.Interfaces.IntegerSO;
-      parameter Integer NumberIni=0;
-
-      Modelica.Blocks.Interfaces.BooleanInput u
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-    protected
-      Integer Cycle(start=NumberIni);
-      Boolean unot;
-    equation
-      unot= not u;
-      when (edge(unot)) then
-        Cycle = y + 1;
-      end when;
-      y = pre(Cycle);
-      annotation (Diagram(graphics),
-                           Icon(graphics={Text(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              textString=
-                   "#")}));
-    end FallingEdgeCounter;
-
-    block RisingEdgeCounter "Counts the number rising edges"
-      extends Modelica.Blocks.Interfaces.IntegerSO;
-      parameter Integer NumberIni=0;
-      Modelica.Blocks.Interfaces.BooleanInput u
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-    protected
-      Integer Cycle(start=NumberIni);
-    equation
-      when (edge(u)) then
-        Cycle = y + 1;
-      end when;
-      y = pre(Cycle);
-      annotation (Diagram(graphics),
-                           Icon(graphics={Text(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              textString=
-                   "#")}));
-    end RisingEdgeCounter;
-
-    block PulseTime "Estimates the times between two pulses"
-      extends Modelica.Blocks.Interfaces.SO;
-     Modelica.Blocks.Logical.Edge edge1 annotation (Placement(transformation(
-             extent={{-60,-10},{-40,10}}, rotation=0)));
-     Modelica.Blocks.Math.Add add(k1=-1, k2=+1)
-       annotation (Placement(transformation(extent={{72,-10},{92,10}},
-             rotation=0)));
-     Modelica.Blocks.Discrete.TriggeredSampler OnSampler
-       annotation (Placement(transformation(extent={{0,10},{20,30}},  rotation=
-              0)));
-     Modelica.Blocks.Discrete.TriggeredSampler OffSampler2
-       annotation (Placement(transformation(extent={{0,-30},{20,-10}},
-             rotation=0)));
-     Modelica.Blocks.Sources.Clock clock annotation (Placement(transformation(
-             extent={{-60,30},{-40,50}}, rotation=0)));
-     Modelica.Blocks.Logical.FallingEdge fallingEdge
-       annotation (Placement(transformation(extent={{-60,-50},{-40,-30}},
-             rotation=0)));
-     Modelica.Blocks.Discrete.TriggeredSampler OffSampler1
-       annotation (Placement(transformation(extent={{30,10},{50,30}}, rotation=
-              0)));
-      Modelica.Blocks.Interfaces.BooleanInput u
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-    equation
-     connect(OffSampler2.y, add.u2)
-                                   annotation (Line(points={{21,-20},{60,-20},
-             {60,-6},{70,-6}}, color={0,0,127}));
-     connect(edge1.y, OnSampler.trigger)  annotation (Line(points={{-39,0},{10,
-             0},{10,8.2}}, color={255,0,255}));
-     connect(clock.y, OnSampler.u)  annotation (Line(points={{-39,40},{-20,40},
-             {-20,20},{-2,20}}, color={0,0,127}));
-     connect(fallingEdge.y, OffSampler2.trigger)
-                                                annotation (Line(points={{-39,-40},
-             {10,-40},{10,-31.8}},    color={255,0,255}));
-     connect(clock.y, OffSampler2.u)
-                                    annotation (Line(points={{-39,40},{-20,40},
-             {-20,-20},{-2,-20}}, color={0,0,127}));
-     connect(OnSampler.y, OffSampler1.u)  annotation (Line(points={{21,20},{24,
-             20},{26,20},{28,20}},
-                   color={0,0,127}));
-     connect(OffSampler1.y, add.u1) annotation (Line(points={{51,20},{60,20},{
-             60,6},{70,6}}, color={0,0,127}));
-     connect(OffSampler1.trigger, OffSampler2.trigger)
-                                                      annotation (Line(points={{40,8.2},
-             {40,-40},{10,-40},{10,-31.8}},          color={255,0,255}));
-      connect(u, edge1.u) annotation (Line(
-          points={{-120,0},{-62,0}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(u, fallingEdge.u) annotation (Line(
-          points={{-120,0},{-80,0},{-80,-40},{-62,-40}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(add.y, y) annotation (Line(
-          points={{93,0},{110,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-     annotation (Diagram(graphics),
-                          Icon(graphics={
-           Ellipse(extent={{-80,80},{80,-80}}, lineColor={0,0,0}),
-           Line(points={{0,80},{0,60}}, color={0,0,0}),
-           Line(points={{80,0},{60,0}}, color={0,0,0}),
-           Line(points={{0,-80},{0,-60}}, color={0,0,0}),
-           Line(points={{-80,0},{-60,0}}, color={0,0,0}),
-           Line(points={{37,70},{26,50}}, color={0,0,0}),
-           Line(points={{70,38},{49,26}}, color={0,0,0}),
-           Line(points={{71,-37},{52,-27}}, color={0,0,0}),
-           Line(points={{39,-70},{29,-51}}, color={0,0,0}),
-           Line(points={{-39,-70},{-29,-52}}, color={0,0,0}),
-           Line(points={{-71,-37},{-50,-26}}, color={0,0,0}),
-           Line(points={{-71,37},{-54,28}}, color={0,0,0}),
-           Line(points={{-38,70},{-28,51}}, color={0,0,0}),
-           Line(points={{0,0},{-50,50}}, color={0,0,0}),
-           Line(points={{0,0},{40,0}}, color={0,0,0})}));
-    end PulseTime;
-
-    block LinearDependency "Block modeling linear u1 and u2 dependency of y"
-      extends Modelica.Blocks.Interfaces.SI2SO;
-      parameter Real y0=0 "Initial value";
-      parameter Real k1=0 "u1 dependency";
-      parameter Real k2=0 "u2 dependency";
-    equation
-      y= y0*(1+k1*u1+k2*u2);
-      annotation (Diagram(graphics),
-                           Icon(graphics={Line(
-              points={{-100,60},{100,0},{-100,-60}},
-              color={0,0,255},
-              smooth=Smooth.None)}));
-    end LinearDependency;
-
-    block MinMax "Determines the min and the max from the inputs"
-      extends Modelica.Blocks.Interfaces.BlockIcon;
-      parameter Integer nin(min=2)=2 "Number of inputs";
-      Modelica.Blocks.Interfaces.RealOutput yMax
-        annotation (Placement(transformation(extent={{100,50},{120,70}},
-              rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput yMin
-        annotation (Placement(transformation(extent={{100,-70},{120,-50}},
-              rotation=0)));
-      Modelica.Blocks.Interfaces.RealInput u[nin]
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-    equation
-      yMax =  max(u);
-      yMin =  min(u);
-      annotation (
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Text(
-              extent={{-12,80},{100,40}},
-              lineColor={0,0,130},
-              textString="yMax"),
-                           Text(
-              extent={{-10,-40},{100,-80}},
-              lineColor={0,0,130},
-              textString="yMin")}),
-        DymolaStoredErrors);
-    end MinMax;
-
-    block BooleanOnDelay "Delays the boolean true with a defined delay time"
-      extends Modelica.Blocks.Interfaces.BooleanSISO;
-      Modelica_EnergyStorages.MoveTo_Modelica.RSFlipFlop rSFlipFlop
-                            annotation (Placement(transformation(extent={{40,-10},{60,
-                10}},           rotation=0)));
-      Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
-              extent={{-40,-20},{-20,0}},  rotation=0)));
-      parameter Modelica.SIunits.Time delayTime=1
-        "Delay time of output with respect to input signal";
-      Modelica.Blocks.Logical.Timer timer
-        annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-      Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
-            delayTime)
-        annotation (Placement(transformation(extent={{-20,20},{0,40}})));
-    equation
-      connect(not1.y, rSFlipFlop.R) annotation (Line(points={{-19,-10},{20,-10},
-              {20,-6},{38,-6}},
-                              color={255,0,255}));
-      connect(timer.y, greaterThreshold.u) annotation (Line(
-          points={{-39,30},{-22,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(greaterThreshold.y, rSFlipFlop.S) annotation (Line(
-          points={{1,30},{20,30},{20,6},{38,6}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(u, timer.u) annotation (Line(
-          points={{-120,0},{-80,0},{-80,30},{-62,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(u, not1.u) annotation (Line(
-          points={{-120,0},{-80,0},{-80,-10},{-42,-10}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(rSFlipFlop.Q, y) annotation (Line(
-          points={{61,6},{80,6},{80,0},{110,0}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(graphics),
-                           Icon(graphics={
-            Polygon(
-              points={{-80,88},{-88,66},{-72,66},{-80,88}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-80,66},{-80,-82}}, color={0,0,0}),
-            Line(points={{-90,-70},{72,-70}}, color={0,0,0}),
-            Polygon(
-              points={{90,-70},{68,-62},{68,-78},{90,-70}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-80,-70},{-50,-70},{-50,54},{56,54},{56,-70},{58,
-                  -70}}, color={0,0,0}),
-            Line(points={{-50,-70},{-30,-70},{-30,54},{56,54},{56,-70},{70,
-                  -70},{68,-70}}, color={0,0,0}),
-            Text(
-              extent={{-90,72},{10,56}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              textString=
-                   "Td")}));
-    end BooleanOnDelay;
-
-    type TimeAging = Real (final quantity="1/Modelica.SIunits.Time",final unit="1/s");
-    type ChargeAging = Real (final quantity="1/Modelica.SIunits.ElectricCharge",final unit="1/(A.s)");
-  end MoveTo_Modelica;
-  annotation (uses(Modelica(version="3.2")),version="0.1.0",versionBuild=1,versionDate="2011-05-11");
+  annotation (uses(Modelica(version="3.2")),
+       version=3.2);
 end Modelica_EnergyStorages;
