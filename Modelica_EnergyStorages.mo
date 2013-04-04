@@ -2773,7 +2773,7 @@ management systems, loads and charging devices.
         "Calculators for the variables in the cell land stack models"
        extends Modelica_EnergyStorages.Icons.CalculatorPackage;
         block CellCalculator "Calculator for the capacity, SOC, SOH,..."
-          import ElectricEnergyStorages = Modelica.Electrical.EnergyStorages;
+          import ElectricEnergyStorages = Modelica_EnergyStorages;
          extends Icons.Block;
 
           Modelica.Blocks.Interfaces.RealInput i
@@ -3449,11 +3449,11 @@ management systems, loads and charging devices.
           SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
               0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-
           capacity=
               Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
               40*3600),
           Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.001));
+
       annotation(defaultComponentPrefixes="parameter");
       end Test1Parameters;
 
@@ -3463,11 +3463,11 @@ management systems, loads and charging devices.
           SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
               0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-
           capacity=
               Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
               20*3600),
           Rs=Modelica_EnergyStorages.CellRecords.Components.Resistance(R0=0.002));
+
       annotation(defaultComponentPrefixes="parameter");
       end Test2Parameters;
     end StaticResistance;
@@ -3519,7 +3519,6 @@ management systems, loads and charging devices.
           SOCOCV=Modelica_EnergyStorages.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131; 0.05,3.35;
               0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,3.85; 0.9,4; 1,4.2]),
-
           capacity=
               Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0=
               40*3600),
@@ -3530,6 +3529,7 @@ management systems, loads and charging devices.
               0.0001), Cd=
               Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0=
               50000))});
+
       annotation(defaultComponentPrefixes="parameter", Icon(graphics));
       end Test1Parameters;
     end LinearDynamicImpedance;
@@ -3678,11 +3678,9 @@ management systems, loads and charging devices.
         delayAfterCharging=delayAfterCharging,
         delayAfterDischarging=delayAfterDischarging)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-      Modelica.Blocks.Math.MinMax
-                             minMax(nin=ns)
+      Components.MinMax           minMax(final nin=ns)
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-      Interfaces.SingleCellBus.VOut                     vOut[
-                           ns]
+      Interfaces.SingleCellBus.VOut vOut[ns]
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
       Interfaces.SingleCellBus.Bus singleCellBus[ns,np]
@@ -3721,10 +3719,6 @@ management systems, loads and charging devices.
       connect(cycling.Charging, Charging) annotation (Line(
           points={{41,0},{80,0},{80,-60},{110,-60}},
           color={255,0,255},
-          smooth=Smooth.None));
-      connect(vOut.y, minMax.u) annotation (Line(
-          points={{-56,0},{-42,0}},
-          color={0,0,127},
           smooth=Smooth.None));
       connect(minMax.yMax,vMax)  annotation (Line(
           points={{-19,6},{0,6},{0,110}},
@@ -3774,6 +3768,10 @@ management systems, loads and charging devices.
           string="%first",
           index=-1,
           extent={{-6,3},{-6,3}}));
+      connect(vOut.y, minMax.u) annotation (Line(
+          points={{-56,0},{-42,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
       annotation (Icon(graphics={
             Text(
               extent={{34,78},{90,48}},
@@ -3790,7 +3788,9 @@ management systems, loads and charging devices.
             Text(
               extent={{-44,80},{38,50}},
               lineColor={0,0,127},
-              textString="Vmax")}),      Diagram(graphics));
+              textString="Vmax")}),      Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+                                                 graphics));
     end VoltageCycling;
 
     package Components
@@ -3833,13 +3833,13 @@ management systems, loads and charging devices.
                 rotation=0,
               origin={110,60})));
 
-        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime
-            =delayAfterCharging)
+        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime=
+             delayAfterCharging)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 rotation=0,
               origin={70,40})));
-        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime
-            =delayAfterDischarging)
+        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime=
+             delayAfterDischarging)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 rotation=0,
               origin={70,0})));
@@ -4056,6 +4056,42 @@ management systems, loads and charging devices.
                 textString=
                      "Td")}));
       end OnDelay;
+
+    block MinMax
+        "Output the minimum and the maximum element of the input vector"
+      extends Modelica.Blocks.Icons.Block;
+      parameter Integer nin(min=1) = 1 "Number of input connections";
+      Modelica.Blocks.Interfaces.RealInput u[nin]
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+      Modelica.Blocks.Interfaces.RealOutput yMax annotation (Placement(
+            transformation(extent={{100,50},{120,70}}, rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput yMin annotation (Placement(
+            transformation(extent={{100,-70},{120,-50}}, rotation=0)));
+    equation
+      yMax = max(u);
+      yMin = min(u);
+      annotation (
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            initialScale=0.1), graphics),
+        Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            initialScale=0.1), graphics={Text(
+              extent={{-12,80},{100,40}},
+              lineColor={0,0,0},
+              textString="yMax"), Text(
+              extent={{-10,-40},{100,-80}},
+              lineColor={0,0,0},
+              textString="yMin")}),
+        Documentation(info="<html>
+<p>
+Determines the minimum and maximum element of the input vector and
+provide both values as output.
+</p>
+</html>"));
+    end MinMax;
     end Components;
   end BatteryManagement;
 
