@@ -2928,9 +2928,7 @@ management systems, loads and charging devices.
                 Text(
                   extent={{-84,-40},{-44,-80}},
                   lineColor={0,0,130},
-                  textString="Z")}),
-            version="1",
-            DymolaStoredErrors);
+                  textString="Z")}));
         end CellCalculator;
 
         block SOC "State of Charge calculator"
@@ -8234,5 +8232,5 @@ constructed by the signals connected to this bus.
   end Sources;
 
   annotation (uses(Modelica(version="3.2")),
-       version=3.2);
+       version="3.2");
 end Modelica_EnergyStorages;
