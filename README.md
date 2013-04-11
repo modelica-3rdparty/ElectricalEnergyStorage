@@ -12,7 +12,7 @@ It is planned to include this library in a future version of the Modelica Standa
 
 ## Current release
 
-Currently there is no offical release available. However you can download the [latest development version)](../../archive/master.zip) at any time.
+Currently there is no offical release available. However you can download the [latest development version](../../archive/master.zip) at any time.
 
 ## License
 
