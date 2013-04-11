@@ -869,7 +869,6 @@ management systems, loads and charging devices.
   end Examples;
 
   package Batteries "Package for battery cells and battery stacks"
-    //extends Modelica.Icons.Package;
     extends Modelica.Icons.Package;
     extends Modelica_EnergyStorages.Icons.BatteriesPackage;
 
