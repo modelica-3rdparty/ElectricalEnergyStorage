@@ -20,6 +20,6 @@ This Modelica package is free software and the use is completely at your own ris
 it can be redistributed and/or modified under the terms of the [Modelica License 2](https://modelica.org/licenses/ModelicaLicense2).
 
 ## Development and contribution
-Main developer: [Anton Haumer](a.haumer@haumer.at)
+Main developer: [Anton Haumer](mailto:a.haumer@haumer.at)
 
 You may report any issues by using the [Modelica Issue Tracker](https://trac.modelica.org/Modelica/newticket?component=_Modelica_EnergyStorages).
