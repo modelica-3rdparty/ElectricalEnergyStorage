@@ -965,7 +965,7 @@ management systems, loads and charging devices.
                 extent={{4,-4},{-4,4}},
                 rotation=0,
                 origin={-24,24})));
-          final parameter Modelica.SIunits.Time tini(fixed=false)=0
+          final parameter Modelica.SIunits.Time tini(fixed=false)
             "Initial time";
         initial equation
           tini=time;
@@ -1048,7 +1048,7 @@ management systems, loads and charging devices.
           parameter Real SOCini(start=0.5) "Initial state of charge"
             annotation (Dialog(group="Initialization"));
           final parameter Modelica.SIunits.Resistance Z0=sum(cellParameters.RC.Rd.R0);
-          final parameter Modelica.SIunits.Time tini(fixed=false)=0
+          final parameter Modelica.SIunits.Time tini(fixed=false)
             "Initial time";
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n
             "Negative pin"
@@ -1350,7 +1350,7 @@ management systems, loads and charging devices.
             Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start=0.5) "Initial state of charge"
             annotation (Dialog(group="Initialization"));
-          final parameter Modelica.SIunits.Time tini(fixed=false)=0
+          final parameter Modelica.SIunits.Time tini(fixed=false)
             "Initial time";
           Modelica_EnergyStorages.Sensors.CellMeasurement cellMeasurement
                             annotation (Placement(transformation(extent={{20,-20},
@@ -1574,8 +1574,7 @@ management systems, loads and charging devices.
             final fileName=cellParameters.SOCOCV.OCVfileName)
                                annotation (Placement(transformation(extent={{-70,-80},
                     {-50,-60}},         rotation=0)));
-         final parameter Modelica.SIunits.Time tini(fixed=false)=0
-            "Initial time";
+         final parameter Modelica.SIunits.Time tini(fixed=false) "Initial time";
        initial equation
          tini=time;
 
@@ -2657,7 +2656,7 @@ management systems, loads and charging devices.
                   extent={{112,-12},{172,14}},
                   lineColor={0,0,255},
                   pattern=LinePattern.Dot,
-                  textString=                     "num"),
+                  textString =                    "num"),
                 Line(
                   points={{140,40},{140,68},{40,68},{40,68}},
                   color={188,0,0},
@@ -8231,6 +8230,7 @@ constructed by the signals connected to this bus.
     end Components;
   end Sources;
 
-  annotation (uses(Modelica(version="3.2")),
-       version="3.2");
+  annotation (uses(Modelica(version="3.2.1")),
+       version="3.2.1",
+    conversion(noneFromVersion="3.2"));
 end Modelica_EnergyStorages;
