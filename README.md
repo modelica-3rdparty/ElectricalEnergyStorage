@@ -5,7 +5,7 @@ Free library that contains models with different complexity for simulating of el
 ## Library description
 
 This package contains electric energy storage models and components for modeling these storages.
-A rough overview about the EnergyStorages library was presented at the Modelica conference 2011 in [A Modelica Library for Simulation of Elecric Energy Storages](http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf)
+A rough overview about the EnergyStorages library was presented at the Modelica conference 2011 in [A Modelica Library for Simulation of Electric Energy Storages](http://modelica.org/events/modelica2011/Proceedings/pages/papers/17_4_ID_105_a_fv.pdf)
 
 It is planned to include this library in a future version of the Modelica Standard Library.
 
