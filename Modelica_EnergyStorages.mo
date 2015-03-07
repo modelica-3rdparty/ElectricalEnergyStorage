@@ -1036,7 +1036,7 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance
-          "Battery cell model with a linear dependant, dynamic internal impedance and basic aging behavior"
+          "Battery cell model with a linear dependent, dynamic internal impedance and basic aging behavior"
         extends Modelica_EnergyStorages.Icons.CellLinearDynamicImpedance;
          parameter
             CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters
@@ -1340,7 +1340,7 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance
-          "Battery cell model with a linear dependant, dynamic internal impedance and with basic cell measurement"
+          "Battery cell model with a linear dependent, dynamic internal impedance and with basic cell measurement"
         extends Modelica_EnergyStorages.Icons.CellLinearDynamicImpedance;
           parameter
             CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters
