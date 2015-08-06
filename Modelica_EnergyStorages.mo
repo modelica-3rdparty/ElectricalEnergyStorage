@@ -2111,10 +2111,6 @@ management systems, loads and charging devices.
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
             annotation (Placement(transformation(extent={{-10,90},{10,110}})));
         equation
-          connect(n, n) annotation (Line(
-              points={{100,4.44089e-16},{100,4.44089e-16}},
-              color={0,0,255},
-              smooth=Smooth.None));
           connect(Resistor.p, p) annotation (Line(
               points={{-10,0},{-54,0},{-54,4.44089e-16},{-100,4.44089e-16}},
               color={0,0,255},
@@ -2833,10 +2829,6 @@ management systems, loads and charging devices.
           parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH
             "State of health relevant parameters";
         equation
-          connect(SOC, SOC) annotation (Line(points={{110,60},{110,60}}, color=
-                  {0,0,127}));
-          connect(C, C)   annotation (Line(points={{110,-20},{110,-20}}, color=
-                  {0,0,127}));
           connect(sOC.SOC, SOC) annotation (Line(points={{91,60},{110,60}},
                 color={0,0,127}));
           connect(i, q.i) annotation (Line(
