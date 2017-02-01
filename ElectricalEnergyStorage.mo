@@ -1,5 +1,6 @@
-package Modelica_EnergyStorages "Library for electric energy storages"
-  extends Modelica_EnergyStorages.Icons.BatteryPackage;
+package ElectricalEnergyStorage
+  "Library for electric energy storages"
+  extends ElectricalEnergyStorage.Icons.BatteryPackage;
 
   package UsersGuide "User's Guide of the EnergyStorages library"
     extends Modelica.Icons.Information;
@@ -41,7 +42,7 @@ management systems, loads and charging devices.
       output Modelica.SIunits.Voltage V = voltageSensor.v;
       Modelica.Electrical.Analog.Sources.PulseCurrent pulseCurrent(I = 10, width = 50, offset = 0, period = 300) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-60, -20})));
       Modelica.Electrical.Analog.Basic.Ground ground annotation(Placement(transformation(extent = {{50, -60}, {70, -40}})));
-      Batteries.Components.Impedances.CellImpedance rCseriesLinear(Rs(R0 = 0.001), RC = {Modelica_EnergyStorages.CellRecords.Components.RCelement(Rd = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.0002), Cd = Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0 = 50000)), Modelica_EnergyStorages.CellRecords.Components.RCelement(Rd = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.0003), Cd = Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0 = 60000)), Modelica_EnergyStorages.CellRecords.Components.RCelement(Rd = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.0004), Cd = Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0 = 70000))}) annotation(Placement(transformation(extent = {{0, 30}, {40, 50}})));
+      Batteries.Components.Impedances.CellImpedance rCseriesLinear(Rs(R0 = 0.001), RC = {ElectricalEnergyStorage.CellRecords.Components.RCelement(Rd = ElectricalEnergyStorage.CellRecords.Components.Resistance(R0 = 0.0002), Cd = ElectricalEnergyStorage.CellRecords.Components.Capacitance(C0 = 50000)), ElectricalEnergyStorage.CellRecords.Components.RCelement(Rd = ElectricalEnergyStorage.CellRecords.Components.Resistance(R0 = 0.0003), Cd = ElectricalEnergyStorage.CellRecords.Components.Capacitance(C0 = 60000)), ElectricalEnergyStorage.CellRecords.Components.RCelement(Rd = ElectricalEnergyStorage.CellRecords.Components.Resistance(R0 = 0.0004), Cd = ElectricalEnergyStorage.CellRecords.Components.Capacitance(C0 = 70000))}) annotation(Placement(transformation(extent = {{0, 30}, {40, 50}})));
       Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 298.15) annotation(Placement(transformation(extent = {{-40, 50}, {-20, 70}})));
       Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(transformation(extent = {{-40, 0}, {-20, 20}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{10, -30}, {30, -10}})));
@@ -67,7 +68,11 @@ management systems, loads and charging devices.
       output Modelica.SIunits.Voltage SOC = batteryCell.calculator.SOC;
       output Modelica.SIunits.Voltage OCV = batteryCell.OCV.v;
       Modelica.Electrical.Analog.Basic.Ground ground annotation(Placement(transformation(extent = {{-10, -60}, {10, -40}})));
-      Modelica_EnergyStorages.Batteries.Cells.Basic.StaticResistance batteryCell(cellParameters = Modelica_EnergyStorages.CellRecords.StaticResistance.Test1Parameters(), SOCini = 1) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
+      ElectricalEnergyStorage.Batteries.Cells.Basic.StaticResistance batteryCell(
+          cellParameters=
+            ElectricalEnergyStorage.CellRecords.StaticResistance.Test1Parameters(),
+          SOCini=1) annotation (Placement(transformation(extent={{-10,
+                -10},{10,10}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 270, origin = {30, 0})));
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-30, 40})));
       Sources.Loads.Cycles.Liberal fTP72_1(Cn = 40, C = 2) annotation(Placement(transformation(extent = {{-70, -10}, {-50, 10}})));
@@ -92,7 +97,11 @@ management systems, loads and charging devices.
       Modelica.Electrical.Analog.Basic.Ground ground annotation(Placement(transformation(extent = {{10, -60}, {30, -40}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-10, 0})));
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-10, 40})));
-      Modelica_EnergyStorages.Batteries.Cells.Basic.LinearDynamicImpedance batteryCell(cellParameters = Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.Test1Parameters(), SOCini = 0.5) annotation(Placement(transformation(extent = {{10, -10}, {30, 10}})));
+      ElectricalEnergyStorage.Batteries.Cells.Basic.LinearDynamicImpedance
+        batteryCell(cellParameters=
+            ElectricalEnergyStorage.CellRecords.LinearDynamicImpedance.Test1Parameters(),
+          SOCini=0.5) annotation (Placement(transformation(extent={{
+                10,-10},{30,10}})));
     equation
       connect(pulseCurrent.n, ground.p) annotation(Line(points = {{-40, -10}, {-40, -40}, {20, -40}}, color = {0, 0, 255}, smooth = Smooth.None));
       connect(ground.p, batteryCell.pin_n) annotation(Line(points = {{20, -40}, {20, -10}}, color = {0, 0, 255}, smooth = Smooth.None));
@@ -112,7 +121,7 @@ management systems, loads and charging devices.
       Sources.Chargers.CCCV charger(Vmax = 4.2, Imax = 40, T = 0.000001) annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 0, origin = {-40, 10})));
       Sources.Loads.BooleanConstantCurrent load(I = 40) annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {-80, 10})));
       BatteryManagement.VoltageCycling cycler(ns = 1, np = 1, delayAfterDischarging = 100, Vmax = 4.2, delayAfterCharging = 500, Ifinal = 2, Vmin = 2.7) annotation(Placement(transformation(extent = {{30, 0}, {10, 20}})));
-      Batteries.Cells.WithMeasurement.LinearDynamicImpedance batteryCell(cellParameters = Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.Test1Parameters(), SOCini = 0.5) annotation(Placement(transformation(extent = {{50, 0}, {70, 20}})));
+      Batteries.Cells.WithMeasurement.LinearDynamicImpedance batteryCell(cellParameters = ElectricalEnergyStorage.CellRecords.LinearDynamicImpedance.Test1Parameters(), SOCini = 0.5) annotation(Placement(transformation(extent = {{50, 0}, {70, 20}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 270, origin = {90, 10})));
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {40, 60})));
     equation
@@ -145,7 +154,14 @@ management systems, loads and charging devices.
       BatteryManagement.VoltageCycling cycler(delayAfterDischarging = 100, Vmax = 4.2, delayAfterCharging = 500, ns = 1, np = 1, Ifinal = 2, Vmin = 2.7, initialDischarging = false) annotation(Placement(transformation(extent = {{30, 0}, {10, 20}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 270, origin = {90, 10})));
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {40, 60})));
-      Modelica_EnergyStorages.Batteries.Stacks.WithMeasurement.StaticResistanceScaled batteryStack(ns = 100, np = 2, SOCini = 0.5, cellParameters = Modelica_EnergyStorages.CellRecords.StaticResistance.Test2Parameters()) annotation(Placement(transformation(extent = {{50, 0}, {70, 20}})));
+      ElectricalEnergyStorage.Batteries.Stacks.WithMeasurement.StaticResistanceScaled
+        batteryStack(
+        ns=100,
+        np=2,
+        SOCini=0.5,
+        cellParameters=
+            ElectricalEnergyStorage.CellRecords.StaticResistance.Test2Parameters())
+        annotation (Placement(transformation(extent={{50,0},{70,20}})));
       Sources.Loads.Cycles.FTP72 load(gain = 1, table = [0, 0; 1, 0; 2, 0; 3, 0; 4, 0; 5, 0; 6, 0; 7, 0; 8, 0; 9, 0; 10, 0; 11, 0; 12, 0; 13, 0; 14, 0; 15, 0; 16, 0; 17, 0; 18, 0; 19, 0; 20, 7.63E-15; 21, 2.656862299; 22, 5.066824278; 23, 6.919044302; 24, 9.92721153; 25, 11.99083842; 26, 13.28667893; 27, 2.948986157; 28, 5.137151842; 29, 16.40934905; 30, 7.516868387; 31, 5.908250322; 32, 2.157048719; 33, -0.995107891; 34, -2.198487625; 35, -2.161427667; 36, -1.557434624; 37, -2.088169806; 38, -12.35098315; 39, -7.948784273; 40, 0.817499451; 41, 2.117771289; 42, 2.166091748; 43, 3.143999402; 44, 6.26306327; 45, 11.87475974; 46, 13.19569999; 47, 11.72513052; 48, 2.855969106; 49, 0.277692017; 50, 0.904958197; 51, -6.363589501; 52, -11.0799931; 53, -8.109271371; 54, -4.867712487; 55, 0.886824653; 56, 10.46680633; 57, 12.8893158; 58, 12.3191627; 59, 12.00772035; 60, 8.509745343; 61, 4.537143881; 62, 3.911765052; 63, 2.532362225; 64, -0.976453428; 65, 1.0812139; 66, 3.177148783; 67, 2.500817595; 68, 1.101144937; 69, 1.091145544; 70, 1.780345304; 71, 5.361068592; 72, 5.497513442; 73, 2.644941662; 74, -0.25017447; 75, -1.669071408; 76, 2.532362225; 77, 4.731114217; 78, 6.336353546; 79, 1.965818968; 80, -0.235128558; 81, 4.904488962; 82, 6.551950386; 83, 8.343637381; 84, 11.16181509; 85, 8.205760078; 86, 6.716255706; 87, 5.12200457; 88, 5.19826403; 89, 5.275273722; 90, 2.694977444; 91, 0.951372803; 92, 1.791488361; 93, 1.777192195; 94, 3.494876196; 95, 6.164012091; 96, -0.763593295; 97, -1.629908514; 98, -0.813649371; 99, 5.046487368; 100, 6.870545952; 101, 6.135372417; 102, 4.46133192; 103, 3.616033726; 104, 1.864225701; 105, -1.615287117; 106, -2.467470057; 107, 3.396206249; 108, 5.147341381; 109, 6.995471304; 110, 7.153524107; 111, 8.236929137; 112, 6.573955157; 113, 4.818460446; 114, 1.161216183; 115, -1.567435399; 116, -22.49130079; 117, -21.51938172; 118, -18.86940338; 119, -16.15374721; 120, -13.38226452; 121, -10.56480711; 122, -7.71122688; 123, -4.831375337; 124, -1.935104277; 125, -3.50282E-12; 126, 0; 127, 0; 128, 0; 129, 0; 130, 0; 131, 0; 132, 0; 133, 0; 134, 0; 135, 0; 136, 0; 137, 0; 138, 0; 139, 0; 140, 0; 141, 0; 142, 0; 143, 0; 144, 0; 145, 0; 146, 0; 147, 0; 148, 0; 149, 0; 150, 0; 151, 0; 152, 0; 153, 0; 154, 0; 155, 0; 156, 0; 157, 0; 158, 0; 159, 0; 160, 0; 161, 0; 162, 0; 163, 0; 164, 3.200194369; 165, 6.410240389; 166, 9.639989941; 167, 12.89929459; 168, 16.19800598; 169, 19.54597616; 170, 16.41978194; 171, 16.03903701; 172, 12.78077258; 173, 6.459117883; 174, -3.115198616; 175, -2.374217206; 176, -0.974859065; 177, 3.933174589; 178, 3.270190504; 179, 3.307888855; 180, 4.829761684; 181, 12.80447373; 182, -3.161607682; 183, -15.10480141; 184, -6.717964858; 185, -16.73479315; 186, -7.385146225; 187, -1.407686368; 188, 5.644245974; 189, 3.731350062; 190, 9.104510165; 191, 15.17586056; 192, 17.554767; 193, 23.56615648; 194, 30.00422086; 195, 31.37224334; 196, 31.16944854; 197, 15.53427713; 198, 26.55164776; 199, 18.46231859; 200, 24.16384499; 201, 22.76816223; 202, 26.42478909; 203, 18.10320226; 204, 17.26562624; 205, 16.33635994; 206, 7.020957872; 207, 4.300084023; 208, 5.592980506; 209, 4.212060311; 210, 6.845587556; 211, 6.845587556; 212, 6.845587556; 213, 6.845587556; 214, 9.560080973; 215, 9.64156472; 216, 13.87348744; 217, 15.53422692; 218, 15.85777415; 219, 13.30255272; 220, 14.95138738; 221, 16.68797266; 222, 14.05693456; 223, 15.75817658; 224, 19.07038909; 225, 24.16331029; 226, 23.29511248; 227, 17.52724598; 228, 14.62976509; 229, 11.60224307; 230, 8.477397529; 231, 5.289749171; 232, 9.878810305; 233, 13.04036023; 234, 14.73844624; 235, 16.51252525; 236, 13.50761889; 237, 16.86267019; 238, 13.82598361; 239, 15.57296564; 240, 12.45278851; 241, 10.86426746; 242, 7.601665095; 243, 10.76750104; 244, 10.76750104; 245, 10.76750104; 246, 10.76750104; 247, 10.76750104; 248, 9.13923413; 249, 5.860690061; 250, 5.743763523; 251, -0.698505663; 252, 2.230374967; 253, 3.624743419; 254, 6.58373148; 255, 4.963409033; 256, 7.931230103; 257, 14.09534591; 258, 11.12236337; 259, 11.16968066; 260, 9.654001849; 261, 4.99907654; 262, 3.361220902; 263, 3.232982113; 264, 3.107067348; 265, 1.493270362; 266, 13.32133575; 267, 2.92251612; 268, 7.254387981; 269, 5.729048631; 270, 5.658319597; 271, 10.0305283; 272, 11.56959204; 273, 13.17044223; 274, 14.84277344; 275, 16.5967319; 276, 16.88346888; 277, 17.17387278; 278, 23.85831694; 279, 18.00680173; 280, 13.45509413; 281, 16.80393012; 282, 10.52829073; 283, 7.307069946; 284, 0.874541781; 285, -0.854647819; 286, -4.082136394; 287, -7.220020796; 288, -5.884373961; 289, 8.543993067; 290, 8.543993067; 291, 2.655293037; 292, -6.050005745; 293, 6.546513201; 294, 9.389747977; 295, 6.546513202; 296, 2.235037797; 297, 6.368531676; 298, 7.755335762; 299, 7.755335762; 300, 2.101797043; 301, 0.610331872; 302, 0.497795072; 303, -4.985954469; 304, -7.669023658; 305, -7.692067385; 306, -8.927306102; 307, -8.884523638; 308, -7.667847129; 309, -8.755922569; 310, -15.08609668; 311, -11.5799748; 312, -14.18415221; 313, -9.981393829; 314, -8.814951099; 315, -5.988296893; 316, -5.038045778; 317, 1.805868249; 318, -1.627149454; 319, -5.713441874; 320, -9.376638763; 321, -16.9536642; 322, -18.46191898; 323, -6.613828488; 324, -4.17854971; 325, -1.993153256; 326, -6.159392554; 327, -5.650441148; 328, -9.857827863; 329, -4.603227774; 330, -5.894468909; 331, -4.130382136; 332, -1.231614217; 333, 0; 334, 0; 335, 0; 336, 0; 337, 0; 338, 0; 339, 0; 340, 0; 341, 0; 342, 0; 343, 0; 344, 0; 345, 0; 346, 4.57589E-13; 347, 0.324930308; 348, 4.171443367; 349, 7.386419831; 350, 10.624085; 351, 13.89429084; 352, 16.0353751; 353, 16.3887344; 354, 17.28582211; 355, 9.635959939; 356, 12.44831303; 357, 12.4827907; 358, 14.07930661; 359, 18.5445484; 360, 9.615613756; 361, 9.937444046; 362, 7.443430289; 363, 9.511696169; 364, 10.76658307; 365, 12.11814552; 366, 4.409297334; 367, 6.436308902; 368, 2.506923034; 369, 0.51941915; 370, 5.405191696; 371, 11.58835847; 372, 8.784622664; 373, 3.741698266; 374, 3.741698266; 375, 3.741698266; 376, 3.741698266; 377, 3.741698266; 378, 4.775370456; 379, 6.89081058; 380, 4.87671245; 381, 2.811644975; 382, -0.292641342; 383, -5.304798; 384, -6.216833082; 385, -2.41535046; 386, -15.65512214; 387, -17.08803827; 388, -21.83565488; 389, -15.81357266; 390, -14.06563098; 391, -12.70045477; 392, -11.39930533; 393, -7.78925633; 394, -7.624294883; 395, -4.743801088; 396, -1.847186252; 397, 0; 398, 0; 399, 0; 400, 0; 401, 0; 402, 2.67029E-12; 403, 2.010978954; 404, 5.728007677; 405, 8.952754472; 406, 12.20496661; 407, 15.49449573; 408, 18.83119389; 409, 22.22491246; 410, 20.04251654; 411, 6.214729453; 412, 16.8185521; 413, 14.59833713; 414, 10.98016173; 415, 3.435426484; 416, 1.734800219; 417, 0.028983707; 418, -0.823876327; 419, -1.654910703; 420, -4.020437795; 421, -19.18022902; 422, -18.6250916; 423, -15.90395297; 424, -13.12788379; 425, -10.30673543; 426, -7.450359702; 427, -4.568608433; 428, -1.671333197; 429, 0; 430, 0; 431, 0; 432, 0; 433, 0; 434, 0; 435, 0; 436, 0; 437, 0; 438, 0; 439, 0; 440, 0; 441, 0; 442, 0; 443, 0; 444, 0; 445, 0; 446, 0; 447, 4.89925E-12; 448, 3.200194369; 449, 6.410240389; 450, 9.639989941; 451, 12.89929459; 452, 16.19800598; 453, 19.54597616; 454, 22.95305652; 455, 26.42909869; 456, 13.12884131; 457, 13.02585526; 458, 24.01710355; 459, 16.98582574; 460, 8.883891257; 461, 15.1814732; 462, 6.495645135; 463, 8.640431212; 464, 8.820916562; 465, 2.733113477; 466, 4.775370456; 467, 4.800557053; 468, 1.724528462; 469, 0.674892003; 470, 6.76745286; 471, 3.741698266; 472, -0.335974304; 473, 2.637167573; 474, 2.618271221; 475, 1.594598035; 476, 3.566941843; 477, 3.566941843; 478, 3.566941843; 479, 3.566941843; 480, 3.566941843; 481, 1.563086101; 482, 4.528904576; 483, 4.553113637; 484, 6.615474687; 485, 0.608426021; 486, 1.563086101; 487, 3.524223192; 488, 3.524223192; 489, 1.531957519; 490, 1.501210757; 491, 2.452540212; 492, -6.169527386; 493, -10.51952811; 494, -13.43035419; 495, -14.21835171; 496, -15.96234367; 497, -17.38428341; 498, -13.73732524; 499, -14.31168689; 500, -11.50845972; 501, -7.857888357; 502, -5.914173204; 503, -3.404266842; 504, -0.795719559; 505, 0; 506, 0; 507, 0; 508, 0; 509, 0; 510, 2.5503E-12; 511, 0.457179488; 512, 2.413794392; 513, 3.335360609; 514, 2.124297628; 515, 5.170959519; 516, 3.428271735; 517, 3.170009555; 518, 5.276694851; 519, 8.988259393; 520, 9.867898699; 521, 9.475031174; 522, 8.083119793; 523, 7.464335702; 524, 6.65736864; 525, 7.633966206; 526, 8.028253406; 527, 7.014636637; 528, 6.572398214; 529, 4.609369532; 530, 2.532362225; 531, 1.831956121; 532, 1.831956121; 533, 1.831956121; 534, 1.831956121; 535, 1.831956122; 536, 6.214729452; 537, 3.384123323; 538, 3.422663827; 539, -0.957429853; 540, -0.965866084; 541, 0.431143758; 542, 1.831956121; 543, 1.831956121; 544, -2.346632981; 545, -6.817007417; 546, -17.06565542; 547, -14.31168689; 548, -11.50845972; 549, -8.665825846; 550, -5.793636748; 551, -2.90174422; 552, 0; 553, 0; 554, 0; 555, 0; 556, 0; 557, 0; 558, 0; 559, 0; 560, 0; 561, 0; 562, 0; 563, 0; 564, 0; 565, 0; 566, 0; 567, 0; 568, 8.95959E-12; 569, 3.200194369; 570, 6.410240389; 571, 9.639989941; 572, 11.97231592; 573, 7.339731434; 574, 7.17833896; 575, 5.747512387; 576, 0.984750347; 577, 0.984750347; 578, 3.478927766; 579, 2.036717573; 580, 1.044942419; 581, 0.046937528; 582, -1.39663062; 583, 0.502865454; 584, -0.443822877; 585, 2.889855163; 586, 1.472284985; 587, 0.508474196; 588, -0.908892634; 589, 0.480891466; 590, 0.943159597; 591, 1.416455943; 592, 2.889855163; 593, 3.994715778; 594, 5.781355304; 595, 4.947435838; 596, 6.939262993; 597, 6.069027381; 598, 1.963986656; 599, 1.977391789; 600, 3.847049661; 601, 3.935821564; 602, 4.025558433; 603, 2.157048719; 604, 1.526683225; 605, 1.526683225; 606, 2.821567271; 607, 8.307989819; 608, 11.68993878; 609, 8.521620753; 610, 5.747558789; 611, 5.88900271; 612, -4.60142366; 613, -19.51822817; 614, -16.81758906; 615, -14.05873551; 616, -11.25151887; 617, -8.405790945; 618, -5.53140359; 619, -2.638208358; 620, 0; 621, 0; 622, 0; 623, 0; 624, 0; 625, 0; 626, 0; 627, 0; 628, 0; 629, 0; 630, 0; 631, 0; 632, 0; 633, 0; 634, 0; 635, 0; 636, 0; 637, 0; 638, 0; 639, 0; 640, 0; 641, 0; 642, 0; 643, 0; 644, 0; 645, 6.99602E-12; 646, 1.210459708; 647, 3.357240952; 648, 7.581896952; 649, 7.363029504; 650, 8.702935779; 651, 6.634894622; 652, 6.420321844; 653, 11.81376128; 654, 12.752064; 655, 9.599074538; 656, 8.9562538; 657, 8.800535288; 658, 10.00438843; 659, 7.541871176; 660, 4.063081741; 661, 4.879508686; 662, 2.710816718; 663, 2.72746367; 664, 1.993438074; 665, 3.500602336; 666, 2.777836743; 667, 2.035406106; 668, -1.676293098; 669, -1.674057881; 670, -10.90648451; 671, -11.78521976; 672, -13.9140663; 673, -8.713817167; 674, -6.930713934; 675, -8.834571475; 676, -6.649329531; 677, -4.444029625; 678, -2.096821389; 679, -0.750677585; 680, 0; 681, 0; 682, 0; 683, 0; 684, 0; 685, 0; 686, 0; 687, 0; 688, 0; 689, 0; 690, 0; 691, 0; 692, 0; 693, 5.58055E-12; 694, 0.611854826; 695, 1.905843762; 696, 1.556655875; 697, 4.127459248; 698, 7.406257621; 699, 7.219541316; 700, 9.036988353; 701, 5.294545428; 702, 9.205374339; 703, 2.363272215; 704, 0.018623437; 705, 0.943159598; 706, 9.757613801; 707, 6.56117162; 708, 6.338082562; 709, 9.848498576; 710, 7.830338722; 711, 1.526683225; 712, -0.99510789; 713, 5.365442524; 714, 5.536642551; 715, 2.960689899; 716, -4.776972272; 717, -4.019912508; 718, -5.007236666; 719, -11.53584973; 720, -11.78227588; 721, -9.470231203; 722, -7.128579435; 723, -4.575453951; 724, -1.937829727; 725, -1.125331027; 726, -0.435167407; 727, -0.201763184; 728, 0.022366789; 729, 2.565211789; 730, 6.312726537; 731, 8.807391157; 732, 10.80415425; 733, 6.634894622; 734, 9.867898699; 735, 11.15731028; 736, 10.00647183; 737, 12.86024509; 738, 11.95107628; 739, 11.37718455; 740, 9.042156622; 741, 9.459711637; 742, 6.676752664; 743, 6.061181182; 744, 4.584981296; 745, 5.472642767; 746, 4.751697708; 747, 2.347903781; 748, -0.077375731; 749, 1.495734103; 750, 0.686291747; 751, -1.672170762; 752, -3.17781995; 753, -7.389372165; 754, -11.52370964; 755, -10.63137793; 756, -12.1446105; 757, -10.61354225; 758, -5.861573805; 759, -7.756609315; 760, -7.705596946; 761, -5.270256885; 762, -2.554159625; 763, -0.563128117; 764, 0.067237436; 765, -0.117714446; 766, -3.02466E-11; 767, 2.656862299; 768, 6.117751911; 769, 9.345303105; 770, 12.60151373; 771, 13.723869; 772, 9.362339697; 773, 5.747002588; 774, 7.220350745; 775, 8.290240589; 776, 9.483038458; 777, 9.4078126; 778, 14.43926724; 779, 13.17186432; 780, 9.88453098; 781, 6.177476124; 782, 4.679783058; 783, 7.253326716; 784, 2.395309621; 785, 2.395309621; 786, 1.572560984; 787, -0.063130045; 788, 0.715483978; 789, 2.301203574; 790, 2.301203574; 791, 1.495734102; 792, -2.444551408; 793, 1.409616266; 794, 2.180063152; 795, 2.180063152; 796, 2.180063152; 797, 2.180063152; 798, 2.180063152; 799, 2.968187482; 800, 5.393021113; 801, 6.324574338; 802, 15.18259872; 803, 11.43256662; 804, 11.89346941; 805, 12.36314504; 806, 3.11778344; 807, 8.883891256; 808, 7.126552589; 809, 6.260587616; 810, 2.399009027; 811, 1.411238145; 812, 3.316342959; 813, 2.346321424; 814, 0.411778186; 815, -1.49946105; 816, 2.193247382; 817, -1.530727012; 818, -1.55432898; 819, 2.016088009; 820, 0.198996594; 821, 1.954309112; 822, -5.038045778; 823, -2.467636778; 824, 1.720834662; 825, 2.558520362; 826, 2.558520362; 827, 2.558520361; 828, 0.02086629; 829, 1.665788421; 830, 2.492267808; 831, 0.817875763; 832, -0.843368564; 833, -3.244614759; 834, -1.670359715; 835, -3.18826124; 836, -8.818200775; 837, -10.28359157; 838, -9.007684476; 839, -7.304568942; 840, -5.810802993; 841, 1.182052265; 842, 6.338082562; 843, 6.036126289; 844, 4.402567715; 845, 5.168536444; 846, 5.337128444; 847, 5.507951124; 848, 7.084066219; 849, 8.836017784; 850, 9.250043264; 851, 6.520933274; 852, 2.049540377; 853, 3.57969881; 854, 3.619686765; 855, 3.65997079; 856, 6.898027911; 857, 4.632228023; 858, 8.027504176; 859, 3.204979077; 860, 3.223740919; 861, 3.242581893; 862, 1.598798576; 863, -4.814850385; 864, -2.442617648; 865, -1.675383887; 866, -6.735345035; 867, -3.771293334; 868, -1.664378334; 869, 3.890423459; 870, 3.954652978; 871, 4.755670789; 872, 3.364959298; 873, 5.663566385; 874, 7.367841263; 875, 6.80274378; 876, 4.561472974; 877, 7.09066072; 878, 7.286096684; 879, 4.07957734; 880, 1.612036302; 881, 1.598798576; 882, 1.585639984; 883, -0.861593003; 884, -0.87856773; 885, 1.470746583; 886, 2.255201594; 887, -0.898054558; 888, -0.912280767; 889, -2.421852688; 890, 5.132564119; 891, 6.032297066; 892, 4.561472974; 893, 3.824111265; 894, 0.667214688; 895, 3.824111266; 896, 2.255201594; 897, 2.255201594; 898, -0.118259616; 899, -0.137672715; 900, -1.675803362; 901, -0.186156239; 902, 1.292975637; 903, 2.035406107; 904, 2.035406106; 905, 0.533700622; 906, 1.259412314; 907, 1.993438074; 908, -0.224745869; 909, -0.240213842; 910, 1.91143387; 911, 4.128978795; 912, 1.215665864; 913, -0.24522927; 914, -4.422451765; 915, -5.598273421; 916, -6.592763237; 917, -2.204459751; 918, 1.426445896; 919, 2.045295364; 920, 7.236630079; 921, 6.876558219; 922, 5.739286348; 923, 3.085799867; 924, 3.122138334; 925, 5.306974167; 926, 3.251445092; 927, 2.564180994; 928, 2.580193864; 929, 3.326842337; 930, -0.259856574; 931, 0.431143758; 932, 1.831956121; 933, 1.831956121; 934, -0.282857679; 935, 0.394815764; 936, 0.380756633; 937, 1.742346251; 938, 3.140407998; 939, 5.333986952; 940, 1.831956121; 941, -0.976453427; 942, 1.780345303; 943, -1.658610637; 944, 4.513204115; 945, 6.064276321; 946, 5.497513441; 947, -1.671009479; 948, -5.691342471; 949, -10.85675687; 950, -9.429461277; 951, -14.17484623; 952, -11.85053979; 953, -9.01215768; 954, -6.143026386; 955, -3.252997453; 956, -0.351922676; 957, 0; 958, 0; 959, 1.33819E-11; 960, 1.210459709; 961, 5.143871183; 962, 8.364682608; 963, 11.61116833; 964, 14.89317987; 965, 12.30404555; 966, 6.857963144; 967, 9.104510165; 968, 7.875414701; 969, 7.017608697; 970, 8.028253407; 971, 12.06358268; 972, 15.27024653; 973, 11.42542458; 974, 6.993997756; 975, 4.703676541; 976, 3.130722146; 977, 2.332259009; 978, 2.332259008; 979, -3.99850995; 980, 0.639169552; 981, -0.150238756; 982, -0.925313752; 983, -0.19188547; 984, -1.676293098; 985, -0.235128558; 986, -1.671875438; 987, -6.363732331; 988, -10.85675686; 989, -1.596138375; 990, 1.415608141; 991, 3.280561829; 992, 5.939242101; 993, 4.806385041; 994, 0.283655184; 995, 1.56119606; 996, 2.873264051; 997, -0.358276724; 998, 1.549629644; 999, 1.549629645; 1000, 6.910980764; 1001, 5.066896489; 1002, 5.915543247; 1003, 3.195620605; 1004, 3.954652978; 1005, 4.755670789; 1006, 2.62864988; 1007, 1.183599341; 1008, -1.67007471; 1009, -4.359376875; 1010, -0.987800878; 1011, -1.641795109; 1012, -0.351891136; 1013, -0.99477903; 1014, -1.61139533; 1015, -0.99415787; 1016, -5.007236667; 1017, -13.68102342; 1018, -12.36253584; 1019, -9.530803003; 1020, -6.666529624; 1021, -3.779567525; 1022, -0.879768297; 1023, 0; 1024, 0; 1025, 0; 1026, 0; 1027, 0; 1028, 0; 1029, 0; 1030, 0; 1031, 0; 1032, 0; 1033, 0; 1034, 0; 1035, 0; 1036, 0; 1037, 0; 1038, 0; 1039, 0; 1040, 0; 1041, 0; 1042, 0; 1043, 0; 1044, 0; 1045, 0; 1046, 0; 1047, 0; 1048, 0; 1049, 0; 1050, 0; 1051, 0; 1052, 7.45565E-12; 1053, 0.457179489; 1054, 3.319632439; 1055, 7.093359665; 1056, 10.32855526; 1057, 13.5953957; 1058, 15.74931251; 1059, 8.891158636; 1060, 9.664835174; 1061, 12.44187462; 1062, 9.317000781; 1063, 8.428846089; 1064, 7.364438044; 1065, 7.649161314; 1066, 8.717281001; 1067, 4.330534154; 1068, 6.77113378; 1069, 6.148287894; 1070, 5.472642766; 1071, -0.098163265; 1072, -1.672170762; 1073, -1.675383886; 1074, 2.106809411; 1075, -3.150435814; 1076, -10.58755302; 1077, -11.08062791; 1078, -4.607884892; 1079, -3.873524458; 1080, -12.04014224; 1081, -11.78227588; 1082, -8.669090568; 1083, -3.172861505; 1084, -0.956389014; 1085, -1.188063542; 1086, -0.866737999; 1087, -0.578389324; 1088, -0.555795769; 1089, 0.172732015; 1090, 0.917777197; 1091, 0.940099669; 1092, -0.312054445; 1093, 0.172732015; 1094, -0.963609432; 1095, -1.632410642; 1096, -2.572302701; 1097, -0.750127771; 1098, -1.048395229; 1099, -0.403492108; 1100, -2.24303E-12; 1101, 0.007273885; 1102, 0.110891907; 1103, 0.520002539; 1104, 2.180301241; 1105, 6.70289181; 1106, 9.177947785; 1107, 10.70928487; 1108, 5.45821228; 1109, 2.818940023; 1110, 7.626598967; 1111, 11.72937477; 1112, 11.90613496; 1113, 7.245709766; 1114, 2.571336297; 1115, 1.990855307; 1116, 2.004376948; 1117, 3.261200495; 1118, 6.569607736; 1119, 4.806385042; 1120, 7.014636637; 1121, 6.572398214; 1122, 5.333986953; 1123, 1.121346822; 1124, 1.11121173; 1125, 3.232768485; 1126, 4.731114217; 1127, 4.829761683; 1128, 3.422663828; 1129, 4.979860027; 1130, 3.540004732; 1131, 4.353293055; 1132, 2.863248004; 1133, 2.106809412; 1134, 2.106809412; 1135, 1.338744846; 1136, 1.327192445; 1137, 2.078027956; 1138, -0.19188547; 1139, 1.281715469; 1140, -0.947870587; 1141, -1.67405788; 1142, -4.422451765; 1143, -5.598273421; 1144, -10.63137793; 1145, -7.144913072; 1146, -11.22960184; 1147, -5.821199626; 1148, -7.093066322; 1149, -9.358037796; 1150, -6.492108991; 1151, -3.604088396; 1152, -0.703827807; 1153, 0; 1154, 0; 1155, 0; 1156, 0; 1157, 0; 1158, 0; 1159, 0; 1160, 0; 1161, 0; 1162, 0; 1163, 0; 1164, 0; 1165, 0; 1166, 0; 1167, 0; 1168, 3.13906E-12; 1169, 1.329856139; 1170, 5.241189342; 1171, 8.462634102; 1172, 11.71005147; 1173, 14.99329342; 1174, 18.32221142; 1175, 16.15141402; 1176, 13.82761652; 1177, 4.935835405; 1178, -1.637351687; 1179, -1.625144524; 1180, -12.7481624; 1181, -14.48009544; 1182, -11.67957319; 1183, -8.839047172; 1184, -5.96836885; 1185, -3.077390025; 1186, -0.175962436; 1187, 0; 1188, 0; 1189, 0; 1190, 0; 1191, 0; 1192, 0; 1193, 0; 1194, 0; 1195, 0; 1196, 7.11805E-14; 1197, 0.020151296; 1198, 0.613554256; 1199, 2.119623784; 1200, 5.766409694; 1201, 9.541734229; 1202, 8.011906864; 1203, 3.927683736; 1204, 1.045979638; 1205, -0.757123043; 1206, 1.385477852; 1207, 1.789613409; 1208, 0.688574932; 1209, 4.281529939; 1210, 7.377113743; 1211, 8.128893355; 1212, 9.463474083; 1213, 7.301462315; 1214, 9.010733279; 1215, 4.427354793; 1216, 3.280561829; 1217, 1.448299325; 1218, -0.391439742; 1219, -0.39838598; 1220, 3.222656159; 1221, 3.280561829; 1222, 2.703106683; 1223, 0.84575966; 1224, 0.221437734; 1225, 0.210909642; 1226, 1.415608141; 1227, 0.805281564; 1228, -6.050701855; 1229, -2.067035049; 1230, -0.431683638; 1231, 3.417050595; 1232, 2.349603763; 1233, 2.380610942; 1234, -1.520718288; 1235, -8.778180258; 1236, -7.821700264; 1237, -8.423511865; 1238, -7.91196282; 1239, -4.101429081; 1240, -3.083747725; 1241, -2.059486996; 1242, -0.938089975; 1243, -0.32168353; 1244, -3.78303E-12; 1245, 0; 1246, 0; 1247, 0; 1248, 0; 1249, 0; 1250, 0; 1251, 0; 1252, 0.324930308; 1253, 0.044767844; 1254, 0.044767844; 1255, 0.044767844; 1256, 0.044767844; 1257, 0.340698567; 1258, 1.312082452; 1259, 1.302462656; 1260, 1.630134324; 1261, 2.587704792; 1262, 4.191379999; 1263, 6.096160618; 1264, 1.993327234; 1265, -2.197509774; 1266, -1.973183435; 1267, -1.556366212; 1268, 3.383206902; 1269, 7.332688528; 1270, 12.5183065; 1271, 15.27303636; 1272, 14.86878613; 1273, 10.18741566; 1274, 6.334332852; 1275, 3.980568281; 1276, 6.739506031; 1277, 5.623101163; 1278, 5.093304805; 1279, 4.513204115; 1280, 1.767611881; 1281, -1.65700286; 1282, -1.647982703; 1283, 1.643926425; 1284, 1.643926425; 1285, 1.643926425; 1286, 1.643926425; 1287, 1.643926425; 1288, 5.066896489; 1289, 2.392538567; 1290, 4.513204115; 1291, 3.177148783; 1292, 3.933174589; 1293, 4.731114217; 1294, 3.34586573; 1295, 2.644941662; 1296, 4.151086338; 1297, 3.461489267; 1298, 8.158318824; 1299, 8.45573126; 1300, 6.265502477; 1301, 8.098567764; 1302, 3.242581894; 1303, 1.598798577; 1304, -5.589347641; 1305, -21.04289661; 1306, -18.3802443; 1307, -15.65370497; 1308, -12.8731304; 1309, -10.04837256; 1310, -7.189282895; 1311, -4.305713201; 1312, -1.407515246; 1313, -6.35671E-11; 1314, 0; 1315, 0; 1316, 0; 1317, 0; 1318, 0; 1319, 0; 1320, 0; 1321, 0; 1322, 0; 1323, 0; 1324, 0; 1325, 0; 1326, 0; 1327, 0; 1328, 0; 1329, 0; 1330, 0; 1331, 0; 1332, 0; 1333, 0; 1334, 0; 1335, 0; 1336, 0; 1337, 0; 1338, 0.697602998; 1339, 4.65749275; 1340, 7.87527368; 1341, 11.11723606; 1342, 7.352077671; 1343, 8.870473291; 1344, 8.96941633; 1345, 8.78888414; 1346, 7.766667629; 1347, 5.839912393; 1348, 7.361569846; 1349, 5.140650299; 1350, 2.719846498; 1351, 3.397994564; 1352, -0.995037958; 1353, -0.994157869; 1354, -1.582870251; 1355, -2.135571384; 1356, -1.541663615; 1357, -0.975896978; 1358, -4.584656071; 1359, -3.875336982; 1360, -3.679521202; 1361, -3.479181935; 1362, -5.131929056; 1363, -8.692604712; 1364, -6.342728867; 1365, -3.840186021; 1366, -1.778577377; 1367, -2.41891E-10; 1368, 0; 1369, 0; 1370, 0]) annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {-80, 10})));
     equation
       connect(cycler.Charging, charger.on) annotation(Line(points = {{9, 4}, {0, 4}, {0, 10}, {-31, 10}}, color = {255, 0, 255}, smooth = Smooth.None));
@@ -167,7 +183,7 @@ management systems, loads and charging devices.
 
     model AdvancedStackCycling
       extends Modelica.Icons.Example;
-      parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] = {{CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 35 * 3600))}, {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 40 * 3600))}, {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 45 * 3600))}} annotation(Placement(transformation(extent = {{50, -80}, {70, -60}})));
+      parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] = {{CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(C0 = 35 * 3600))}, {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(C0 = 40 * 3600))}, {CellRecords.LinearDynamicImpedance.Test1Parameters(capacity = ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(C0 = 45 * 3600))}} annotation(Placement(transformation(extent = {{50, -80}, {70, -60}})));
       output Modelica.SIunits.Current Istack = currentSensor.i;
       output Modelica.SIunits.Current Icell[:, :] = cycler.singleCellBus.i;
       output Modelica.SIunits.Voltage Vstack = voltageSensor.v;
@@ -178,7 +194,9 @@ management systems, loads and charging devices.
       BatteryManagement.VoltageCycling cycler(delayAfterDischarging = 100, Vmax = 4.2, delayAfterCharging = 500, Ifinal = 2, Vmin = 2.7, initialDischarging = false, ns = batteryStack.ns, np = batteryStack.np) annotation(Placement(transformation(extent = {{30, 0}, {10, 20}})));
       Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 270, origin = {90, 10})));
       Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {40, 60})));
-      Modelica_EnergyStorages.Batteries.Stacks.WithMeasurement.LinearDynamicImpedanceMatrix batteryStack(cellParameters = cellParameters) annotation(Placement(transformation(extent = {{50, 0}, {70, 20}})));
+      ElectricalEnergyStorage.Batteries.Stacks.WithMeasurement.LinearDynamicImpedanceMatrix
+        batteryStack(cellParameters=cellParameters) annotation (
+          Placement(transformation(extent={{50,0},{70,20}})));
       Sources.Loads.BooleanConstantCurrent load(I = 40) annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {-80, 10})));
     equation
       connect(cycler.Charging, charger.on) annotation(Line(points = {{9, 4}, {0, 4}, {0, 10}, {-31, 10}}, color = {255, 0, 255}, smooth = Smooth.None));
@@ -201,18 +219,19 @@ management systems, loads and charging devices.
 
   package Batteries "Package for battery cells and battery stacks"
     extends Modelica.Icons.Package;
-    extends Modelica_EnergyStorages.Icons.BatteriesPackage;
+    extends ElectricalEnergyStorage.Icons.BatteriesPackage;
 
     package Cells "Package for battery cells"
       //extends Icons.SingleCell;
 
       package Basic "Package for battery cells without measurement"
-        extends Modelica_EnergyStorages.Icons.SinglePackage;
+        extends ElectricalEnergyStorage.Icons.SinglePackage;
 
         model StaticResistance "Battery cell model with a static internal impedance"
-          extends Modelica_EnergyStorages.Icons.CellStaticResistance;
+          extends ElectricalEnergyStorage.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -251,9 +270,11 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance "Battery cell model with a linear dependant, dynamic internal impedance and basic aging behavior"
-          extends Modelica_EnergyStorages.Icons.CellLinearDynamicImpedance;
+          extends
+            ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           final parameter Modelica.SIunits.Resistance Z0 = sum(cellParameters.RC.Rd.R0);
           final parameter Modelica.SIunits.Time tini(fixed = false) "Initial time";
@@ -302,23 +323,37 @@ management systems, loads and charging devices.
       end Basic;
 
       package WithMeasurement "Package for battery cells with basic cell measurement"
-        extends Modelica_EnergyStorages.Icons.MeasurementPackage;
+        extends ElectricalEnergyStorage.Icons.MeasurementPackage;
 
         model StaticResistance "Battery cell model with a static internal impedance and with basic cell measurement"
-          extends Modelica_EnergyStorages.Icons.CellStaticResistance;
+          extends ElectricalEnergyStorage.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Sensors.CellMeasurement cellMeasurement annotation(Placement(transformation(origin = {0, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 180)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
-          Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus singleCellBus annotation(Placement(transformation(origin = {-60, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-52, 0})));
+          ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus singleCellBus
+            annotation (Placement(transformation(
+                origin={-60,0},
+                extent={{-10,-10},{10,10}},
+                rotation=90), iconTransformation(
+                extent={{-20,-20},{20,20}},
+                rotation=270,
+                origin={-52,0})));
         protected
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort annotation(Placement(transformation(extent = {{76, -4}, {84, 4}})));
         public
           Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T = TOperational) if not useHeatPort annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, -50})));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort annotation(Placement(transformation(extent = {{86, -10}, {106, 10}}, rotation = 0), iconTransformation(extent = {{44, -10}, {64, 10}})));
-          Modelica_EnergyStorages.Batteries.Cells.Basic.StaticResistance staticResistance(final cellParameters = cellParameters, final useHeatPort = true, final TOperational = TOperational, final SOCini = SOCini) annotation(Placement(transformation(extent = {{40, -20}, {80, 20}})));
+          ElectricalEnergyStorage.Batteries.Cells.Basic.StaticResistance
+            staticResistance(
+            final cellParameters=cellParameters,
+            final useHeatPort=true,
+            final TOperational=TOperational,
+            final SOCini=SOCini) annotation (Placement(transformation(
+                  extent={{40,-20},{80,20}})));
         equation
           connect(cellMeasurement.pin_p, pin_p) annotation(Line(points = {{0, 20}, {0, 50}, {0, 100}}, color = {0, 0, 255}));
           connect(cellMeasurement.pin_n, pin_n) annotation(Line(points = {{0, -20}, {0, -50}, {0, -100}}, color = {0, 0, 255}));
@@ -335,21 +370,38 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance "Battery cell model with a linear dependant, dynamic internal impedance and with basic cell measurement"
-          extends Modelica_EnergyStorages.Icons.CellLinearDynamicImpedance;
+          extends
+            ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           final parameter Modelica.SIunits.Time tini(fixed = false) "Initial time";
-          Modelica_EnergyStorages.Sensors.CellMeasurement cellMeasurement annotation(Placement(transformation(extent = {{20, -20}, {-20, 20}}, rotation = 0)));
+          ElectricalEnergyStorage.Sensors.CellMeasurement cellMeasurement
+            annotation (Placement(transformation(extent={{20,-20},{-20,
+                    20}}, rotation=0)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
-          Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus singleCellBus annotation(Placement(transformation(origin = {-60, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-52, 0})));
+          ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus singleCellBus
+            annotation (Placement(transformation(
+                origin={-60,0},
+                extent={{-10,-10},{10,10}},
+                rotation=90), iconTransformation(
+                extent={{-20,-20},{20,20}},
+                rotation=270,
+                origin={-52,0})));
         protected
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort annotation(Placement(transformation(extent = {{76, -4}, {84, 4}})));
         public
           Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T = TOperational) if not useHeatPort annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, -50})));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort annotation(Placement(transformation(extent = {{86, -10}, {106, 10}}, rotation = 0), iconTransformation(extent = {{44, -10}, {64, 10}})));
-          Modelica_EnergyStorages.Batteries.Cells.Basic.LinearDynamicImpedance linearDynamicImpedance(final cellParameters = cellParameters, TOperational = TOperational, final useHeatPort = true, final SOCini = SOCini) annotation(Placement(transformation(extent = {{40, -20}, {80, 20}})));
+          ElectricalEnergyStorage.Batteries.Cells.Basic.LinearDynamicImpedance
+            linearDynamicImpedance(
+            final cellParameters=cellParameters,
+            TOperational=TOperational,
+            final useHeatPort=true,
+            final SOCini=SOCini) annotation (Placement(transformation(
+                  extent={{40,-20},{80,20}})));
         initial equation
           tini = time;
         equation
@@ -371,17 +423,18 @@ management systems, loads and charging devices.
     end Cells;
 
     package Stacks "Package for battery stacks"
-      extends Modelica_EnergyStorages.Icons.StackPackage;
+      extends ElectricalEnergyStorage.Icons.StackPackage;
 
       package Basic "Package for battery stacks without measurement"
-        extends Modelica_EnergyStorages.Icons.SinglePackage;
+        extends ElectricalEnergyStorage.Icons.SinglePackage;
 
         model StaticResistanceScaled "Battery stack model with a static internal impedance"
-          extends Modelica_EnergyStorages.Icons.StackStaticResistance;
+          extends ElectricalEnergyStorage.Icons.StackStaticResistance;
           parameter Integer ns(min = 1) "number of serial connected cells";
           parameter Integer np(min = 1) "number of parallel connected cells";
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
@@ -424,12 +477,14 @@ management systems, loads and charging devices.
         end StaticResistanceScaled;
 
         model LinearDynamicImpedanceMatrix "Array of ns times np LinearDynamicImpedance cells with independent parameters"
-          extends Modelica_EnergyStorages.Icons.StackLinearDynamicImpedance;
+          extends
+            ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
           final parameter Integer ns(min = 1) = size(cellParameters, 1) "Number of serial connected cells";
           final parameter Integer np(min = 1) = size(cellParameters, 2) "Number of parallel connected cells";
           parameter Boolean useCellTerminals = true "Enable/disable single cell terminals";
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini[ns, np](start = fill(0.5, ns, np)) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
@@ -440,7 +495,19 @@ management systems, loads and charging devices.
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort[ns, np] annotation(Placement(transformation(extent = {{76, -4}, {84, 4}})));
         public
           Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature[ns, np](final T = fill(TOperational, ns, np)) if not useHeatPort annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, -50})));
-          Modelica_EnergyStorages.Batteries.Cells.Basic.LinearDynamicImpedance cell[ns, np](final useHeatPort = fill(true, ns, np), final TOperational = fill(TOperational, ns, np), final SOCini = SOCini, final cellParameters = cellParameters) annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}})));
+          ElectricalEnergyStorage.Batteries.Cells.Basic.LinearDynamicImpedance
+            cell[ns,np](
+            final useHeatPort=fill(
+                        true,
+                        ns,
+                        np),
+            final TOperational=fill(
+                        TOperational,
+                        ns,
+                        np),
+            final SOCini=SOCini,
+            final cellParameters=cellParameters) annotation (
+              Placement(transformation(extent={{-20,-20},{20,20}})));
         equation
           //series connection
           for s in 1:ns - 1 loop
@@ -471,27 +538,45 @@ management systems, loads and charging devices.
       end Basic;
 
       package WithMeasurement "Package for single battery stacks"
-        extends Modelica_EnergyStorages.Icons.MeasurementPackage;
+        extends ElectricalEnergyStorage.Icons.MeasurementPackage;
 
         model StaticResistanceScaled "Battery stack model with a static internal impedance and with basic cell measurement"
-          extends Modelica_EnergyStorages.Icons.StackStaticResistance;
+          extends ElectricalEnergyStorage.Icons.StackStaticResistance;
           parameter Integer ns(min = 1) "number of serial connected cells";
           parameter Integer np(min = 1) "number of parallel connected cells";
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}, rotation = 0), iconTransformation(extent = {{84, -10}, {104, 10}})));
-          Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus cellBus annotation(Placement(transformation(origin = {-86, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 90), iconTransformation(extent = {{-18, -18}, {18, 18}}, rotation = 90, origin = {-96, 0})));
+          ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus cellBus
+            annotation (Placement(transformation(
+                origin={-86,0},
+                extent={{-20,-20},{20,20}},
+                rotation=90), iconTransformation(
+                extent={{-18,-18},{18,18}},
+                rotation=90,
+                origin={-96,0})));
         protected
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort annotation(Placement(transformation(extent = {{76, -4}, {84, 4}})));
         public
           Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T = TOperational) if not useHeatPort annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, -50})));
-          Modelica_EnergyStorages.Sensors.CellMeasurement cellMeasurement annotation(Placement(transformation(extent = {{0, -20}, {-40, 20}}, rotation = 0)));
+          ElectricalEnergyStorage.Sensors.CellMeasurement cellMeasurement
+            annotation (Placement(transformation(extent={{0,-20},{-40,
+                    20}}, rotation=0)));
           Modelica.Blocks.Math.Gain gainCurrent(final k = 1 / np) annotation(Placement(transformation(origin = {-70, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
           Modelica.Blocks.Math.Gain gainVoltage(final k = 1 / ns) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-70, -40})));
-          Modelica_EnergyStorages.Batteries.Stacks.Basic.StaticResistanceScaled staticResistance(final ns = ns, final np = np, final useHeatPort = true, final TOperational = TOperational, final SOCini = SOCini, final cellParameters = cellParameters) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
+          ElectricalEnergyStorage.Batteries.Stacks.Basic.StaticResistanceScaled
+            staticResistance(
+            final ns=ns,
+            final np=np,
+            final useHeatPort=true,
+            final TOperational=TOperational,
+            final SOCini=SOCini,
+            final cellParameters=cellParameters) annotation (
+              Placement(transformation(extent={{20,-20},{60,20}})));
         equation
           connect(internalHeatPort, internalHeatPort) annotation(Line(points = {{80, 0}, {80, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
           connect(pin_pStack, cellMeasurement.pin_p) annotation(Line(points = {{0, 100}, {0, 80}, {-20, 80}, {-20, 20}}, color = {0, 0, 255}, smooth = Smooth.None));
@@ -511,19 +596,28 @@ management systems, loads and charging devices.
         end StaticResistanceScaled;
 
         model LinearDynamicImpedanceMatrix "Array of ns times np LinearDynamicImpedance cells with independent parameters and with basic cell measurement"
-          extends Modelica_EnergyStorages.Icons.StackLinearDynamicImpedance;
+          extends
+            ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
           final parameter Integer ns(min = 1) = size(cellParameters, 1) "Number of serial connected cells";
           final parameter Integer np(min = 1) = size(cellParameters, 2) "Number of parallel connected cells";
           parameter Boolean useCellTerminals = true "Enable/disable single cell terminals";
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends Modelica_EnergyStorages.Batteries.Components.OperationalParameters;
+          extends
+            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini[ns, np](start = fill(0.5, ns, np)) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pCell[ns] if useCellTerminals "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-110, 50}, {-90, 70}}, rotation = 0), iconTransformation(extent = {{-104, 50}, {-84, 70}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nCell[ns] if useCellTerminals "Negative pin" annotation(Placement(transformation(extent = {{-110, -70}, {-90, -50}}, rotation = 0), iconTransformation(extent = {{-104, -70}, {-84, -50}})));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[ns, np] if useHeatPort annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}, rotation = 0), iconTransformation(extent = {{84, -10}, {104, 10}})));
-          Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus cellBus[ns, np] annotation(Placement(transformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 90), iconTransformation(extent = {{-18, -18}, {18, 18}}, rotation = 90, origin = {-96, 0})));
+          ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus cellBus[ns,np]
+            annotation (Placement(transformation(
+                origin={-80,0},
+                extent={{-20,-20},{20,20}},
+                rotation=90), iconTransformation(
+                extent={{-18,-18},{18,18}},
+                rotation=90,
+                origin={-96,0})));
         protected
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort[ns, np] annotation(Placement(transformation(extent = {{76, -4}, {84, 4}})));
         public
@@ -562,10 +656,10 @@ management systems, loads and charging devices.
     end Stacks;
 
     package Components "Components of the cells and stack models"
-      extends Modelica_EnergyStorages.Icons.ComponentPackage;
+      extends ElectricalEnergyStorage.Icons.ComponentPackage;
 
       package Impedances "Internal impedance models of the battery cell models"
-        extends Modelica_EnergyStorages.Icons.ImpedancePackage;
+        extends ElectricalEnergyStorage.Icons.ImpedancePackage;
 
         partial model BasicImpedance "Basic internal impedance"
           extends Modelica.Electrical.Analog.Interfaces.TwoPin;
@@ -577,7 +671,9 @@ management systems, loads and charging devices.
 
         model Rlinear "Linear dependent resistance"
           extends BasicImpedance;
-          parameter Modelica_EnergyStorages.CellRecords.Components.Resistance R "Resistance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.Resistance
+            R "Resistance parameters";
           Modelica.Blocks.Interfaces.RealOutput Z annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {60, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {60, 110})));
           Modelica.Electrical.Analog.Basic.VariableResistor Resistor(useHeatPort = true, T_ref = R.temperature.Tref, alpha = R.temperature.alpha) annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 0, origin = {0, 0})));
           Calculators.ImpedanceValue impedanceValue(y0 = R.R0, kSOC = R.SOC.kSOC, kQabs = R.aging.kQabs, kt = R.aging.kt, Qini = R.aging.Qini) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, -30})));
@@ -596,7 +692,9 @@ management systems, loads and charging devices.
 
         model Clinear "Linear dependent capacitance"
           extends BasicImpedance;
-          parameter Modelica_EnergyStorages.CellRecords.Components.Capacitance C "Capacitance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.Capacitance
+            C "Capacitance parameters";
           Calculators.ImpedanceValue impedanceValue(kQabs = C.aging.kQabs, kt = C.aging.kt, y0 = C.C0, kSOC = C.SOC.kSOC, Qini = C.aging.Qini) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, -30})));
           Modelica.Electrical.Analog.Basic.VariableCapacitor variableCapacitor annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin = {0, 0})));
         equation
@@ -611,7 +709,9 @@ management systems, loads and charging devices.
 
         model RClinear "Linear dependent resistance and capacitance combination"
           extends BasicImpedance;
-          parameter Modelica_EnergyStorages.CellRecords.Components.RCelement RC "Transient response resistance and capacitance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.RCelement RC
+            "Transient response resistance and capacitance parameters";
           Clinear capacitor(final C = RC.Cd) annotation(Placement(transformation(extent = {{-10, -30}, {10, -10}}, rotation = 0)));
           Rlinear resistor(final R = RC.Rd) annotation(Placement(transformation(extent = {{-10, 10}, {10, 30}}, rotation = 0)));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -634,7 +734,9 @@ management systems, loads and charging devices.
 
         model RCseriesLinear "Series connection of several linear dependent resistance and capacitance combinations"
           extends BasicImpedance;
-          parameter Modelica_EnergyStorages.CellRecords.Components.RCelement RC[:] "Transient response resistance and capacitance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.RCelement RC[:]
+            "Transient response resistance and capacitance parameters";
           final parameter Integer num(min = 1) = size(RC, 1) "Number of serial RC elements";
           RClinear rclinear[num](final RC = RC) annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 0)));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -663,8 +765,12 @@ management systems, loads and charging devices.
         end RCseriesLinear;
 
         model CellImpedance "Complete internal impedance of a battery cell"
-          parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs "Resistance parameters";
-          parameter Modelica_EnergyStorages.CellRecords.Components.RCelement RC[:] "Transient response resistance and capacitance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.Resistance
+            Rs "Resistance parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.RCelement RC[:]
+            "Transient response resistance and capacitance parameters";
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-210, -10}, {-190, 10}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin" annotation(Placement(transformation(extent = {{190, -10}, {210, 10}}, rotation = 0)));
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -690,15 +796,24 @@ management systems, loads and charging devices.
           connect(rcseriesLinear.Z, add.u2) annotation(Line(points = {{52, 22}, {52, 44}, {78, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(add.y, Z) annotation(Line(points = {{101, 50}, {140, 50}, {140, 110}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(rcseriesLinear.i, i) annotation(Line(points = {{52, -18}, {52, -32}, {140, -32}, {140, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
-          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}), graphics = {Rectangle(extent = {{-160, 10}, {-120, -10}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{80, 0}, {110, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{134, -10}, {134, -50}}, color = {0, 0, 255}, pattern = LinePattern.Dot, thickness = 0.5), Line(points = {{146, -10}, {146, -50}}, color = {0, 0, 255}, pattern = LinePattern.Dot, thickness = 0.5), Rectangle(extent = {{120, 40}, {160, 20}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{134, -30}, {110, -30}, {110, 30}, {120, 30}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{146, -30}, {170, -30}, {170, 30}, {160, 30}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Text(extent = {{112, -12}, {172, 14}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "num"), Line(points = {{140, 40}, {140, 68}, {40, 68}, {40, 68}}, color = {188, 0, 0}, pattern = LinePattern.Dash), Line(points = {{70, 0}, {80, 0}}, color = {0, 0, 255}, smooth = Smooth.None), Text(extent = {{-40, -60}, {40, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "SOC"), Text(extent = {{100, -60}, {180, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "i"), Text(extent = {{-170, -38}, {-110, -12}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "Rs"), Line(points = {{170, 0}, {190, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{180, 0}, {190, 0}}, color = {0, 0, 255}, smooth = Smooth.None), Line(points = {{-66, -8}, {-66, -48}}, color = {0, 0, 255}, thickness = 0.5), Line(points = {{-54, -8}, {-54, -48}}, color = {0, 0, 255}, thickness = 0.5), Rectangle(extent = {{-80, 40}, {-40, 20}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-66, -30}, {-90, -30}, {-90, 30}, {-80, 30}}, color = {0, 0, 255}), Line(points = {{-54, -30}, {-30, -30}, {-30, 30}, {-40, 30}}, color = {0, 0, 255}), Line(points = {{-30, 0}, {-10, 0}, {-10, 0}, {10, 0}}, color = {0, 0, 255}), Line(points = {{-60, 40}, {-60, 68}, {0, 68}, {0, 68}}, color = {188, 0, 0}), Line(points = {{34, -8}, {34, -48}}, color = {0, 0, 255}, thickness = 0.5), Line(points = {{46, -8}, {46, -48}}, color = {0, 0, 255}, thickness = 0.5), Rectangle(extent = {{20, 40}, {60, 20}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{34, -30}, {10, -30}, {10, 30}, {20, 30}}, color = {0, 0, 255}), Line(points = {{46, -30}, {70, -30}, {70, 30}, {60, 30}}, color = {0, 0, 255}), Line(points = {{0, 90}, {0, 68}, {40, 68}, {40, 40}}, color = {188, 0, 0}), Line(points = {{-120, 0}, {-100, 0}, {-100, 0}, {-90, 0}}, color = {0, 0, 255}), Line(points = {{-200, 0}, {-180, 0}, {-180, 0}, {-160, 0}}, color = {0, 0, 255}), Text(extent = {{12, -10}, {72, 16}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "2"), Text(extent = {{-90, -8}, {-30, 18}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "1"), Line(points = {{-140, 10}, {-140, 68}, {0, 68}, {0, 88}}, color = {188, 0, 0}), Text(extent = {{-180, -60}, {-100, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "t"), Text(extent = {{100, 98}, {180, 78}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "Z"), Text(extent = {{-200, 140}, {-60, 80}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name")}));
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}), graphics={  Rectangle(extent = {{-160, 10}, {-120, -10}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Line(points = {{80, 0}, {110, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{134, -10}, {134, -50}}, color = {0, 0, 255}, pattern = LinePattern.Dot, thickness = 0.5), Line(points = {{146, -10}, {146, -50}}, color = {0, 0, 255}, pattern = LinePattern.Dot, thickness = 0.5), Rectangle(extent = {{120, 40}, {160, 20}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, fillColor = {255, 255, 255},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Line(points = {{134, -30}, {110, -30}, {110, 30}, {120, 30}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{146, -30}, {170, -30}, {170, 30}, {160, 30}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Text(extent = {{112, -12}, {172, 14}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "num"), Line(points = {{140, 40}, {140, 68}, {40, 68}, {40, 68}}, color = {188, 0, 0}, pattern = LinePattern.Dash), Line(points = {{70, 0}, {80, 0}}, color = {0, 0, 255}, smooth = Smooth.None), Text(extent = {{-40, -60}, {40, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "SOC"), Text(extent = {{100, -60}, {180, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "i"), Text(extent = {{-170, -38}, {-110, -12}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "Rs"), Line(points = {{170, 0}, {190, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dot), Line(points = {{180, 0}, {190, 0}}, color = {0, 0, 255}, smooth = Smooth.None), Line(points = {{-66, -8}, {-66, -48}}, color = {0, 0, 255}, thickness = 0.5), Line(points = {{-54, -8}, {-54, -48}}, color = {0, 0, 255}, thickness = 0.5), Rectangle(extent = {{-80, 40}, {-40, 20}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Line(points = {{-66, -30}, {-90, -30}, {-90, 30}, {-80, 30}}, color = {0, 0, 255}), Line(points = {{-54, -30}, {-30, -30}, {-30, 30}, {-40, 30}}, color = {0, 0, 255}), Line(points = {{-30, 0}, {-10, 0}, {-10, 0}, {10, 0}}, color = {0, 0, 255}), Line(points = {{-60, 40}, {-60, 68}, {0, 68}, {0, 68}}, color = {188, 0, 0}), Line(points = {{34, -8}, {34, -48}}, color = {0, 0, 255}, thickness = 0.5), Line(points = {{46, -8}, {46, -48}}, color = {0, 0, 255}, thickness = 0.5), Rectangle(extent = {{20, 40}, {60, 20}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Line(points = {{34, -30}, {10, -30}, {10, 30}, {20, 30}}, color = {0, 0, 255}), Line(points = {{46, -30}, {70, -30}, {70, 30}, {60, 30}}, color = {0, 0, 255}), Line(points = {{0, 90}, {0, 68}, {40, 68}, {40, 40}}, color = {188, 0, 0}), Line(points = {{-120, 0}, {-100, 0}, {-100, 0}, {-90, 0}}, color = {0, 0, 255}), Line(points = {{-200, 0}, {-180, 0}, {-180, 0}, {-160, 0}}, color = {0, 0, 255}), Text(extent = {{12, -10}, {72, 16}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "2"), Text(extent = {{-90, -8}, {-30, 18}}, lineColor = {0, 0, 255}, pattern = LinePattern.Dot, textString = "1"), Line(points = {{-140, 10}, {-140, 68}, {0, 68}, {0, 88}}, color = {188, 0, 0}), Text(extent = {{-180, -60}, {-100, -80}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "t"), Text(extent = {{100, 98}, {180, 78}}, lineColor = {0, 0, 127}, fillColor = {122, 255, 107},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "Z"), Text(extent = {{-200, 140}, {-60, 80}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107},
+                    fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "%name")}));
         end CellImpedance;
       end Impedances;
 
       package Calculators "Calculators for the variables in the cell land stack models"
-        extends Modelica_EnergyStorages.Icons.CalculatorPackage;
+        extends ElectricalEnergyStorage.Icons.CalculatorPackage;
 
         block CellCalculator "Calculator for the capacity, SOC, SOH,..."
-          import ElectricEnergyStorages = Modelica_EnergyStorages;
+          import ElectricEnergyStorages = ElectricalEnergyStorage;
           extends Icons.Block;
           Modelica.Blocks.Interfaces.RealInput i annotation(Placement(transformation(extent = {{-100, 10}, {-80, 30}}, rotation = 0)));
           Modelica.Blocks.Interfaces.RealOutput SOC annotation(Placement(transformation(extent = {{100, 50}, {120, 70}}, rotation = 0)));
@@ -715,8 +830,12 @@ management systems, loads and charging devices.
           Modelica.Blocks.Interfaces.RealInput Z "Connector of Real input signal" annotation(Placement(transformation(extent = {{-100, -70}, {-80, -50}})));
           parameter Real SOCini "Initial state of charge";
           parameter Modelica.SIunits.Resistance Z0 "Sum of all initial ohmic impedances Rs0+Rd0[1]+...+Rd0[ns]";
-          parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity "Charge capacity";
-          parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH "State of health relevant parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity
+            capacity "Charge capacity";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.SOH SoH
+            "State of health relevant parameters";
         equation
           connect(sOC.SOC, SOC) annotation(Line(points = {{91, 60}, {110, 60}}, color = {0, 0, 127}));
           connect(i, q.i) annotation(Line(points = {{-90, 20}, {-30, 20}, {-30, 10}, {-19, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -753,7 +872,9 @@ management systems, loads and charging devices.
 
         block Capacity "Capacity calculator"
           extends Icons.Block;
-          parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity "Charge capacity";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity
+            capacity "Charge capacity";
           Modelica.Blocks.Interfaces.RealInput Qabs "Connector of Real input signal" annotation(Placement(transformation(extent = {{-100, -70}, {-80, -50}}, rotation = 0)));
           Modelica.Blocks.Interfaces.RealInput T "Connector of Real input signal" annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}}, rotation = 0)));
           Modelica.Blocks.Interfaces.RealInput t "Connector of Real input signal" annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}}, rotation = 0)));
@@ -831,7 +952,9 @@ management systems, loads and charging devices.
           Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{40, -10}, {60, 10}})));
           parameter Modelica.SIunits.ElectricCharge C0 "Charge capacity for Qeq=0 and teq=0";
           parameter Modelica.SIunits.Resistance Z0 "Sum of all initial ohmic impedances Rs0+Rd0[1]+...+Rd0[ns]";
-          parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH "State of health relevant parameters";
+          parameter
+            ElectricalEnergyStorage.CellRecords.Components.SOH SoH
+            "State of health relevant parameters";
           Modelica.Blocks.Sources.Constant const(final k = 1) annotation(Placement(transformation(extent = {{40, -70}, {60, -50}})));
           Modelica.Blocks.Math.Feedback feedback annotation(Placement(transformation(extent = {{70, -50}, {90, -70}})));
         equation
@@ -872,14 +995,16 @@ management systems, loads and charging devices.
       end Calculators;
 
       model SelfDischarge "Block modeling basic self discharge"
-        extends Modelica_EnergyStorages.Icons.Sink;
+        extends ElectricalEnergyStorage.Icons.Sink;
         Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {40, 0}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
         Modelica.Blocks.Interfaces.RealInput i "Current flowing from pin p to pin n as input signal" annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}}, rotation = 0)));
         Modelica.Blocks.Interfaces.RealInput t "Current flowing from pin p to pin n as input signal" annotation(Placement(transformation(extent = {{-100, -70}, {-80, -50}}, rotation = 0)));
         Modelica.Blocks.Math.LinearDependency linearDependency(k1 = Isd.aging.kQabs, k2 = Isd.aging.kt, y0 = Isd.Isd0) annotation(Placement(transformation(extent = {{0, -10}, {20, 10}})));
-        parameter Modelica_EnergyStorages.CellRecords.Components.Selfdischarge Isd "Self discharge parameters";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.Selfdischarge
+          Isd "Self discharge parameters";
         Calculators.Qabs qabs(Qini = Isd.aging.Qini) annotation(Placement(transformation(extent = {{-60, 50}, {-40, 70}})));
       equation
         connect(signalCurrent.p, pin_p) annotation(Line(points = {{40, 10}, {40, 80}, {0, 80}, {0, 100}}, color = {0, 0, 255}));
@@ -906,20 +1031,49 @@ management systems, loads and charging devices.
 
       record StaticResistanceParameters "Basic parameter record for StaticResistance models"
         extends Modelica.Icons.MaterialProperty;
-        parameter Modelica_EnergyStorages.CellRecords.Components.SOCOCV SOCOCV "SOC vs OCV curve relevant parameters";
-        parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity "Charge capacity";
-        parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs "Resistance parameters";
-        parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH "State of health relevant parameters";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.SOCOCV SOCOCV
+          "SOC vs OCV curve relevant parameters";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity
+          capacity "Charge capacity";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.Resistance Rs
+          "Resistance parameters";
+        parameter ElectricalEnergyStorage.CellRecords.Components.SOH SoH
+          "State of health relevant parameters";
         annotation(defaultComponentPrefixes = "parameter", Icon(graphics = {Text(extent = {{-100, 120}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name"), Rectangle(extent = {{-50, -76}, {50, 76}}, lineColor = {0, 170, 0}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid)}));
       end StaticResistanceParameters;
 
       record Test1Parameters
-        extends Modelica_EnergyStorages.CellRecords.StaticResistance.StaticResistanceParameters(SOCOCV = Modelica_EnergyStorages.CellRecords.Components.SOCOCV(OCVtableOnFile = false, OCVtable = [0, 2.7; 0.0085, 3.131; 0.05, 3.35; 0.1, 3.49; 0.2, 3.55; 0.4, 3.65; 0.6, 3.75; 0.75, 3.85; 0.9, 4; 1, 4.2]), capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 40 * 3600), Rs = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.001));
+        extends
+          ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
+          SOCOCV=
+              ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
+              0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,
+              3.85; 0.9,4; 1,4.2]),
+          capacity=
+              ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(
+              C0=40*3600),
+          Rs=ElectricalEnergyStorage.CellRecords.Components.Resistance(
+              R0=0.001));
         annotation(defaultComponentPrefixes = "parameter");
       end Test1Parameters;
 
       record Test2Parameters
-        extends Modelica_EnergyStorages.CellRecords.StaticResistance.StaticResistanceParameters(SOCOCV = Modelica_EnergyStorages.CellRecords.Components.SOCOCV(OCVtableOnFile = false, OCVtable = [0, 2.7; 0.0085, 3.131; 0.05, 3.35; 0.1, 3.49; 0.2, 3.55; 0.4, 3.65; 0.6, 3.75; 0.75, 3.85; 0.9, 4; 1, 4.2]), capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 20 * 3600), Rs = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.002));
+        extends
+          ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
+          SOCOCV=
+              ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
+              0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,
+              3.85; 0.9,4; 1,4.2]),
+          capacity=
+              ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(
+              C0=20*3600),
+          Rs=ElectricalEnergyStorage.CellRecords.Components.Resistance(
+              R0=0.002));
         annotation(defaultComponentPrefixes = "parameter");
       end Test2Parameters;
     end StaticResistance;
@@ -929,23 +1083,53 @@ management systems, loads and charging devices.
 
       record LinearDynamicImpedanceParameters "Basic parameter record for LinearDynamicImpedance models"
         extends Modelica.Icons.MaterialProperty;
-        parameter Modelica_EnergyStorages.CellRecords.Components.SOCOCV SOCOCV "SOC vs OCV curve relevant parameters";
-        parameter Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity capacity "Charge capacity";
-        parameter Modelica_EnergyStorages.CellRecords.Components.Resistance Rs "Resistance parameters";
-        parameter Modelica_EnergyStorages.CellRecords.Components.SOH SoH "State of health relevant parameters";
-        parameter Modelica_EnergyStorages.CellRecords.Components.Selfdischarge Isd "Self discharge parameters" annotation(Dialog(group = "Advanced"));
-        parameter Modelica_EnergyStorages.CellRecords.Components.RCelement RC[:] "Transient response resistance and capacitance parameters" annotation(Dialog(group = "Advanced"));
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.SOCOCV SOCOCV
+          "SOC vs OCV curve relevant parameters";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity
+          capacity "Charge capacity";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.Resistance Rs
+          "Resistance parameters";
+        parameter ElectricalEnergyStorage.CellRecords.Components.SOH SoH
+          "State of health relevant parameters";
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.Selfdischarge
+          Isd "Self discharge parameters"
+          annotation (Dialog(group="Advanced"));
+        parameter
+          ElectricalEnergyStorage.CellRecords.Components.RCelement RC[:]
+          "Transient response resistance and capacitance parameters"
+          annotation (Dialog(group="Advanced"));
         annotation(defaultComponentPrefixes = "parameter", Icon(graphics = {Text(extent = {{-100, 120}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name"), Rectangle(extent = {{-50, -76}, {50, 76}}, lineColor = {0, 170, 0}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid), Polygon(points = {{-50, 20}, {50, 40}, {50, 44}, {-50, 24}, {-50, 20}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-50, -40}, {50, -20}, {50, -16}, {-50, -36}, {-50, -40}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}));
       end LinearDynamicImpedanceParameters;
 
       record Test1Parameters
-        extends Modelica_EnergyStorages.CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters(SOCOCV = Modelica_EnergyStorages.CellRecords.Components.SOCOCV(OCVtableOnFile = false, OCVtable = [0, 2.7; 0.0085, 3.131; 0.05, 3.35; 0.1, 3.49; 0.2, 3.55; 0.4, 3.65; 0.6, 3.75; 0.75, 3.85; 0.9, 4; 1, 4.2]), capacity = Modelica_EnergyStorages.CellRecords.Components.ChargeCapacity(C0 = 40 * 3600), Rs = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.0001), RC = {Modelica_EnergyStorages.CellRecords.Components.RCelement(Rd = Modelica_EnergyStorages.CellRecords.Components.Resistance(R0 = 0.0001), Cd = Modelica_EnergyStorages.CellRecords.Components.Capacitance(C0 = 50000))});
+        extends
+          ElectricalEnergyStorage.CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters(
+          SOCOCV=
+              ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
+              OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
+              0.05,3.35; 0.1,3.49; 0.2,3.55; 0.4,3.65; 0.6,3.75; 0.75,
+              3.85; 0.9,4; 1,4.2]),
+          capacity=
+              ElectricalEnergyStorage.CellRecords.Components.ChargeCapacity(
+              C0=40*3600),
+          Rs=ElectricalEnergyStorage.CellRecords.Components.Resistance(
+              R0=0.0001),
+          RC={ElectricalEnergyStorage.CellRecords.Components.RCelement(
+              Rd=
+              ElectricalEnergyStorage.CellRecords.Components.Resistance(
+              R0=0.0001), Cd=
+              ElectricalEnergyStorage.CellRecords.Components.Capacitance(
+              C0=50000))});
         annotation(defaultComponentPrefixes = "parameter", Icon(graphics));
       end Test1Parameters;
     end LinearDynamicImpedance;
 
     package Components "Contains the records for more comfortable parameterization"
-      extends Modelica_EnergyStorages.Icons.ComponentPackage;
+      extends ElectricalEnergyStorage.Icons.ComponentPackage;
 
       record SOCOCV "Combines SOC vs OCV curve table parameters"
         extends Modelica.Icons.Record;
@@ -1028,7 +1212,7 @@ management systems, loads and charging devices.
 
   package BatteryManagement "Package for battery management models"
     extends Modelica.Icons.Package;
-    extends Modelica_EnergyStorages.Icons.BatteryManagementPackage;
+    extends ElectricalEnergyStorage.Icons.BatteryManagementPackage;
 
     model VoltageCycling "Cycling of cells/stacks due to their pin voltage"
       extends Icons.Block;
@@ -1069,7 +1253,7 @@ management systems, loads and charging devices.
     end VoltageCycling;
 
     package Components "Package, which contains models for the BatteryManagement models"
-      extends Modelica_EnergyStorages.Icons.ComponentPackage;
+      extends ElectricalEnergyStorage.Icons.ComponentPackage;
 
       block Cycling "Basic cycling model"
         extends Icons.Block;
@@ -1083,8 +1267,17 @@ management systems, loads and charging devices.
         parameter Modelica.SIunits.Time delayAfterDischarging "Delay time after discharging";
         parameter Boolean initialDischarging = true "True if start with discharging";
         Modelica.Blocks.Interfaces.BooleanOutput Discharging(start = initialDischarging) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {110, 60})));
-        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime = delayAfterCharging) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {70, 40})));
-        Modelica_EnergyStorages.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime = delayAfterDischarging) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {70, 0})));
+        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime
+            =delayAfterCharging) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={70,40})));
+        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime
+            =delayAfterDischarging) annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={70,0})));
         Modelica.Blocks.Logical.Edge edge1 annotation(Placement(transformation(origin = {30, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
         Modelica.Blocks.Interfaces.BooleanInput ChargingFinished(start = initialDischarging) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, -60})));
         Modelica.Blocks.Interfaces.BooleanOutput Charging(start = initialDischarging) annotation(Placement(transformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
@@ -1172,7 +1365,13 @@ provide both values as output.
       //   Oesterreichisches Forschungs- und Pruefzentrum Arsenal Ges.m.b.H,
       //   Giefinggasse 2, 1210 Vienna, Austria, UID: ATU 46577208
       //   www.ait.ac.at, sed@ait.ac.at
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics = {Polygon(points = {{-54, -100}, {-54, 80}, {-20, 80}, {-20, 100}, {20, 100}, {20, 80}, {54, 80}, {54, -100}, {-54, -100}}, lineColor = {0, 0, 0}, lineThickness = 0.5, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-20, -59}, {21, 50}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid), Polygon(points = {{-20, 14}, {21, 24}, {21, 28}, {-20, 18}, {-20, 14}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-20, -39}, {21, -29}, {21, -26}, {-20, -36}, {-20, -39}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-20, -40}, {21, -30}, {21, -26}, {-20, -36}, {-20, -40}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}), Documentation(revisions = "<html>
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-54, -100}, {-54, 80}, {-20, 80}, {-20, 100}, {20, 100}, {20, 80}, {54, 80}, {54, -100}, {-54, -100}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                                                                                                                        0.5, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Rectangle(extent = {{-20, -59}, {21, 50}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 170, 0},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Polygon(points = {{-20, 14}, {21, 24}, {21, 28}, {-20, 18}, {-20, 14}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Polygon(points = {{-20, -39}, {21, -29}, {21, -26}, {-20, -36}, {-20, -39}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Polygon(points = {{-20, -40}, {21, -30}, {21, -26}, {-20, -36}, {-20, -40}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid)}), Documentation(revisions = "<html>
 <table border=\"1\" rules=\"groups\">
 <thead>
 <tr><td>Version</td>  <td>Date</td>  <td>Comment</td></tr>
@@ -1211,7 +1410,8 @@ provide both values as output.
     end StackPackage;
 
     partial package IconPackage "Icon for the Icons package"
-      annotation(Icon(graphics = {Rectangle(extent = {{-72, 12}, {8, -68}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-72, 12}, {-42, 42}}, color = {0, 0, 0}), Line(points = {{-42, 42}, {38, 42}}, color = {0, 0, 0}), Line(points = {{38, 42}, {8, 12}}, color = {0, 0, 0}), Line(points = {{38, 42}, {38, -46}}, color = {0, 0, 0}), Line(points = {{46, -30}, {8, -68}}, color = {0, 0, 0})}), Diagram(graphics = {Rectangle(extent = {{-80, 0}, {0, -80}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-80, 0}, {-50, 30}}, color = {0, 0, 0}), Line(points = {{-50, 30}, {30, 30}}, color = {0, 0, 0}), Line(points = {{30, 30}, {0, 0}}, color = {0, 0, 0}), Line(points = {{30, 30}, {30, -58}}, color = {0, 0, 0}), Line(points = {{30, -50}, {0, -80}}, color = {0, 0, 0})}));
+      annotation(Icon(graphics={  Rectangle(extent = {{-72, 12}, {8, -68}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                 FillPattern.Solid), Line(points = {{-72, 12}, {-42, 42}}, color = {0, 0, 0}), Line(points = {{-42, 42}, {38, 42}}, color = {0, 0, 0}), Line(points = {{38, 42}, {8, 12}}, color = {0, 0, 0}), Line(points = {{38, 42}, {38, -46}}, color = {0, 0, 0}), Line(points = {{46, -30}, {8, -68}}, color = {0, 0, 0})}), Diagram(graphics = {Rectangle(extent = {{-80, 0}, {0, -80}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-80, 0}, {-50, 30}}, color = {0, 0, 0}), Line(points = {{-50, 30}, {30, 30}}, color = {0, 0, 0}), Line(points = {{30, 30}, {0, 0}}, color = {0, 0, 0}), Line(points = {{30, 30}, {30, -58}}, color = {0, 0, 0}), Line(points = {{30, -50}, {0, -80}}, color = {0, 0, 0})}));
     end IconPackage;
 
     partial package SIunitsPackage "Icon for the SIunits package"
@@ -1243,7 +1443,11 @@ provide both values as output.
     end SinglePackage;
 
     partial package BatteriesPackage "Icon for the Batteries package "
-      annotation(Icon(graphics = {Ellipse(extent = {{-56, -34}, {26, -76}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-56, 40}, {26, -38}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-56, -56}, {-56, 32}, {26, 28}, {26, -56}}, color = {0, 0, 0}), Ellipse(extent = {{-56, 54}, {26, 4}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Ellipse(extent = {{-34, 52}, {0, 34}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}));
+      annotation(Icon(graphics={  Ellipse(extent = {{-56, -34}, {26, -76}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                 FillPattern.Solid), Rectangle(extent = {{-56, 40}, {26, -38}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Line(points = {{-56, -56}, {-56, 32}, {26, 28}, {26, -56}}, color = {0, 0, 0}), Ellipse(extent = {{-56, 54}, {26, 4}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Ellipse(extent = {{-34, 52}, {0, 34}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid)}));
     end BatteriesPackage;
 
     partial package Load "Icon for the Load package"
@@ -1251,7 +1455,11 @@ provide both values as output.
     end Load;
 
     partial package BatteryManagementPackage "Icon for the BatteryManagement package"
-      annotation(Icon(graphics = {Polygon(points = {{-60, -54}, {-10, 32}, {40, -54}, {-60, -54}}, lineColor = {95, 95, 95}, smooth = Smooth.None, fillPattern = FillPattern.Solid, fillColor = {95, 95, 95}), Ellipse(extent = {{-30, 46}, {10, 6}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Ellipse(extent = {{-80, -34}, {-40, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Ellipse(extent = {{20, -34}, {60, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}), Diagram(graphics));
+      annotation(Icon(graphics={  Polygon(points = {{-60, -54}, {-10, 32}, {40, -54}, {-60, -54}}, lineColor = {95, 95, 95}, smooth = Smooth.None,
+                fillPattern =                                                                                                                                    FillPattern.Solid, fillColor = {95, 95, 95}), Ellipse(extent = {{-30, 46}, {10, 6}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Ellipse(extent = {{-80, -34}, {-40, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Ellipse(extent = {{20, -34}, {60, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid)}), Diagram(graphics));
     end BatteryManagementPackage;
 
     partial block Block "Icon for a basic block"
@@ -1311,12 +1519,12 @@ provide both values as output.
     end StackLinearDynamicImpedance;
 
     partial block Source "Icon for a basic block"
-      extends Modelica_EnergyStorages.Icons.Block;
+      extends ElectricalEnergyStorage.Icons.Block;
       annotation(Icon(graphics = {Ellipse(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, origin = {0, 2}, rotation = 90), Line(points = {{0, 40}, {0, -40}}, color = {0, 0, 0}, origin = {0, 2}, rotation = 90), Polygon(points = {{0, -10}, {-8, 8}, {8, 8}, {0, -10}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, origin = {0, 60}, rotation = 180), Line(points = {{0, 90}, {0, 42}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}, smooth = Smooth.None)}));
     end Source;
 
     partial block Sink "Icon for a basic block"
-      extends Modelica_EnergyStorages.Icons.Block;
+      extends ElectricalEnergyStorage.Icons.Block;
       annotation(Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{88, -88}, {-88, 88}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Text(extent = {{14, 134}, {176, 100}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name"), Ellipse(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, origin = {0, 2}, rotation = 90), Line(points = {{0, 40}, {0, -40}}, color = {0, 0, 0}, origin = {0, 2}, rotation = 90), Polygon(points = {{0, -10}, {-8, 8}, {8, 8}, {0, -10}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, origin = {0, 60}, rotation = 360), Line(points = {{0, 90}, {0, 42}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}, smooth = Smooth.None)}));
     end Sink;
     annotation(Diagram(graphics), Icon(graphics));
@@ -1361,7 +1569,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
       model IOut "Adaptor for reading the current of the battery from the SingleCellBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1372,7 +1585,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
 
       model IIn "Adaptor for feeding the current of the battery to the SingleCellBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1386,7 +1604,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
       model TempOut "Adaptor for reading the temperature of the battery from the SingleCellBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Temperature of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1397,7 +1620,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
 
       model TempIn "Adaptor for feeding the temperature of the battery to the SingleCellBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {2, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1411,7 +1639,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
       model VOut "Adaptor for reading the voltage of the battery from the SingleCellBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Voltage of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1422,7 +1655,12 @@ This bus is used for <a href=\"modelica://Modelica.Electrical.Machines.BasicMach
 
       model VIn "Adaptor for feeding the voltage of the battery to the SingleCellBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.SingleCellBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.SingleCellBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1465,8 +1703,11 @@ constructed by the signals connected to this bus.
         parameter Integer ns = 12 "Number of buses";
         SOCOut sOCOut[ns] annotation(Placement(transformation(extent = {{-66, 46}, {-46, 66}})));
         SOCIn sOCIn annotation(Placement(transformation(extent = {{46, 46}, {66, 66}})));
-        Modelica_EnergyStorages.Interfaces.ControlBus.SOHOut sOHOut[ns] annotation(Placement(transformation(extent = {{-66, 26}, {-46, 46}})));
-        Modelica_EnergyStorages.Interfaces.ControlBus.SOHIn sOHIn annotation(Placement(transformation(extent = {{46, 26}, {66, 46}})));
+        ElectricalEnergyStorage.Interfaces.ControlBus.SOHOut sOHOut[ns]
+          annotation (Placement(transformation(extent={{-66,26},{-46,
+                  46}})));
+        ElectricalEnergyStorage.Interfaces.ControlBus.SOHIn sOHIn
+          annotation (Placement(transformation(extent={{46,26},{66,46}})));
         COut cOut[ns] annotation(Placement(transformation(extent = {{-66, 6}, {-46, 26}})));
         CIn cIn annotation(Placement(transformation(extent = {{46, 6}, {66, 26}})));
         CyclesOut cyclesOut[ns] annotation(Placement(transformation(extent = {{-66, 66}, {-46, 86}})));
@@ -1513,7 +1754,12 @@ constructed by the signals connected to this bus.
       model SOCOut "Adaptor for reading the SOC of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1524,7 +1770,12 @@ constructed by the signals connected to this bus.
 
       model SOCIn "Adaptor for feeding the SOC of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1538,7 +1789,12 @@ constructed by the signals connected to this bus.
       model SOHOut "Adaptor for reading the SOS of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1549,7 +1805,12 @@ constructed by the signals connected to this bus.
 
       model SOHIn "Adaptor for feeding the SOS of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1563,7 +1824,12 @@ constructed by the signals connected to this bus.
       model COut "Adaptor for reading the capacity of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Charge capacity of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1574,7 +1840,12 @@ constructed by the signals connected to this bus.
 
       model CIn "Adaptor for feeding the capacity of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1588,7 +1859,12 @@ constructed by the signals connected to this bus.
       model CyclesOut "Adaptor for reading the cycles of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1599,7 +1875,12 @@ constructed by the signals connected to this bus.
 
       model CyclesIn "Adaptor for feeding the cycles of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1613,7 +1894,12 @@ constructed by the signals connected to this bus.
       model OCVOut "Adaptor for reading the OCV of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1624,7 +1910,12 @@ constructed by the signals connected to this bus.
 
       model OCVIn "Adaptor for feeding the OCV of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1638,7 +1929,12 @@ constructed by the signals connected to this bus.
       model VOut "Adaptor for reading the voltage of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1649,7 +1945,12 @@ constructed by the signals connected to this bus.
 
       model VIn "Adaptor for feeding the voltage of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1663,7 +1964,12 @@ constructed by the signals connected to this bus.
       model IOut "Adaptor for reading the current of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1674,7 +1980,12 @@ constructed by the signals connected to this bus.
 
       model IIn "Adaptor for feeding the current of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1688,7 +1999,12 @@ constructed by the signals connected to this bus.
       model TOut "Adaptor for reading the temperature of the battery from the ControlBus"
         extends Icons.AdaptorOut;
         Modelica.Blocks.Interfaces.RealOutput y "Current of the battery (Output)" annotation(Placement(transformation(extent = {{30, -10}, {50, 10}}, rotation = 0)));
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {-40, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={-40,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       equation
@@ -1699,7 +2015,12 @@ constructed by the signals connected to this bus.
 
       model TIn "Adaptor for feeding the temperature of the battery to the ControlBus"
         extends Icons.AdaptorIn;
-        Modelica_EnergyStorages.Interfaces.ControlBus.Bus controlBus "This bus contains the voltage, the current and the temperature of the cell" annotation(Placement(transformation(origin = {42, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 270)));
+        ElectricalEnergyStorage.Interfaces.ControlBus.Bus controlBus
+          "This bus contains the voltage, the current and the temperature of the cell"
+          annotation (Placement(transformation(
+              origin={42,0},
+              extent={{-20,20},{20,-20}},
+              rotation=270)));
       protected
         Modelica.Blocks.Math.Gain gain annotation(Placement(transformation(origin = {0, 0}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
       public
@@ -1852,13 +2173,13 @@ constructed by the signals connected to this bus.
 
     package Loads "Package with different loads"
       extends Modelica.Icons.Package;
-      extends Modelica_EnergyStorages.Icons.Load;
+      extends ElectricalEnergyStorage.Icons.Load;
 
       package Cycles "Standardized cycles"
-        extends Modelica_EnergyStorages.Icons.CyclesPackage;
+        extends ElectricalEnergyStorage.Icons.CyclesPackage;
 
         model FTP72 "Federal Test Procedure: Urban Dynamometer Driving Schedule (UDDS)"
-          extends Modelica_EnergyStorages.Icons.Sink;
+          extends ElectricalEnergyStorage.Icons.Sink;
           Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {40, 10}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
@@ -1881,7 +2202,7 @@ constructed by the signals connected to this bus.
         end FTP72;
 
         model Liberal "Aging accelerating test cycle"
-          extends Modelica_EnergyStorages.Icons.Sink;
+          extends ElectricalEnergyStorage.Icons.Sink;
           Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {40, 30}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
@@ -1902,10 +2223,10 @@ constructed by the signals connected to this bus.
         end Liberal;
 
         package Components "Components for the cycles"
-          extends Modelica_EnergyStorages.Icons.ComponentPackage;
+          extends ElectricalEnergyStorage.Icons.ComponentPackage;
 
           model FTP72_Power "FTP72 cycle definition"
-            extends Modelica_EnergyStorages.Icons.Block;
+            extends ElectricalEnergyStorage.Icons.Block;
             Modelica.Blocks.Sources.CombiTimeTable FTP72_Table(tableName = "tab1", fileName = "FTP72.txt", extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative, tableOnFile = false, table = table) annotation(Placement(transformation(extent = {{-60, -60}, {-40, -40}}, rotation = 0)));
             Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{-20, 30}, {0, 10}}, rotation = 0)));
             Modelica.Blocks.Sources.Constant const(k = gain) annotation(Placement(transformation(extent = {{-60, 30}, {-40, 50}}, rotation = 0)));
@@ -1928,7 +2249,7 @@ constructed by the signals connected to this bus.
           end FTP72_Power;
 
           model Liberal "Liberal cycle definition"
-            extends Modelica_EnergyStorages.Icons.Block;
+            extends ElectricalEnergyStorage.Icons.Block;
             Modelica.Blocks.Sources.Pulse polse1C(offset = 0, amplitude = 1, period = 105, width = 18 * 100 / 105) annotation(Placement(transformation(extent = {{-80, 70}, {-60, 90}}, rotation = 0)));
             Modelica.Blocks.Sources.Pulse pulse0_5C(startTime = 18, offset = 0, amplitude = 0.5, width = 36 * 100 / 105, period = 105) annotation(Placement(transformation(extent = {{-80, 30}, {-60, 50}}, rotation = 0)));
             Modelica.Blocks.Sources.Pulse pulse0_9C(offset = 0, amplitude = -0.9, startTime = 69, width = 3 * 100 / 105, period = 105) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}}, rotation = 0)));
@@ -1966,7 +2287,7 @@ constructed by the signals connected to this bus.
       end Cycles;
 
       model CCCV "Constant voltage, constant current discharging device"
-        extends Modelica_EnergyStorages.Icons.Sink;
+        extends ElectricalEnergyStorage.Icons.Sink;
         parameter Boolean ExternalControl = true;
         Components.ControlledCurrent controlledCurrent(Imax = Imax, T = T, Vref = Vmin) annotation(Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 180, origin = {60, 2})));
         parameter Modelica.SIunits.Voltage Vmin "Minimal battery voltage";
@@ -1992,7 +2313,7 @@ constructed by the signals connected to this bus.
       end CCCV;
 
       model BooleanConstantCurrent "Constant current discharging device"
-        extends Modelica_EnergyStorages.Icons.Sink;
+        extends ElectricalEnergyStorage.Icons.Sink;
         Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {40, -10}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
@@ -2012,7 +2333,7 @@ constructed by the signals connected to this bus.
       end BooleanConstantCurrent;
 
       model BooleanConstantPower "Constant power discharging device"
-        extends Modelica_EnergyStorages.Icons.Sink;
+        extends ElectricalEnergyStorage.Icons.Sink;
         Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {40, 0}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
@@ -2020,7 +2341,9 @@ constructed by the signals connected to this bus.
         Modelica.Blocks.Math.Product product annotation(Placement(transformation(origin = {10, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
         parameter Modelica.SIunits.Time T = 1 "Controller time constant";
         parameter Modelica.SIunits.Current Imax "Upper current limit of controller";
-        Modelica_EnergyStorages.Sources.Components.LimitedIntegralController limitedController(outMax = Imax, T = T) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
+        ElectricalEnergyStorage.Sources.Components.LimitedIntegralController
+          limitedController(outMax=Imax, T=T) annotation (Placement(
+              transformation(extent={{-10,-10},{10,10}})));
         Modelica.Blocks.Sources.Constant constantPower(k = power) annotation(Placement(transformation(extent = {{-80, -50}, {-60, -30}})));
         parameter Modelica.SIunits.Power power "Constant power";
         Modelica.Blocks.Math.Product product1 annotation(Placement(transformation(extent = {{-40, -10}, {-20, 10}}, rotation = 0)));
@@ -2043,7 +2366,7 @@ constructed by the signals connected to this bus.
       end BooleanConstantPower;
 
       model SignalPower "Signal power discharging device"
-        extends Modelica_EnergyStorages.Icons.Sink;
+        extends ElectricalEnergyStorage.Icons.Sink;
         Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent annotation(Placement(transformation(origin = {20, 0}, extent = {{-10, 10}, {10, -10}}, rotation = 270)));
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
@@ -2052,7 +2375,9 @@ constructed by the signals connected to this bus.
         Modelica.Blocks.Interfaces.RealInput power annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}}, rotation = 0)));
         parameter Modelica.SIunits.Time T = 1 "Controller time constant";
         parameter Modelica.SIunits.Current Imax "Upper current limit of controller";
-        Modelica_EnergyStorages.Sources.Components.LimitedIntegralController limitedController(outMax = Imax, T = T) annotation(Placement(transformation(extent = {{-60, -10}, {-40, 10}})));
+        ElectricalEnergyStorage.Sources.Components.LimitedIntegralController
+          limitedController(outMax=Imax, T=T) annotation (Placement(
+              transformation(extent={{-60,-10},{-40,10}})));
       equation
         connect(signalCurrent.p, pin_p) annotation(Line(points = {{20, 10}, {20, 100}, {0, 100}}, color = {0, 0, 255}));
         connect(signalCurrent.n, pin_n) annotation(Line(points = {{20, -10}, {20, -100}, {0, -100}}, color = {0, 0, 255}));
@@ -2070,12 +2395,18 @@ constructed by the signals connected to this bus.
 
     package Chargers "Charging devices"
       extends Modelica.Icons.Package;
-      extends Modelica_EnergyStorages.Icons.ChargerPackage;
+      extends ElectricalEnergyStorage.Icons.ChargerPackage;
 
       model CCCV "Constant voltage, constant current charging device"
-        extends Modelica_EnergyStorages.Icons.Source;
+        extends ElectricalEnergyStorage.Icons.Source;
         parameter Boolean ExternalControl = true;
-        Modelica_EnergyStorages.Sources.Components.ControlledCurrent controlledCurrent(Imax = Imax, T = T, Vref = Vmax) annotation(Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 180, origin = {60, 0})));
+        ElectricalEnergyStorage.Sources.Components.ControlledCurrent controlledCurrent(
+          Imax=Imax,
+          T=T,
+          Vref=Vmax) annotation (Placement(transformation(
+              extent={{10,10},{-10,-10}},
+              rotation=180,
+              origin={60,0})));
         parameter Modelica.SIunits.Voltage Vmax "Minimal battery voltage";
         parameter Modelica.SIunits.Current Imax "Maximal charging current";
         parameter Modelica.SIunits.Time T = 0.01 "Controller time constant";
@@ -2100,7 +2431,7 @@ constructed by the signals connected to this bus.
     end Chargers;
 
     package Components "Components for the loads and the charging devices"
-      extends Modelica_EnergyStorages.Icons.ComponentPackage;
+      extends ElectricalEnergyStorage.Icons.ComponentPackage;
 
       block LimitedIntegralController "Limited output controller"
         extends Icons.Block;
@@ -2120,7 +2451,7 @@ constructed by the signals connected to this bus.
       end LimitedIntegralController;
 
       model ControlledCurrent "Controls the current according to the inputs"
-        extends Modelica_EnergyStorages.Icons.Source;
+        extends ElectricalEnergyStorage.Icons.Source;
         parameter Modelica.SIunits.Voltage Vref "Reference voltage";
         parameter Modelica.SIunits.Current Imax "Maximal current";
         parameter Modelica.SIunits.Time T = 0.01 "Controller time constant";
@@ -2130,7 +2461,9 @@ constructed by the signals connected to this bus.
         Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 180, origin = {16, 0})));
         Modelica.Blocks.Math.BooleanToReal booleanToReal annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-38, 30})));
         Modelica.Blocks.Interfaces.RealInput vControl annotation(Placement(transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(extent = {{-100, -68}, {-80, -48}})));
-        Modelica_EnergyStorages.Sources.Components.LimitedIntegralController limitedController(outMax = Imax, T = T) annotation(Placement(transformation(extent = {{-46, -20}, {-26, 0}})));
+        ElectricalEnergyStorage.Sources.Components.LimitedIntegralController
+          limitedController(outMax=Imax, T=T) annotation (Placement(
+              transformation(extent={{-46,-20},{-26,0}})));
         Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin_n annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}})));
       equation
@@ -2147,4 +2480,4 @@ constructed by the signals connected to this bus.
     end Components;
   end Sources;
   annotation(uses(Modelica(version = "3.2.1")), version = "3.2.1", conversion(noneFromVersion = "3.2"));
-end Modelica_EnergyStorages;
+end ElectricalEnergyStorage;
