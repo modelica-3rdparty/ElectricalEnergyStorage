@@ -230,8 +230,7 @@ management systems, loads and charging devices.
         model StaticResistance "Battery cell model with a static internal impedance"
           extends ElectricalEnergyStorage.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -270,11 +269,9 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance "Battery cell model with a linear dependant, dynamic internal impedance and basic aging behavior"
-          extends
-            ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
+          extends ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           final parameter Modelica.SIunits.Resistance Z0 = sum(cellParameters.RC.Rd.R0);
           final parameter Modelica.SIunits.Time tini(fixed = false) "Initial time";
@@ -328,8 +325,7 @@ management systems, loads and charging devices.
         model StaticResistance "Battery cell model with a static internal impedance and with basic cell measurement"
           extends ElectricalEnergyStorage.Icons.CellStaticResistance;
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Sensors.CellMeasurement cellMeasurement annotation(Placement(transformation(origin = {0, 0}, extent = {{-20, 20}, {20, -20}}, rotation = 180)));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0)));
@@ -370,11 +366,9 @@ management systems, loads and charging devices.
         end StaticResistance;
 
         model LinearDynamicImpedance "Battery cell model with a linear dependant, dynamic internal impedance and with basic cell measurement"
-          extends
-            ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
+          extends ElectricalEnergyStorage.Icons.CellLinearDynamicImpedance;
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           final parameter Modelica.SIunits.Time tini(fixed = false) "Initial time";
           ElectricalEnergyStorage.Sensors.CellMeasurement cellMeasurement
@@ -433,8 +427,7 @@ management systems, loads and charging devices.
           parameter Integer ns(min = 1) "number of serial connected cells";
           parameter Integer np(min = 1) "number of parallel connected cells";
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_n "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
@@ -477,14 +470,12 @@ management systems, loads and charging devices.
         end StaticResistanceScaled;
 
         model LinearDynamicImpedanceMatrix "Array of ns times np LinearDynamicImpedance cells with independent parameters"
-          extends
-            ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
+          extends ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
           final parameter Integer ns(min = 1) = size(cellParameters, 1) "Number of serial connected cells";
           final parameter Integer np(min = 1) = size(cellParameters, 2) "Number of parallel connected cells";
           parameter Boolean useCellTerminals = true "Enable/disable single cell terminals";
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini[ns, np](start = fill(0.5, ns, np)) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
@@ -545,8 +536,7 @@ management systems, loads and charging devices.
           parameter Integer ns(min = 1) "number of serial connected cells";
           parameter Integer np(min = 1) "number of parallel connected cells";
           parameter CellRecords.StaticResistance.StaticResistanceParameters cellParameters annotation(__Dymola_choicesAllMatching = true, Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini(start = 0.5) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
@@ -596,14 +586,12 @@ management systems, loads and charging devices.
         end StaticResistanceScaled;
 
         model LinearDynamicImpedanceMatrix "Array of ns times np LinearDynamicImpedance cells with independent parameters and with basic cell measurement"
-          extends
-            ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
+          extends ElectricalEnergyStorage.Icons.StackLinearDynamicImpedance;
           final parameter Integer ns(min = 1) = size(cellParameters, 1) "Number of serial connected cells";
           final parameter Integer np(min = 1) = size(cellParameters, 2) "Number of parallel connected cells";
           parameter Boolean useCellTerminals = true "Enable/disable single cell terminals";
           parameter CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters cellParameters[:, :] annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-          extends
-            ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
+          extends ElectricalEnergyStorage.Batteries.Components.OperationalParameters;
           parameter Real SOCini[ns, np](start = fill(0.5, ns, np)) "Initial state of charge" annotation(Dialog(group = "Initialization"));
           Modelica.Electrical.Analog.Interfaces.PositivePin pin_pStack "Positive pin (potential p.v > n.v for positive voltage drop v)" annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}}, rotation = 0), iconTransformation(extent = {{-10, 84}, {10, 104}})));
           Modelica.Electrical.Analog.Interfaces.NegativePin pin_nStack "Negative pin" annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}, rotation = 0), iconTransformation(extent = {{-10, -104}, {10, -84}})));
@@ -1046,8 +1034,7 @@ management systems, loads and charging devices.
       end StaticResistanceParameters;
 
       record Test1Parameters
-        extends
-          ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
+        extends ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
           SOCOCV=
               ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
@@ -1062,8 +1049,7 @@ management systems, loads and charging devices.
       end Test1Parameters;
 
       record Test2Parameters
-        extends
-          ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
+        extends ElectricalEnergyStorage.CellRecords.StaticResistance.StaticResistanceParameters(
           SOCOCV=
               ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
@@ -1106,8 +1092,7 @@ management systems, loads and charging devices.
       end LinearDynamicImpedanceParameters;
 
       record Test1Parameters
-        extends
-          ElectricalEnergyStorage.CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters(
+        extends ElectricalEnergyStorage.CellRecords.LinearDynamicImpedance.LinearDynamicImpedanceParameters(
           SOCOCV=
               ElectricalEnergyStorage.CellRecords.Components.SOCOCV(
               OCVtableOnFile=false, OCVtable=[0,2.7; 0.0085,3.131;
@@ -1267,13 +1252,13 @@ management systems, loads and charging devices.
         parameter Modelica.SIunits.Time delayAfterDischarging "Delay time after discharging";
         parameter Boolean initialDischarging = true "True if start with discharging";
         Modelica.Blocks.Interfaces.BooleanOutput Discharging(start = initialDischarging) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {110, 60})));
-        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime
-            =delayAfterCharging) annotation (Placement(transformation(
+        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay AfterChargingDelay(delayTime=
+             delayAfterCharging) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={70,40})));
-        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime
-            =delayAfterDischarging) annotation (Placement(
+        ElectricalEnergyStorage.BatteryManagement.Components.OnDelay BeforeChargingDelay(delayTime=
+             delayAfterDischarging) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -2479,5 +2464,5 @@ constructed by the signals connected to this bus.
       end ControlledCurrent;
     end Components;
   end Sources;
-  annotation(uses(Modelica(version = "3.2.1")), version = "3.2.1", conversion(noneFromVersion = "3.2"));
+  annotation(uses(Modelica(version="3.2.2")),version = "3.2.2", conversion(noneFromVersion = "3.2"));
 end ElectricalEnergyStorage;
