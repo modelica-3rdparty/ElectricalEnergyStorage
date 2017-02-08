@@ -413,7 +413,7 @@ management systems, loads and charging devices.
           annotation(Diagram(graphics), Icon(graphics));
         end LinearDynamicImpedance;
       end WithMeasurement;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Line(points = {{-80, -80}, {-80, 40}, {-60, 40}, {-60, 60}, {-20, 60}, {-20, 40}, {20, 40}, {20, 60}, {60, 60}, {60, 40}, {80, 40}, {80, -80}, {-80, -80}}, color = {0, 0, 0}, smooth = Smooth.None), Text(extent = {{-40, 0}, {20, -60}}, lineColor = {0, 0, 0}, textString = "+"), Text(extent = {{20, -8}, {80, -68}}, lineColor = {0, 0, 0}, textString = "-")}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points = {{-80, -80}, {-80, 40}, {-60, 40}, {-60, 60}, {-20, 60}, {-20, 40}, {20, 40}, {20, 60}, {60, 60}, {60, 40}, {80, 40}, {80, -80}, {-80, -80}}, color = {0, 0, 0}, smooth = Smooth.None), Text(extent = {{-40, 0}, {20, -60}}, lineColor = {0, 0, 0}, textString = "+"), Text(extent = {{20, -8}, {80, -68}}, lineColor = {0, 0, 0}, textString = "-")}));
     end Cells;
 
     package Stacks "Package for battery stacks"
@@ -839,7 +839,7 @@ management systems, loads and charging devices.
           connect(c.C, sOH.C) annotation(Line(points = {{41, -20}, {60, -20}, {60, -60}, {73, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(c.C, EquivalentCycles.C) annotation(Line(points = {{41, -20}, {60, -20}, {60, 14}, {71, 14}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(c.C, sOC.C) annotation(Line(points = {{41, -20}, {60, -20}, {60, 54}, {71, 54}}, color = {0, 0, 127}, smooth = Smooth.None));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-86, 44}, {-46, 4}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{38, 0}, {90, -40}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{6, 80}, {86, 40}}, lineColor = {0, 0, 130}, textString = "SOC"), Text(extent = {{-12, 44}, {90, 2}}, lineColor = {0, 0, 130}, textString = "cycles"), Text(extent = {{0, -38}, {96, -78}}, lineColor = {0, 0, 130}, textString = "SOH"), Text(extent = {{-86, 82}, {-46, 42}}, lineColor = {0, 0, 130}, textString = "T"), Text(extent = {{-86, 6}, {-46, -34}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{-84, -40}, {-44, -80}}, lineColor = {0, 0, 130}, textString = "Z")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-86, 44}, {-46, 4}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{38, 0}, {90, -40}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{6, 80}, {86, 40}}, lineColor = {0, 0, 130}, textString = "SOC"), Text(extent = {{-12, 44}, {90, 2}}, lineColor = {0, 0, 130}, textString = "cycles"), Text(extent = {{0, -38}, {96, -78}}, lineColor = {0, 0, 130}, textString = "SOH"), Text(extent = {{-86, 82}, {-46, 42}}, lineColor = {0, 0, 130}, textString = "T"), Text(extent = {{-86, 6}, {-46, -34}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{-84, -40}, {-44, -80}}, lineColor = {0, 0, 130}, textString = "Z")}));
         end CellCalculator;
 
         block SOC "State of Charge calculator"
@@ -855,7 +855,7 @@ management systems, loads and charging devices.
           connect(C, DivisionNormierung.u2) annotation(Line(points = {{-90, -60}, {-60, -60}, {-60, -6}, {-42, -6}}, color = {0, 0, 127}));
           connect(DivisionNormierung.y, integrator.u) annotation(Line(points = {{-19, 0}, {-2, 0}}, color = {0, 0, 127}));
           connect(integrator.y, SOC) annotation(Line(points = {{21, 0}, {110, 0}}, color = {0, 0, 127}));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-80, -40}, {-40, -80}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-80, 80}, {-40, 40}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{10, 20}, {90, -20}}, lineColor = {0, 0, 130}, textString = "SOC")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-80, -40}, {-40, -80}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-80, 80}, {-40, 40}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{10, 20}, {90, -20}}, lineColor = {0, 0, 130}, textString = "SOC")}));
         end SOC;
 
         block Capacity "Capacity calculator"
@@ -869,7 +869,7 @@ management systems, loads and charging devices.
           Modelica.Blocks.Interfaces.RealOutput C "Output signal connector" annotation(Placement(transformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
         equation
           C = capacity.C0 * (1 + capacity.aging.kt * t + capacity.aging.kQabs * Qabs) * (1 + capacity.temperature.alpha * (T - capacity.temperature.Tref));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-108, 82}, {-28, 42}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{40, 20}, {100, -20}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-106, -36}, {-4, -76}}, lineColor = {0, 0, 130}, textString = "|Q|"), Text(extent = {{-106, 20}, {-26, -20}}, lineColor = {0, 0, 130}, textString = "T")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-108, 82}, {-28, 42}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{40, 20}, {100, -20}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-106, -36}, {-4, -76}}, lineColor = {0, 0, 130}, textString = "|Q|"), Text(extent = {{-106, 20}, {-26, -20}}, lineColor = {0, 0, 130}, textString = "T")}));
         end Capacity;
 
         block Qabs "Absolute charge transfer calculator"
@@ -883,7 +883,7 @@ management systems, loads and charging devices.
           connect(i, abs.u) annotation(Line(points = {{-90, 0}, {-62, 0}}, color = {0, 0, 127}));
           connect(absInt.y, Qabs) annotation(Line(points = {{81, 0}, {110, 0}}, color = {0, 0, 127}));
           connect(abs.y, absInt.u) annotation(Line(points = {{-39, 0}, {58, 0}}, color = {0, 0, 127}));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{30, 20}, {90, -20}}, lineColor = {0, 0, 130}, textString = "|Q|"), Text(extent = {{-88, 20}, {-48, -20}}, lineColor = {0, 0, 130}, textString = "i")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{30, 20}, {90, -20}}, lineColor = {0, 0, 130}, textString = "|Q|"), Text(extent = {{-88, 20}, {-48, -20}}, lineColor = {0, 0, 130}, textString = "i")}));
         end Qabs;
 
         block Cycles "Equivalent cycles calculator"
@@ -908,7 +908,7 @@ management systems, loads and charging devices.
           connect(abs1.y, gain.u) annotation(Line(points = {{-39, 60}, {-32.2, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(DivisionNormierung.y, integrator.u) annotation(Line(points = {{41, 0}, {58, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(integrator.y, cycles) annotation(Line(points = {{81, 0}, {110, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-92, 78}, {-34, 40}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{-80, -40}, {-40, -80}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-16, 22}, {90, -16}}, lineColor = {0, 0, 130}, textString = "cycles")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-92, 78}, {-34, 40}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{-80, -40}, {-40, -80}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-16, 22}, {90, -16}}, lineColor = {0, 0, 130}, textString = "cycles")}));
         end Cycles;
 
         block ImpedanceValue "Block modeling linear SOC and SOH dependency of resistance and capacitances"
@@ -924,7 +924,7 @@ management systems, loads and charging devices.
           parameter Modelica.SIunits.ElectricCharge Qini "Initial transferred charge";
           Modelica.Blocks.Interfaces.RealInput SOC annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}}, rotation = 0)));
         equation
-          y = y0 * (1 + kSOC * SOC + kt * t + kQabs * qabs.Qabs) annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-86, 82}, {-42, 44}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{-84, 20}, {16, -20}}, lineColor = {0, 0, 130}, textString = "SOC"), Text(extent = {{-114, -40}, {-14, -80}}, lineColor = {0, 0, 130}, textString = "i")}));
+          y = y0 * (1 + kSOC * SOC + kt * t + kQabs * qabs.Qabs) annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-86, 82}, {-42, 44}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{-84, 20}, {16, -20}}, lineColor = {0, 0, 130}, textString = "SOC"), Text(extent = {{-114, -40}, {-14, -80}}, lineColor = {0, 0, 130}, textString = "i")}));
           connect(i, qabs.i) annotation(Line(points = {{-90, -60}, {-59, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
           annotation(Icon(graphics = {Text(extent = {{-108, 80}, {-8, 40}}, lineColor = {0, 0, 130}, textString = "t"), Text(extent = {{48, 22}, {92, -16}}, lineColor = {0, 0, 130}, textString = "y")}));
         end ImpedanceValue;
@@ -954,7 +954,7 @@ management systems, loads and charging devices.
           connect(product.y, feedback.u2) annotation(Line(points = {{61, 0}, {80, 0}, {80, -52}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(const.y, feedback.u1) annotation(Line(points = {{61, -60}, {72, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(feedback.y, SOS) annotation(Line(points = {{89, -60}, {110, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{10, 80}, {90, 40}}, lineColor = {0, 0, 130}, textString = "SOH"), Text(extent = {{-94, 84}, {-24, 34}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-72, -36}, {-38, -82}}, lineColor = {0, 0, 130}, textString = "Z"), Text(extent = {{10, -38}, {90, -78}}, lineColor = {0, 0, 130}, textString = "SOS")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{10, 80}, {90, 40}}, lineColor = {0, 0, 130}, textString = "SOH"), Text(extent = {{-94, 84}, {-24, 34}}, lineColor = {0, 0, 130}, textString = "C"), Text(extent = {{-72, -36}, {-38, -82}}, lineColor = {0, 0, 130}, textString = "Z"), Text(extent = {{10, -38}, {90, -78}}, lineColor = {0, 0, 130}, textString = "SOS")}));
         end SOHSOS;
 
         block SOHC "Capacity State of Health calculator"
@@ -966,7 +966,7 @@ management systems, loads and charging devices.
         equation
           assert(xc > 0 and xc < 1, "SOHC: parameter xc out of range (0..1)");
           SOHc = (C / C0 - xc) / (1 - xc);
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-14, 24}, {88, -16}}, lineColor = {0, 0, 130}, textString = "SOHc"), Text(extent = {{-98, 20}, {-26, -20}}, lineColor = {0, 0, 130}, textString = "C")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-14, 24}, {88, -16}}, lineColor = {0, 0, 130}, textString = "SOHc"), Text(extent = {{-98, 20}, {-26, -20}}, lineColor = {0, 0, 130}, textString = "C")}));
         end SOHC;
 
         block SOHZ "Impedance State of Health calculator"
@@ -978,7 +978,7 @@ management systems, loads and charging devices.
         equation
           assert(xz > 1, "SOHZ: parameter xz out of range (>1)");
           SOHz = (Z / Z0 - xz) / (1 - xz);
-          annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-6, 18}, {88, -22}}, lineColor = {0, 0, 130}, textString = "SOHz"), Text(extent = {{-96, 18}, {-24, -22}}, lineColor = {0, 0, 130}, textString = "Z")}));
+          annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-6, 18}, {88, -22}}, lineColor = {0, 0, 130}, textString = "SOHz"), Text(extent = {{-96, 18}, {-24, -22}}, lineColor = {0, 0, 130}, textString = "Z")}));
         end SOHZ;
       end Calculators;
 
@@ -1001,7 +1001,7 @@ management systems, loads and charging devices.
         connect(linearDependency.y, signalCurrent.i) annotation(Line(points = {{21, 0}, {33, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(i, qabs.i) annotation(Line(points = {{-90, 60}, {-59, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(qabs.Qabs, linearDependency.u1) annotation(Line(points = {{-39, 60}, {-20, 60}, {-20, 6}, {-2, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
-        annotation(Diagram(graphics), Icon(graphics = {Text(extent = {{-86, 90}, {-48, 30}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{-84, -28}, {-46, -88}}, lineColor = {0, 0, 130}, textString = "t")}));
+        annotation(Diagram(graphics), Icon(graphics={  Text(extent = {{-86, 90}, {-48, 30}}, lineColor = {0, 0, 130}, textString = "i"), Text(extent = {{-84, -28}, {-46, -88}}, lineColor = {0, 0, 130}, textString = "t")}));
       end SelfDischarge;
 
       partial model OperationalParameters
@@ -1369,7 +1369,7 @@ provide both values as output.
     end BatteryPackage;
 
     partial package ChargerPackage "Icon for the Chargers package"
-      annotation(Icon(graphics = {Polygon(points = {{-10, -20}, {-10, -20}, {-10, -20}, {-34, -86}, {44, 0}, {-6, 0}, {16, 58}, {-58, -20}, {-10, -20}}, lineColor = {0, 0, 0}, smooth = Smooth.None, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}), Diagram(graphics));
+      annotation(Icon(graphics={  Polygon(points = {{-10, -20}, {-10, -20}, {-10, -20}, {-34, -86}, {44, 0}, {-6, 0}, {16, 58}, {-58, -20}, {-10, -20}}, lineColor = {0, 0, 0}, smooth = Smooth.None, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}), Diagram(graphics));
     end ChargerPackage;
 
     partial package FolderPackage "Icon for a standard package"
@@ -1404,19 +1404,19 @@ provide both values as output.
     end SIunitsPackage;
 
     partial package ComponentPackage "Icon for the Components package"
-      annotation(Icon(graphics = {Rectangle(extent = {{-78, 46}, {42, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-18, 46}, {-18, -74}}, color = {0, 0, 0}), Line(points = {{-78, -14}, {42, -14}, {42, -14}}, color = {0, 0, 0})}));
+      annotation(Icon(graphics={  Rectangle(extent = {{-78, 46}, {42, -74}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-18, 46}, {-18, -74}}, color = {0, 0, 0}), Line(points = {{-78, -14}, {42, -14}, {42, -14}}, color = {0, 0, 0})}));
     end ComponentPackage;
 
     partial package CalculatorPackage "Icon for the Calculators package"
-      annotation(Icon(graphics = {Rectangle(extent = {{-80, 100}, {100, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-56, 80}, {72, 46}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, 18}, {-20, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, 18}, {20, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, 18}, {60, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, -22}, {-20, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, -22}, {20, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, -22}, {60, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, -62}, {-20, -72}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, -62}, {20, -72}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, -62}, {60, -72}}, lineColor = {0, 0, 0})}), Diagram(graphics));
+      annotation(Icon(graphics={  Rectangle(extent = {{-80, 100}, {100, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-56, 80}, {72, 46}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, 18}, {-20, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, 18}, {20, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, 18}, {60, 8}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, -22}, {-20, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, -22}, {20, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, -22}, {60, -32}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-30, -62}, {-20, -72}}, lineColor = {0, 0, 0}), Rectangle(extent = {{10, -62}, {20, -72}}, lineColor = {0, 0, 0}), Rectangle(extent = {{50, -62}, {60, -72}}, lineColor = {0, 0, 0})}), Diagram(graphics));
     end CalculatorPackage;
 
     partial package ImpedancePackage "Icon for the Impedance package"
-      annotation(Icon(graphics = {Line(points = {{-100, 60}, {-60, 60}}, color = {0, 0, 0}), Rectangle(extent = {{-60, 80}, {60, 40}}, lineColor = {0, 0, 0}), Line(points = {{60, 60}, {100, 60}}, color = {0, 0, 0}), Line(points = {{-100, -50}, {-10, -50}}, color = {0, 0, 0}), Line(points = {{10, -52}, {100, -52}}, color = {0, 0, 0}), Line(points = {{-10, 0}, {-10, -100}, {-10, -100}}, color = {0, 0, 0}), Line(points = {{10, 0}, {10, -100}, {10, -100}}, color = {0, 0, 0}), Line(points = {{-100, 58}, {-100, -42}, {-100, -50}}, color = {0, 0, 0}), Line(points = {{100, 60}, {100, -40}, {100, -52}}, color = {0, 0, 0})}), Diagram(graphics));
+      annotation(Icon(graphics={  Line(points = {{-100, 60}, {-60, 60}}, color = {0, 0, 0}), Rectangle(extent = {{-60, 80}, {60, 40}}, lineColor = {0, 0, 0}), Line(points = {{60, 60}, {100, 60}}, color = {0, 0, 0}), Line(points = {{-100, -50}, {-10, -50}}, color = {0, 0, 0}), Line(points = {{10, -52}, {100, -52}}, color = {0, 0, 0}), Line(points = {{-10, 0}, {-10, -100}, {-10, -100}}, color = {0, 0, 0}), Line(points = {{10, 0}, {10, -100}, {10, -100}}, color = {0, 0, 0}), Line(points = {{-100, 58}, {-100, -42}, {-100, -50}}, color = {0, 0, 0}), Line(points = {{100, 60}, {100, -40}, {100, -52}}, color = {0, 0, 0})}), Diagram(graphics));
     end ImpedancePackage;
 
     partial package CyclesPackage "Icon for the Cycles package"
-      annotation(Icon(graphics = {Line(points = {{-100, -40}, {-80, -40}, {-60, 0}, {-40, -80}, {-20, -20}, {-10, -52}, {20, 80}, {44, -100}, {60, -20}, {80, -40}, {100, -40}}, color = {0, 0, 0})}));
+      annotation(Icon(graphics={  Line(points = {{-100, -40}, {-80, -40}, {-60, 0}, {-40, -80}, {-20, -20}, {-10, -52}, {20, 80}, {44, -100}, {60, -20}, {80, -40}, {100, -40}}, color = {0, 0, 0})}));
     end CyclesPackage;
 
     partial package MeasurementPackage "Icon for the Measurement package"
@@ -1436,7 +1436,7 @@ provide both values as output.
     end BatteriesPackage;
 
     partial package Load "Icon for the Load package"
-      annotation(Icon(graphics = {Ellipse(extent = {{-70, -26}, {-30, -66}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Ellipse(extent = {{6, -28}, {46, -68}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-68, -20}, {-80, -40}, {-80, 20}, {-40, 20}, {-20, 20}, {20, 20}, {52, 20}, {52, 14}, {52, -40}, {52, -40}, {42, -20}, {10, -20}, {0, -40}, {0, -40}, {-20, -40}, {-32, -20}, {-68, -20}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.Solid)}));
+      annotation(Icon(graphics={  Ellipse(extent = {{-70, -26}, {-30, -66}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Ellipse(extent = {{6, -28}, {46, -68}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-68, -20}, {-80, -40}, {-80, 20}, {-40, 20}, {-20, 20}, {20, 20}, {52, 20}, {52, 14}, {52, -40}, {52, -40}, {42, -20}, {10, -20}, {0, -40}, {0, -40}, {-20, -40}, {-32, -20}, {-68, -20}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.Solid)}));
     end Load;
 
     partial package BatteryManagementPackage "Icon for the BatteryManagement package"
@@ -1448,7 +1448,7 @@ provide both values as output.
     end BatteryManagementPackage;
 
     partial block Block "Icon for a basic block"
-      annotation(Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{88, -88}, {-88, 88}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Text(extent = {{14, 134}, {176, 100}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name")}));
+      annotation(Icon(graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{88, -88}, {-88, 88}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Text(extent = {{14, 134}, {176, 100}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name")}));
     end Block;
 
     model ControlBus "Icon for the control bus"
@@ -1510,7 +1510,7 @@ provide both values as output.
 
     partial block Sink "Icon for a basic block"
       extends ElectricalEnergyStorage.Icons.Block;
-      annotation(Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{88, -88}, {-88, 88}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Text(extent = {{14, 134}, {176, 100}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name"), Ellipse(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, origin = {0, 2}, rotation = 90), Line(points = {{0, 40}, {0, -40}}, color = {0, 0, 0}, origin = {0, 2}, rotation = 90), Polygon(points = {{0, -10}, {-8, 8}, {8, 8}, {0, -10}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, origin = {0, 60}, rotation = 360), Line(points = {{0, 90}, {0, 42}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}, smooth = Smooth.None)}));
+      annotation(Icon(graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{88, -88}, {-88, 88}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Text(extent = {{14, 134}, {176, 100}}, lineColor = {0, 0, 255}, fillColor = {122, 255, 107}, fillPattern = FillPattern.Solid, textString = "%name"), Ellipse(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, origin = {0, 2}, rotation = 90), Line(points = {{0, 40}, {0, -40}}, color = {0, 0, 0}, origin = {0, 2}, rotation = 90), Polygon(points = {{0, -10}, {-8, 8}, {8, 8}, {0, -10}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, origin = {0, 60}, rotation = 360), Line(points = {{0, 90}, {0, 42}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}, smooth = Smooth.None)}));
     end Sink;
     annotation(Diagram(graphics), Icon(graphics));
   end Icons;
@@ -2183,7 +2183,7 @@ constructed by the signals connected to this bus.
           connect(fTP72_Power.y, division.u1) annotation(Line(points = {{-39, 16}, {-22, 16}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(on, fTP72_Power.on) annotation(Line(points = {{-90, 0}, {-50, 0}, {-50, 7}}, color = {255, 0, 255}, smooth = Smooth.None));
           connect(division.y, signalCurrent.i) annotation(Line(points = {{1, 10}, {17, 10}, {17, 10}, {33, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
-          annotation(Icon(graphics = {Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}), Line(points = {{0, -90}, {0, -40}}, color = {0, 0, 0}), Text(extent = {{-88, 88}, {-16, 60}}, lineColor = {0, 0, 0}, textString = "FTP72"), Text(extent = {{-104, 18}, {-16, -16}}, lineColor = {255, 0, 255}, textString = "on")}), Diagram(graphics));
+          annotation(Icon(graphics={  Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 0}), Line(points = {{0, -90}, {0, -40}}, color = {0, 0, 0}), Text(extent = {{-88, 88}, {-16, 60}}, lineColor = {0, 0, 0}, textString = "FTP72"), Text(extent = {{-104, 18}, {-16, -16}}, lineColor = {255, 0, 255}, textString = "on")}), Diagram(graphics));
         end FTP72;
 
         model Liberal "Aging accelerating test cycle"
@@ -2204,7 +2204,7 @@ constructed by the signals connected to this bus.
           connect(realExpression.y, product.u2) annotation(Line(points = {{-39, -20}, {-30, -20}, {-30, 18}, {-22, 18}}, color = {0, 0, 127}));
           connect(liberal1.y, product.u1) annotation(Line(points = {{-49, 30}, {-22, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(on, liberal1.on) annotation(Line(points = {{-90, 0}, {-60, 0}, {-60, 21}}, color = {255, 0, 255}, smooth = Smooth.None));
-          annotation(Icon(graphics = {Text(extent = {{-90, 90}, {-10, 60}}, lineColor = {0, 0, 0}, textString = "Liberal")}), Diagram(graphics));
+          annotation(Icon(graphics={  Text(extent = {{-90, 90}, {-10, 60}}, lineColor = {0, 0, 0}, textString = "Liberal")}), Diagram(graphics));
         end Liberal;
 
         package Components "Components for the cycles"
@@ -2230,7 +2230,7 @@ constructed by the signals connected to this bus.
             connect(kW_W.y, product1.u1) annotation(Line(points = {{-1, -50}, {10, -50}, {10, -6}, {18, -6}}, color = {0, 0, 127}, smooth = Smooth.None));
             connect(product1.y, y) annotation(Line(points = {{41, 0}, {110, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
             connect(on, booleanToReal.u) annotation(Line(points = {{0, -100}, {0, -80}, {-80, -80}, {-80, 0}, {-62, 0}}, color = {255, 0, 255}, smooth = Smooth.None));
-            annotation(Icon(graphics = {Text(extent = {{-82, 46}, {74, -8}}, lineColor = {0, 0, 0}, textString = "FTP72"), Polygon(points = {{-80, 80}, {-85, 58}, {-74, 58}, {-80, 80}}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Line(points = {{-80, 58}, {-80, -90}}, color = {95, 95, 95}), Line(points = {{-88, -20}, {84, -20}}, color = {0, 0, 0}), Polygon(points = {{90, -20}, {68, -15}, {68, -26}, {90, -20}}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Text(extent = {{-80, 74}, {-47, 57}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, textString = "y"), Text(extent = {{68, -31}, {89, -41}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, textString = "time"), Text(extent = {{-16, -62}, {17, -79}}, lineColor = {255, 0, 255}, fillColor = {255, 0, 255}, fillPattern = FillPattern.Solid, textString = "on"), Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0})}), Diagram(graphics));
+            annotation(Icon(graphics={  Text(extent = {{-82, 46}, {74, -8}}, lineColor = {0, 0, 0}, textString = "FTP72"), Polygon(points = {{-80, 80}, {-85, 58}, {-74, 58}, {-80, 80}}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Line(points = {{-80, 58}, {-80, -90}}, color = {95, 95, 95}), Line(points = {{-88, -20}, {84, -20}}, color = {0, 0, 0}), Polygon(points = {{90, -20}, {68, -15}, {68, -26}, {90, -20}}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Text(extent = {{-80, 74}, {-47, 57}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, textString = "y"), Text(extent = {{68, -31}, {89, -41}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, textString = "time"), Text(extent = {{-16, -62}, {17, -79}}, lineColor = {255, 0, 255}, fillColor = {255, 0, 255}, fillPattern = FillPattern.Solid, textString = "on"), Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0})}), Diagram(graphics));
           end FTP72_Power;
 
           model Liberal "Liberal cycle definition"
@@ -2294,7 +2294,7 @@ constructed by the signals connected to this bus.
         connect(controlledCurrent.pin_n, pin_n) annotation(Line(points = {{60, -8}, {60, -40}, {0, -40}, {0, -100}}, color = {0, 0, 255}, smooth = Smooth.None));
         connect(voltageSensor.p, controlledCurrent.pin_p) annotation(Line(points = {{-40, 10}, {-40, 40}, {60, 40}, {60, 12}}, color = {0, 0, 255}, smooth = Smooth.None));
         connect(voltageSensor.n, controlledCurrent.pin_n) annotation(Line(points = {{-40, -10}, {-40, -40}, {60, -40}, {60, -8}}, color = {0, 0, 255}, smooth = Smooth.None));
-        annotation(Icon(graphics = {Text(extent = {{17, 14}, {-17, -14}}, lineColor = {255, 85, 255}, textString = "on", origin = {-63, 2}, rotation = 180), Text(extent = {{27, 20}, {-27, -20}}, lineColor = {0, 0, 127}, textString = "v", origin = {-65, -56}, rotation = 180)}));
+        annotation(Icon(graphics={  Text(extent = {{17, 14}, {-17, -14}}, lineColor = {255, 85, 255}, textString = "on", origin = {-63, 2}, rotation = 180), Text(extent = {{27, 20}, {-27, -20}}, lineColor = {0, 0, 127}, textString = "v", origin = {-65, -56}, rotation = 180)}));
       end CCCV;
 
       model BooleanConstantCurrent "Constant current discharging device"
@@ -2314,7 +2314,7 @@ constructed by the signals connected to this bus.
         connect(realExpression.y, product.u2) annotation(Line(points = {{-39, -40}, {-20, -40}, {-20, -16}, {-2, -16}}, color = {0, 0, 127}));
         connect(booleanToReal.u, on) annotation(Line(points = {{-62, 0}, {-90, 0}}, color = {255, 0, 255}));
         connect(booleanToReal.y, product.u1) annotation(Line(points = {{-39, 0}, {-20, 0}, {-20, -4}, {-2, -4}}, color = {0, 0, 127}));
-        annotation(Icon(graphics = {Text(extent = {{-36, 20}, {-84, -16}}, lineColor = {255, 85, 255}, textString = "on")}), Diagram(graphics));
+        annotation(Icon(graphics={  Text(extent = {{-36, 20}, {-84, -16}}, lineColor = {255, 85, 255}, textString = "on")}), Diagram(graphics));
       end BooleanConstantCurrent;
 
       model BooleanConstantPower "Constant power discharging device"
@@ -2347,7 +2347,7 @@ constructed by the signals connected to this bus.
         connect(product1.y, limitedController.u) annotation(Line(points = {{-19, 0}, {-9, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(booleanToReal.y, product1.u1) annotation(Line(points = {{-51, 6}, {-42, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(constantPower.y, product1.u2) annotation(Line(points = {{-59, -40}, {-52, -40}, {-52, -6}, {-42, -6}}, color = {0, 0, 127}, smooth = Smooth.None));
-        annotation(Icon(graphics = {Text(extent = {{-36, 20}, {-84, -16}}, lineColor = {255, 85, 255}, textString = "on")}), Diagram(graphics));
+        annotation(Icon(graphics={  Text(extent = {{-36, 20}, {-84, -16}}, lineColor = {255, 85, 255}, textString = "on")}), Diagram(graphics));
       end BooleanConstantPower;
 
       model SignalPower "Signal power discharging device"
@@ -2373,7 +2373,7 @@ constructed by the signals connected to this bus.
         connect(limitedController.y, signalCurrent.i) annotation(Line(points = {{-39, 0}, {13, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(power, limitedController.u) annotation(Line(points = {{-90, 0}, {-59, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(limitedController.fb, product.y) annotation(Line(points = {{-54, -9}, {-54, -50}, {-41, -50}}, color = {0, 0, 127}, smooth = Smooth.None));
-        annotation(Icon(graphics = {Text(extent = {{-38, 18}, {-86, -18}}, lineColor = {0, 0, 127}, textString = "P")}), Diagram(graphics));
+        annotation(Icon(graphics={  Text(extent = {{-38, 18}, {-86, -18}}, lineColor = {0, 0, 127}, textString = "P")}), Diagram(graphics));
       end SignalPower;
       annotation(Diagram(graphics));
     end Loads;
@@ -2464,5 +2464,5 @@ constructed by the signals connected to this bus.
       end ControlledCurrent;
     end Components;
   end Sources;
-  annotation(uses(Modelica(version="3.2.2")),version = "3.2.2", conversion(noneFromVersion = "3.2"));
+  annotation(uses(Modelica(version="3.2.2")),version = "3.2.2", conversion(noneFromVersion = "3.2",noneFromVersion = "3.2.1"));
 end ElectricalEnergyStorage;
