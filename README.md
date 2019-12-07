@@ -21,4 +21,8 @@ it can be redistributed and/or modified under the terms of the [Modelica License
 ## Development and contribution
 Main developer: [Anton Haumer](mailto:a.haumer@haumer.at)
 
-You may report any issues by using the [Issue Tracker](../../issues) though currently development on this library is stalled. Feel free to fork and continue the development.
+Fundamental parts of this library are implemented in the Modelica Standard Library 4.0.0, see https://github.com/modelica/ModelicaStandardLibrary/issues/2957.
+
+This library is **not maintained** any more and no further development is planned. Issues reported on the [Issue Tracker](../../issues) will most likely not be answered or treated in the future. 
+
+Feel free to fork the library and continue the development.
